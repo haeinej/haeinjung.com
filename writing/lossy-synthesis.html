@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lossy Synthesis — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 20px; }
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 3rem;
+      transition: color 220ms ease;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      letter-spacing: -0.04em;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .site-footer {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.96);
+        mix-blend-mode: difference; pointer-events: none; z-index: 9999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+    .site-cursor { display: none; }
+  </style>
+</head>
+<body>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">Lossy Synthesis</h1>
+      <p class="article-subtitle">On AI leaping past the resistance of being merely a design tool</p>
+      <p class="article-date">March 19, 2026</p>
+    </header>
+    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
+    <div class="article-body">
+      <p>It all started with a conversation on an extra-sunny Monday afternoon at a cafe down Alamo Square called the Mill.</p>
+
+      <p>With my dear friend M, we talked about creativity and AI. Could they coexist? Could they positively feed each other for human prosperity in creation? What would that even look like — not in theory, but in practice, in the work itself?</p>
+
+      <p>If AI becomes a design material or a tool, or a collaborator, or whatever we end up calling it, does the designer retain authorship? Or does the material's internal logic, the model's learned patterns, start designing for us?</p>
+
+      <p>We live amongst an abundance of design.</p>
+
+      <p>What has always fascinated me about design is that it shapes people's behavior, how we perceive and utilize things. Design, in its essence, is extended knowledge. Not information. Knowledge. The kind that has been tested against human hands and human reasoning for centuries until it disappears into instinct.</p>
+
+      <p>Think of a cup. We know to hold it by the handle. We know to pour liquid inside the bowl. These seem obvious, but that is exactly the point that they did not come from nothing. A cup is a long accumulation of human judgment about hands, heat, and thirst. Nobody thinks about it. That is the proof that it works. The more we embed knowledge into objects and spaces, the more they function as shortcuts for living. The interaction becomes subconscious, near-instantaneous, routed through System 1 thinking. A cup is not merely an object. It is centuries of trial compressed into ceramic.</p>
+
+      <p>This compression is not only true of our physical world. It seems equally apparent in cyberspace. Think of the vibe coding tools that have dominated our workflows this past year. Although I personally do hate the purple, gradient, AI-generated-feeling websites, I still think they represent decent design. Stupid enough to convey information clearly. Closer to human-centered principles than the dot-com bubble era, or even five years ago, pre-Claude Code. The prevalence of vibe coding has boosted the overall baseline of design up to a competent median, democratizing the craft to the public. And that baseline matters. Fewer people are now subjected to truly terrible design. That is not nothing.</p>
+
+      <p>But the same shift that democratizes design also destabilizes it.</p>
+
+      <p>Since tools like Claude Code are capable, faster, and cheaper than most mid-level UI designers, the industry fears that human design is replaceable. People feel threatened. AI is no longer merely a tool or a copilot — it is agentic, meaning the labor of creation itself is delegable. We can literally copy-paste any digital experience and duplicate it. Anyone can emulate. That triggers an uncanny feeling that AI is usurping the human domain of creation.</p>
+
+      <p>I understand the fear. But I think of it this way.</p>
+
+      <p>Paint was not always accessible. Scarcity created value. Then people invented the paint tube which is portable, affordable, mass-produced, and initially, some might have felt that buying pre-made paint depreciated the value of artwork. The purity of grinding your own pigment, choosing your own binder, mixing color by hand was gone. Replaced by something convenient. Something anyone could buy.</p>
+
+      <p>But this democratization opened enormous opportunity. The accessibility of portable paint sparked the explosion of Impressionism and plein air painting in the 19th century. Artists left the studio. They went outside. They painted the world as they actually saw it — not as the academy told them to see it. The tool did not diminish the art. It liberated the artist from the studio and into the field, and what they found there changed everything.</p>
+
+      <p>This was a thought that I had mid-conversation, and I was later astonished to find it explored in depth through an article M sent me: Runway's piece on machine learning en plein air, (from 2018, wow) which draws the same parallel between accessible tools and creative breakthroughs.</p>
+
+      <p>Like the paint tube, I believe that when a tool becomes accessible to the common, it becomes the new norm. Friction diminishes. Behavior and workflow change. Not only do these tools become industry standard, but they question and expand the boundary of what human creation even means. What an exciting moment we are at!</p>
+
+      <p>Still not the whole story.</p>
+
+      <hr>
+
+      <p>Because even if AI democratizes creation the way the paint tube democratized painting, there remains a stubborn and important difference between work that is merely competent and work that feels alive. AI-generated work can be convincing. It can be elegant. It can even be beautiful. And yet it often feels almost right and completely dead.</p>
+
+      <p>Why?</p>
+
+      <p>Most AI models are trained on human data. A model represents a machine-learned abstraction of its input. This sounds clean. But two things trouble me, and the more I sit with them, the more I think they point toward something fundamental about why we are feeling this.</p>
+
+      <p>First: encoding is inherently reductive.</p>
+
+      <p>Translating phenomena into representations does not capture their full value. Every act of encoding is an act of compression, and compression means loss. The model learns what is statistically significant and discards the rest. And these small losses, a texture, a hesitation, an asymmetry that has no name, may not be as trivial as they appear. Details matter. They pile up. They compound into what we experience as emergence: the ineffable sense of a whole piece, the feeling that something is alive or dead on the page or screen.</p>
+
+      <p>This, I suspect, is why AI can reproduce resemblance without producing awe. When we choose what the model learns, it can get close to what we meant. It can often imitate what we recognize. But it rarely touches the part that feels irreducibly alive. The kind of awe that art, at its best, is for.</p>
+
+      <p>Why not? I think part of the answer lives in reversibility.</p>
+
+      <p>Human taste is accrued through experience — experiences that are good and bad, beautiful and traumatic, chosen and imposed. These experiences are irreversible. They leave residue. They accumulate into what we call sensibility, or judgment, or simply: a point of view that could not belong to anyone else. For an AI system, nothing is at stake. Everything can be retrained, rolled back, fine-tuned away. There is no scar tissue. No commitment that cannot be undone.</p>
+
+      <p>And maybe that matters more than we admit. Something remarkable might not emerge from a model raised exclusively on beautiful artifacts. Like humans, maybe a system needs to encounter confusion, contradiction, failure — bad data in the fullest sense — and be changed by it in ways that cannot be reversed. The chef who only ever tasted perfect food would have no palate. Palate comes from the full range of the burnt, the bitter, the dish that went wrong and taught you what balance actually means.</p>
+
+      <p>Second: information does not travel in straight lines.</p>
+
+      <p>Communication is not mathematics. It is never clear transmission. When we think about how information is actually perceived between people, it is not a → a. When someone says "a," I might perceive it as a', or b, or something distorted entirely. And this is not a flaw. This is how culture works. The productive misreading, the creative distortion, the associative leap — these are the mechanisms through which new meaning enters the world. Mistranslation is generative. Every interesting idea I have ever had came from misunderstanding something in a way that turned out to be more true than the original.</p>
+
+      <p>AI, simplified, works as: extraction → interpretation → action. Most of the field's energy goes toward making extraction more precise and action more reliable. Minimize the gap between signal and response. Data is treated as information — something to be processed, something that should arrive intact.</p>
+
+      <p>But I believe there is much more nuance to human experience than processing. There is something that happens to information when a human receives it. It does not merely arrive, but collides with everything else that person is carrying — their history, their desires, their unresolved questions — and what emerges from that collision is never what was sent. The collision is not noise. It is where meaning lives.</p>
+
+      <p>If these are the real problems, reductive encoding and linear information models, what might a different approach look like?</p>
+
+      <p>I keep returning to how humans actually handle information, and here are my two bold thoughts, which I would love to be explored more and challenged.</p>
+
+      <p>We operate through consciousness and subconsciousness. Some information is processed analytically, slowly, deliberately. But a vast amount is fermented beneath awareness — accumulating over days, months, years into what we might call subconscious taste. Or salience. Salience is not just 'what is happening.' It is 'what matters here.' And salience is not computable from data alone. It requires something like a stake, a preference, a disposition, something that has been shaped by irreversible experience into a specific orientation toward the world.</p>
+
+      <p>We feel things because they matter. Current AI has no equivalent of mattering. It processes all inputs with statistical precision but has no internal sense of what should weigh more. It has infinite perception and no taste. And I think humans sense this absence instinctively. The discomfort we feel around AI is not that it is too intelligent. It is that it has no skin in the game. The uncanny valley of intelligence is not about appearance. It is about investment.</p>
+
+      <p>Perception is mostly subtraction, not addition. We walk into a room and discard the vast majority of sensory input without conscious effort. What we notice is shaped by what we care about, what we have lost, what we are afraid of. The selection is where meaning lives, not in the data that is collected, but in the data that is thrown away.</p>
+
+      <p>Maybe the problem with current AI is not that it perceives too little, but that it collects too much and discards nothing. Every signal is preserved, traced, weighted. The architecture is designed for lossless transformation — you can always follow the output back to the input. This is considered a feature.</p>
+
+      <p>Traceability. Interpretability. Accountability.</p>
+
+      <p>But what if the next creative generation requires the opposite?</p>
+
+      <p>What if it requires lossy synthesis — transformation where the output is irreducible to its sources, where the original data is consumed in the process, where something must be destroyed for something new to be born?</p>
+
+      <p>It might sound almost heretical within modern machine logic. We are trained to value explainability, reproducibility, provenance. Every machine learning system is built on the principle that you should be able to trace the output back to the input. We want the chain intact.</p>
+
+      <p>But I suspect that the thing we call magic, the thing that produces awe rather than competence, lives in the part that cannot be cleanly traced. In the gap between sources. In the collision that destroys both original terms and gives rise to a third thing neither contained on its own.</p>
+
+      <p>The most transformative human experiences work this way. You do not become wiser by stacking more information on top of yourself like bricks. You become wiser when something you believed collides with something you lived through, and both are broken open. Out of that break comes a third thing: not a sum, but a transformation.</p>
+
+      <p>That is not information processing. That is metabolization.</p>
+
+      <p>So little of our current technical imagination is built around that distinction, and I believe it is an interesting approach to consider.</p>
+
+      <p>Evan Thompson's Mind in Life articulates this more rigorously. His enactivist position argues that cognition is something living systems do, not something they have. Cognition is not a representation of the world stored inside a brain. It is an ongoing, embodied, dynamic interaction between organism and environment. Meaning does not get extracted from the world and deposited into the mind. It emerges continuously, unpredictably in the very act of living.</p>
+
+      <p>If physical AI could move from a representational model (data in, interpretation out) to an enactive one, where meaning emerges from the ongoing interaction between system and environment, something genuinely new would be possible. Not better answers. Not faster processing. But the kind of emergent understanding that surprises even the system that produced it. Understanding that has the texture of discovery rather than retrieval.</p>
+
+      <p>I believe AI, when viewed as a design material, has the potential to unlock a new generation of everyday objects, experiences, and art forms that we cannot yet imagine. Our traditional forms may lose some of their value — that is probably inevitable, and mourning it too long is a waste of the opportunity in front of us. What comes next could be a wholly different paradigm of experience, more dimensional, more multimodal, more deeply aligned with what art has always fundamentally offered: a way for humans to feel something they could not feel alone.</p>
+
+      <p>The competitive edge of the next era will not be hard skill. Anyone can duplicate a digital experience now. The moat is no longer digital, but it is physical, spatial, felt. It is in experiences that cannot be copy-pasted because they are born from the specific collision of a specific person with a specific moment. You are forced to go beyond the screen. Go dimensional. Go multimodal. That is where the irreducible lives.</p>
+
+      <p>A lot of money and attention is focused on AI as a productivity tool. I believe in something further. At a recent talk with Leonardo Giusti (Archetype AI), he said something that I cannot stop thinking about: 'If we could figure out something that humans do not even notice, we could unlock things we do not expect. Non-human intelligence. If you provide AI with sensors and radar that perceive what we cannot — what type of insights evolve from there? And how do you communicate them back to us? Language might not be sufficient.'</p>
+
+      <p>Language might not be sufficient. That sentence alone could open an entire field. If AI perceives through vibration, infrared, pressure, electromagnetic signal, modalities that humans do not have, then translating those perceptions into human language is itself a lossy act. And maybe that is fine. Maybe the loss, the necessary distortion of translating non-human perception into human experience, is where the next art comes from. Not AI replicating what humans already see. But AI seeing what we cannot, and the human encounter with that alien sight producing something neither could have made alone.</p>
+
+      <p>The tools are more accessible than they have ever been. The paint tube has arrived. The question is no longer whether AI will be part of how we create. It is whether we will use it to produce more of the same — or to reach toward something that, like all genuine art, could not have been predicted from its inputs.</p>
+
+      <p>I think the answer lives somewhere in the loss. In what we are willing to let be destroyed. In the synthesis that cannot be traced back to where it came from.</p>
+    </div>
+    <footer class="site-footer">© 2026 Haein Jung</footer>
+  </div>
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+      body.classList.add("cursor-enabled");
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, [role='button']");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+      window.addEventListener("mousemove", (event) => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
+      document.addEventListener("mouseleave", () => { body.classList.remove("cursor-visible", "cursor-link"); });
+    })();
+  </script>
+</body>
+</html>

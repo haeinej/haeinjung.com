@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hey Siri, Play Bubble Gum by New Jeans — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 20px; }
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 3rem;
+      transition: color 220ms ease;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      letter-spacing: -0.04em;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .site-footer {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.96);
+        mix-blend-mode: difference; pointer-events: none; z-index: 9999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+    .site-cursor { display: none; }
+  </style>
+</head>
+<body>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">Hey Siri, Play Bubble Gum by New Jeans</h1>
+      <p class="article-subtitle">What happens after the steps disappear.</p>
+      <p class="article-date">March 8, 2026</p>
+    </header>
+    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
+    <div class="article-body">
+      <p>You are lying down on your sofa, and you realize that your phone is far away from you. You just call out your best mate, Siri. Music plays. No complicated steps in between.</p>
+
+      <p>Bubble gum. Sweet, insipid, a throwback to simpler times. There's a 90s nostalgia baked into the word itself, a longing for when things felt uncomplicated. But bubble gum also pops.</p>
+
+      <p>I think it's worth mentioning my friend M who handed me this interesting thought candy to chew on.</p>
+
+      <p>Services: The New Software — Sequoia Capital</p>
+
+      <p>Sequoia Capital recently argued that the next trillion-dollar emerging company won't sell productivity software — it will sell the work itself: AI drafting contracts, generating marketing campaigns, or managing logistics.</p>
+
+      <p>AI as a faster, cheaper executor of existing processes. Like Siri, a reductionist approach of providing services.</p>
+
+      <p>In the short term, Yes. This will definitely be a money-making playbook for a few. I agree.</p>
+
+      <p>But the article came across contradictory to me. The companies it describes would be the next generation that can sell 'We could replace labor, but with AI.' But I think the process itself would eventually demolish. We would end up at a point where we don't even have to think about the mid-process. The steps themselves dissolve. If so, the article's framework breaks down — there is no 'work budget' to capture. You can't sell 'we'll do your NDA drafting' if the conditions that made NDAs necessary have been restructured at a deeper level.</p>
+
+      <p>Even then, I think the human role would still be needed — for deciding the end product. Should this product exist?</p>
+
+      <p>I think of it this way: the system constantly requires clarity and heads toward oversimplification, abstracting everything. This is not about the process-level judgement this article tries to explain. It is something more upstream — deciding what holds value at all.</p>
+
+      <p>That said, at scale, one dominant system could dominate, depending on how capable they are at simplifying the end results. The article frames this as an exciting opportunity — probably to encourage founders and investments — but I have this repellent gut feeling that this might actually be describing the preconditions for monopoly.</p>
+
+      <p>I think of this as layers. Sequoia imagines multiple companies emerging to create outcomes. But the technology they share would also be backend-functioned through one AI system domain. Any company built on top is easily duplicated from the front. So the monopoly forms at the foundational level — not over a product, but over something like a new type of functional infrastructure. Nothing to unbundle.</p>
+
+      <p>When intelligence becomes infrastructure, competition moves upward while power concentrates downward. The real concentration of power would not be at the service layer. It would be at the intelligence layer that makes all the services possible. One company powering all functions, with interchangeable front-ends.</p>
+
+      <hr>
+
+      <p>The basis of economy was always about scarcity of resources. But if AI makes cognitive labor infinite, the traditional sense of choice-making disappears. This is what scares people. This is why people are afraid of losing white-collar jobs.</p>
+
+      <p>AI bubble (this is a cringe way to phrase — I mean this by the rush, the funding, the vertical plays) instantly reminded me of comparative advantage. Even if one entity is better at everything, trade still makes sense because everyone should specialize in what they are relatively best at. In the early phase of AI, basically now, that logic holds. Lots of companies make money. Investors fund vertical autopilots because each one captures a different niche. Founders build them because the opportunity is real. This is the phase the Sequoia article is mapping.</p>
+
+      <p>However, comparative advantage again has an underlying assumption of scarcity. Eventually it would cease to function, because the precondition no longer exists. Once the underlying technology converges toward general capability — once one system can handle all these verticals at comparable quality — the comparative advantage logic collapses, the ecosystem contracts, and you get convergence into a few dominant systems.</p>
+
+      <p>I would boldly say this convergence is relevant to the period when the AI loop closes and completes AGI.</p>
+
+      <p>The bubble isn't irrational. It's the market correctly responding to a temporary window of comparative advantage, one that will be destroyed by the very technology it's investing in.</p>
+
+      <p>Yet, in my view this is only applicable toward services and processes. If the processes collapse and comparative advantage evaporates, then the only thing that matters is what humans choose to care about. As mentioned in my previous piece, I think the framework of problem-solving might not be meaningful anymore. I foresee a future of value creation, how to expand our resources rather than finding problems and handing out solutions.</p>
+
+      <p>And still value creation inevitably relocates the scarcity problem. The new scarcity becomes the ability to decide which problems matter. When everyone can create, the ability to recognize what's worth caring about becomes the bottleneck. The question is where that scarcity relocates to, whether the new scarcity is more or less humane than the current one. Moreover, value is relational by definition. Money was the primary frame for determining it for a long time. If we adopt my framework — that market logic eventually collapses — then the question gets more complicated.</p>
+
+      <p>If so, what determines value?</p>
+
+      <p>It was always humans.</p>
+
+      <p>Art is somewhat surprising if you think about it. A line that Picasso drew is worth millions. It could be from anyone, but because 'Picasso did it' it creates value and messes up the traditional sense of economic worth. This is clearly shown through Banksy's 2013 performance. Near a street in Central Park, an old man sold some art pieces for about $60. And pedestrians had no clue that they were real Banksy works. The old man sold about revenue of $420. But through real market value, it was more than $200k.</p>
+
+      <p>This reveals a striking reality. Money is just a mere representation of meaning and value.</p>
+
+      <p>I believe in humans. Now would be a time when positing meaning and framing is more important than ever.</p>
+
+      <p>What makes life meaningful might no longer be something finite. It might be the process itself. Say, your personal assistant robot might fold your laundry, cook for you. But these activities are not a matter of what you solved. For some people, the action itself — the pure action itself — is what matters.</p>
+
+      <p>Then what makes meaning?</p>
+
+      <p>Of course, it varies between individuals. But one of the greatest values I believe in is relationships and mutual recognition. We are social creatures, and a lot of what makes life feel meaningful is being seen and needed by other humans, not functionally needed but existentially needed. Big sentence from Hegel: consciousness only becomes real through encountering another consciousness. No AI system, no matter how capable, no matter how successful a title you have, closes that loop.</p>
+
+      <p>This is something that I am focusing on at the moment, relational work. Human relationships are not necessarily about the problem-solving, especially when the abundance of resources arrives. Relationship is not something that can be simplified. It is more of a social negotiation and revise-iteration process. Which means that the end product is not what matters but the pure action or the process is what counts.</p>
+
+      <p>The irony of being, the more AI can do, the more the question of what's worth doing becomes purely, irreducibly human.</p>
+    </div>
+    <footer class="site-footer">© 2026 Haein Jung</footer>
+  </div>
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+      body.classList.add("cursor-enabled");
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, [role='button']");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+      window.addEventListener("mousemove", (event) => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
+      document.addEventListener("mouseleave", () => { body.classList.remove("cursor-visible", "cursor-link"); });
+    })();
+  </script>
+</body>
+</html>

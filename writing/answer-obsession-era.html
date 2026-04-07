@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Answer Obsession Era — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      cursor: none;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .cursor {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--ink);
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease;
+    }
+
+    .cursor.hover {
+      transform: scale(2);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 20px 4rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+      cursor: none;
+    }
+
+    .back-link:hover {
+      color: var(--ink);
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+      margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem;
+      letter-spacing: -0.04em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+
+    .article-subtitle {
+      font-family: 'Instrument Sans', sans-serif;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .article-body p {
+      margin-bottom: 1.4rem;
+    }
+
+    .article-body strong {
+      font-weight: 600;
+    }
+
+    .article-body em {
+      font-style: italic;
+    }
+
+    .article-body h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .article-body h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+      cursor: none;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem 20px 3rem;
+      }
+
+      .article-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="container">
+    <a href="/writing/" class="back-link">&larr; Writing</a>
+
+    <article>
+      <div class="article-date">February 28, 2026</div>
+      <h1 class="article-title">Answer Obsession Era</h1>
+      <p class="article-subtitle">What I need—what we need—is friction, the kind that lets me be wrong without breaking.</p>
+
+      <div class="article-body">
+        <p><strong>What makes a person attractive?</strong></p>
+        <p>This was a question me and my friend have been struggling over a long Socratic conversation. He had a point, a point about honesty.</p>
+        <p>We feel attracted when someone is very authentic and human, and what makes someone feel human is often a certain kind of honesty. I could not find the exact word for this though, would it be honesty?</p>
+        <p>By honesty, I mean the courage to remain corrigible, like admitting your vulnerabilities and insecurities, staying open to being debated over. You are not afraid that you are wrong, some sort of intellectual humbleness.</p>
+        <p>And maybe, that is what being human is: not being fixed, but being corrigible. A person who can be revisited without collapsing. And maybe that is why the modern world scares me sometimes, because it keeps trying to end the conversation early. It gives answers, labels, solutions, validation. It offers closure as if closure were the same thing as truth. But closure often just means I do not have to change.</p>
+        <p>After that conversation, I started to look back upon myself and my past relationships. I realized I was often attracted to someone when they have features that I admired or lacked. I project myself and try to fulfill those needs through those relationships (which often turns out worse when the other person does not feel the need to do so), creating some sort of chase, and mostly those features tend to be tied to being themselves. In love, we often outsource answers to "complete me", "validate me" or "stabilize me". But the people I keep finding magnetic are not the ones who hand me certainty – they are the ones who can handle friction (corrigibility). Corrigibility is proof that a person is alive inside, still in motion.</p>
+        <p><strong>That is why "be yourself" is such a frustrating instruction. Be your authentic self, be honest to yourself, be in the present moment. But everything sounds so fucking abstract.</strong></p>
+        <p><strong>What is even myself?</strong></p>
+        <p>In this booming startup era, and mostly in San Francisco, I feel like everyone is obsessed with problem solving. Startup culture industrializes answer-seeking that everything must be a solvable problem. For a while, I treated that as a bible too, entrapping myself within that framework. But in the end of the day, is that all that actually matters? Okay, you did solve the problem, but because you solved the problem, you are also changed the system, which means your "solution" can turn someone else's situation more problematic. Answers can be correct and still cost something. You eliminated people within that chain of "problem" and their work. They might not be relevant to you directly, but given that humans are incredibly social and dependent, the consequences would eventually travel.</p>
+        <p>Somewhere, in the collision between wanting answers and knowing they cost something, the real question appears: not <em>what is the right answer?</em> but <em>what am I willing to change in order to keep asking?</em></p>
+        <p>I think life's biggest questions, like who to be, what to do, and where to live, are not problems with solutions. They are ongoing negotiations. I think about this within the framework of a triangle. You can optimize for roughly two out of three priorities in any major life decision: what pays, what matters, and what keeps you sane. You will probably sacrifice the third. The "correct" answer depends on which two you are weighting this season. And the answer will change. The trick is not to find the right configuration forever, but to know which compromise you are making right now, and be honest about what it costs.</p>
+        <p>But let me tell you this: if I had to choose two: I would choose what matters and what keeps me sane. I don't even know if that would be the right answer but I'm not afraid of being challenged.</p>
+        <p>And maybe that is the point. Not to find the correct answer. But to remain someone who can be challenged without breaking. Corrigibility.</p>
+        <p>A friend of mine told me this: just learn what to trust and what to question. So simple. And yet, the most difficult thing to practice.</p>
+        <p>This is also what worries me about chatGPT. Not its intelligence. Its reassurance. A machine that tells you what you want to hear, with perfect timing, without hesitation, is not helping you think. It is outsourcing your friction. It is the ultimate answer-giver: a system that never pauses, never struggles, never looks you in the eye and says <em>I don't know.</em></p>
+        <p>And we love it. Because friction is uncomfortable. Because being wrong hurts. Because the modern world rewards speed, clarity, confidence — and punishes hesitation.</p>
+        <p>But what I need — what we need — is friction. Not cruelty. Not chaos. But the kind that lets me be wrong without breaking. The kind that makes room for process, not just product.</p>
+        <p>I don't think you can ever fully become yourself. The word itself is a trap. "Become" implies an endpoint. But there is no endpoint. There is only striving. And what makes someone deeply, magnetically human is not that they have arrived. It is that they are still moving. Still open. Still alive inside.</p>
+        <p>Not an answer. A person.</p>
+      </div>
+    </article>
+
+    <footer class="footer">
+      &copy; 2026 Haein Jung
+    </footer>
+  </div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 9 + 'px';
+      cursor.style.top = e.clientY - 9 + 'px';
+    });
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  </script>
+</body>
+</html>

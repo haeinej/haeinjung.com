@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Haein Jung</title>
+<meta name="description" content="Essays on design, AI, human connection, and becoming.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050914;
+    --bg-strong: #08101f;
+    --ink: #f5f1e8;
+    --muted: rgba(245, 241, 232, 0.72);
+    --soft: rgba(245, 241, 232, 0.46);
+    --line: rgba(245, 241, 232, 0.12);
+    --accent: #000000;
+    --accent-bg: rgba(245, 241, 232, 0.96);
+    --sans: "Instrument Sans", sans-serif;
+    --serif: "Instrument Serif", serif;
+    --transition: 220ms ease;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: var(--sans);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: #000000; color: var(--ink); }
+
+  @media (hover: hover) and (pointer: fine) {
+    body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+  }
+
+  .page { max-width: 1520px; margin: 0 auto; padding: 24px; }
+
+  .site-cursor { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .site-cursor {
+      --cursor-scale: 1;
+      position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+      display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.96);
+      mix-blend-mode: difference; pointer-events: none; z-index: 9999; opacity: 0;
+      transform: translate(-50%, -50%) scale(var(--cursor-scale));
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+    body.cursor-visible .site-cursor { opacity: 1; }
+    body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+    body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+    gap: clamp(28px, 4vw, 64px);
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 28px;
+    align-self: start;
+    min-height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 36px;
+    padding: 16px 0;
+  }
+
+  .brand {
+    display: inline-block;
+    text-decoration: none;
+    font-size: clamp(2.1rem, 4vw, 3.2rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .sidebar-block { margin-top: 20px; display: grid; gap: 4px; }
+
+  .sidebar-location { font-size: 1rem; font-weight: 600; }
+  .sidebar-school { font-size: 0.98rem; line-height: 1.55; color: var(--muted); }
+
+  .sidebar-nav, .sidebar-links { display: flex; flex-wrap: wrap; gap: 12px 18px; }
+  .sidebar-nav { margin-top: 28px; }
+
+  .sidebar-nav a, .sidebar-links a, .mail-link {
+    text-decoration: none;
+    transition: color var(--transition), background-color var(--transition), opacity var(--transition);
+  }
+
+  .sidebar-nav a, .sidebar-links a { color: var(--muted); }
+
+  .sidebar-nav a, .mail-link {
+    display: inline-flex; align-items: center;
+    padding: 0.18rem 0.42rem; margin: -0.18rem -0.42rem;
+    border-radius: 999px;
+  }
+
+  .sidebar-nav a:hover, .sidebar-links a:hover, .mail-link:hover {
+    color: var(--accent); background: var(--accent-bg);
+  }
+
+  .sidebar-links { gap: 12px; }
+  .sidebar-links a {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--muted); border-radius: 999px;
+  }
+  .sidebar-links a:hover { color: var(--accent); }
+  .sidebar-links svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .mail-link {
+    display: inline-block; margin-top: 16px;
+    font-size: 0.95rem; font-weight: 600;
+  }
+
+  .content { padding: 0 0 48px; }
+
+  .writing-meta, .footer-copy {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--soft);
+  }
+
+  .section { padding: 48px 0; }
+
+  .section-title {
+    font-size: clamp(1.55rem, 3vw, 2.2rem);
+    letter-spacing: -0.04em;
+    margin-bottom: 22px;
+  }
+
+  .writing-list { display: grid; }
+
+  .writing-link {
+    text-decoration: none;
+    color: inherit;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    transition: opacity var(--transition);
+  }
+
+  .writing-link:hover { opacity: 0.72; }
+
+  .writing-title {
+    font-size: clamp(1.18rem, 2vw, 1.5rem);
+    letter-spacing: -0.03em;
+  }
+
+  .writing-subtitle {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .footer { padding-top: 22px; }
+
+  @media (max-width: 980px) {
+    .page { padding: 20px; }
+    .layout { grid-template-columns: 1fr; gap: 18px; }
+    .sidebar {
+      position: static; min-height: auto;
+      padding-bottom: 28px; border-bottom: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .writing-link { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <div class="layout">
+      <aside class="sidebar">
+        <div>
+          <a class="brand" href="/">Haein<br>Jung</a>
+          <div class="sidebar-block">
+            <p class="sidebar-location">San Francisco</p>
+            <p class="sidebar-school">Minerva University - Design + Computational Science</p>
+          </div>
+
+          <nav class="sidebar-nav" aria-label="Section navigation">
+            <a href="/work/">Work</a>
+            <a href="/writing/">Writing</a>
+          </nav>
+        </div>
+
+        <div>
+          <div class="sidebar-links" aria-label="External links">
+            <a href="https://www.instagram.com/haeinjvng/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.25-2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/haein-jung-a8441a304/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.73-3.96 4.73 0V21H22v-7.93c0-6.17-7-5.94-8.72-2.91l.04-1.68Z"/></svg>
+            </a>
+            <a href="https://haeinej.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v2.5H3V3Zm0 5h18v2.5H3V8Zm0 5h18V21l-9-5.25L3 21V13Z"/></svg>
+            </a>
+            <a href="https://blog.naver.com/suninjunn/" target="_blank" rel="noopener noreferrer" aria-label="Naver">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h6.4l3.6 5.3V3H20v18h-6.4L10 15.7V21H4V3Z"/></svg>
+            </a>
+          </div>
+          <a class="mail-link" href="mailto:haeinej@gmail.com">haeinej@gmail.com</a>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="section">
+          <h1 class="section-title">Writing</h1>
+
+          <div class="writing-list">
+            <a class="writing-link" href="/writing/one-month-in.html">
+              <div>
+                <h2 class="writing-title">one month in</h2>
+                <span class="writing-subtitle">what are you most afraid of?</span>
+              </div>
+              <span class="writing-meta">Apr 5, 2026</span>
+            </a>
+
+            <a class="writing-link" href="/writing/the-collision-model.html">
+              <div>
+                <h2 class="writing-title">The Collision Model: Anti-Alignment in Physical AI</h2>
+                <span class="writing-subtitle">On what happens when you stop encoding first and start colliding instead.</span>
+              </div>
+              <span class="writing-meta">Mar 26, 2026</span>
+            </a>
+
+            <a class="writing-link" href="/writing/lossy-synthesis.html">
+              <div>
+                <h2 class="writing-title">Lossy Synthesis</h2>
+                <span class="writing-subtitle">On AI leaping past the resistance of being merely a design tool</span>
+              </div>
+              <span class="writing-meta">Mar 19, 2026</span>
+            </a>
+
+            <a class="writing-link" href="/writing/why-i-started-ohm.html">
+              <div>
+                <h2 class="writing-title">Why I Started ohm.</h2>
+              </div>
+              <span class="writing-meta">Mar 11, 2026</span>
+            </a>
+
+            <a class="writing-link" href="/writing/hey-siri-play-bubble-gum.html">
+              <div>
+                <h2 class="writing-title">Hey Siri, Play Bubble Gum by New Jeans</h2>
+                <span class="writing-subtitle">What happens after the steps disappear.</span>
+              </div>
+              <span class="writing-meta">Mar 8, 2026</span>
+            </a>
+
+            <a class="writing-link" href="/writing/answer-obsession-era.html">
+              <div>
+                <h2 class="writing-title">Answer Obsession Era</h2>
+                <span class="writing-subtitle">What I need—what we need—is friction, the kind that lets me be wrong without breaking.</span>
+              </div>
+              <span class="writing-meta">Feb 28, 2026</span>
+            </a>
+
+            <a class="writing-link" href="/writing/exist-and-coexist.html">
+              <div>
+                <h2 class="writing-title">exist and coexist</h2>
+              </div>
+              <span class="writing-meta">Feb 28, 2026</span>
+            </a>
+
+            <a class="writing-link" href="https://blog.naver.com/suninjunn/" target="_blank" rel="noopener noreferrer">
+              <div>
+                <h2 class="writing-title">portrait | haein</h2>
+              </div>
+              <span class="writing-meta">Naver</span>
+            </a>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <p class="footer-copy">&copy; 2026 Haein Jung</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+      body.classList.add("cursor-enabled");
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, [role='button']");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+      window.addEventListener("mousemove", (event) => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
+      document.addEventListener("mouseleave", () => {
+        body.classList.remove("cursor-visible");
+        body.classList.remove("cursor-link");
+      });
+    })();
+  </script>
+</body>
+</html>

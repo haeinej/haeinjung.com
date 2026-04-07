@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exist and coexist — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      cursor: none;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .cursor {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--ink);
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease;
+    }
+
+    .cursor.hover {
+      transform: scale(2);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 20px 4rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+      cursor: none;
+    }
+
+    .back-link:hover {
+      color: var(--ink);
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+      margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem;
+      letter-spacing: -0.04em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .article-body p {
+      margin-bottom: 1.4rem;
+    }
+
+    .article-body strong {
+      font-weight: 600;
+    }
+
+    .article-body em {
+      font-style: italic;
+    }
+
+    .article-body h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .article-body h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+      cursor: none;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem 20px 3rem;
+      }
+
+      .article-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="container">
+    <a href="/writing/" class="back-link">&larr; Writing</a>
+
+    <article>
+      <div class="article-date">February 28, 2026</div>
+      <h1 class="article-title">exist and coexist</h1>
+
+      <div class="article-body">
+        <p>Yesterday, 2 am, after a long 'catching up' with my good friends in Van Ness, I headed home planning to take an e-bike, and the moment I stepped outside, it began to drizzle. I stood under the patio for a while, figuring out whether I should call a Waymo or just go with the rain. Kept walking, I ran into a friend N who was also sitting under a different patio whom I really didn't have the chance to talk to deeply before. Lately, I've been getting a little too excited by having way too much amazing conversations, and despite my weariness, I was basically like, fuck it, I want to ramble more.</p>
+        <p>I activated my curiosity mode and started listening to her story.</p>
+        <p>A recent thought she'd been having was whether she was performing her life or actually living it. I immediately understood where she got that feeling, because that was exactly what I had been going through for the past few years. I wanted to stay busy and live like a person that I wanted to become, yet the discrepancy in between self and image kept lodging itself in me, annoyingly.</p>
+        <p>I remember myself growing up, I wanted to be that 'cool' person who goes to galleries, because that was something I admired. But it was not the purity of the action I valued – it was the product, the image it created. Later, it reached to a point where I could no longer discern whether I was pretending to like it or I whether I genuinely enjoyed the process. And then, eventually, I found myself naturally drawn to galleries, voluntarily read more about art, and actively following recent works and trends. This is a one clear example, but if I look back, a lot of occurrences seem to keep this pattern, not only in me but in humans, generally speaking. Smoking is one explicit example, as if most people start trying to be cool, or by imitating the image it creates. Sooner or later, you reach a point where you get addicted — or, in softer terms, begin to enjoy the act of leisure per se. You never cross a clear line into selfhood, between imitation and identity; most of the time, you live in the ambiguity where one slowly becomes the other.</p>
+        <p>Humans are fragile, in the sense that we are not designed to be fully independent. We are not static. We are easily shaped by other people, systems, and environments. And it is totally fine to be so.</p>
+        <p>Technology dehumanizes people through empowering them. Technology unlocks capabilities one would not otherwise have, and in doing so it feeds our sense of independence. But we are innately not made to be self-contained, static, or perfect. We neglect the fact that there is nothing awkward about relying on people, reaching out, and asking for help. We struggle, strive and shout not only towards ourselves but with other people. A couple months ago we stopped by a vinyl shop in Santa Cruz, where the clerk had exceptional music taste, which struck me instantly. I unconsciously opened Shazam, anxiously trying to capture the sound near the speaker, while also pretending to be a little nonchalant and play it cool. Yes, I did figure out what the song was (Fall in Love by Phantogram), but it led me to imagine the possibilities of what if, what if I didn't have Shazam? I would have asked this clerk what the song was. He might have or I might have recommend other music that was also amazing, or we could have become new friends. Millions of possibilities full of wonder that are latent in a single question. Yet I am here, in the reality with self I became amid all the past choices I made. That being said, I feel like I am always in between something. In between a lot of identities or perceptions I hold of myself. In between myself and the people around me. I sway back and forth trying to find the equilibrium of the conceptual scale I carry in my mind. So I pursue clarity, something tangible to reassure myself.</p>
+        <p>Atoms and molecules are in perpetual motion across all phases of matter, provided the temperature is above absolute zero. We humans, also made of atoms, forget that we too can just exist. Exist being ambiguous. We have the freedom to perform and to live. The freedom to fake smoking and become that cool kid, or to actually become an addict. And the freedom to be both — one, but also two.</p>
+        <p>My new good friend J has an obsession with articulating words, and yesterday, he asked me if I knew the difference between wonder and curiosity.</p>
+        <p>Curiosity is driven, with a clear focus on what I want to know, whereas wonder is what happens when you stumble upon something unexpected and allow yourself to enter a state of awe.</p>
+        <p>Awe. Let us be freer. Let us rediscover ourselves through wonder, and allow ourselves to change over time.</p>
+      </div>
+    </article>
+
+    <footer class="footer">
+      &copy; 2026 Haein Jung
+    </footer>
+  </div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 9 + 'px';
+      cursor.style.top = e.clientY - 9 + 'px';
+    });
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  </script>
+</body>
+</html>

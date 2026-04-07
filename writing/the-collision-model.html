@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collision Model: Anti-Alignment in Physical AI — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 20px; }
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 3rem;
+      transition: color 220ms ease;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      letter-spacing: -0.04em;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .site-footer {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.96);
+        mix-blend-mode: difference; pointer-events: none; z-index: 9999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+    .site-cursor { display: none; }
+  </style>
+</head>
+<body>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">The Collision Model: Anti-Alignment in Physical AI</h1>
+      <p class="article-subtitle">On what happens when you stop encoding first and start colliding instead.</p>
+      <p class="article-date">March 26, 2026</p>
+    </header>
+    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
+    <div class="article-body">
+      <p>Yesterday at the High Line, I sat in front of Heatherwick's Vessel thinking about movement without direction. Then I ran into two close friends by accident, and for a moment the building seemed to prove its own thesis: circulation as encounter. We climbed it together. But the longer I stayed inside it, the more irritated I became. The nets cut through the view. The structure did not quite liberate movement; it managed it. What was meant to open wandering up instead inserted friction into it.</p>
+
+      <p>Yet.. I love friction. I keep saying that and keep failing to explain it, which is perhaps the purest example of what I mean. My previous essay, <em><a href="/writing/lossy-synthesis.html">Lossy Synthesis</a></em>, argued for an architecturally heretical counter-model to machine learning's lossless transformation paradigm. That argument came from the same impulse. I am someone who changes constantly, and that makes me deeply suspicious of systems that define things too early, before they have had the chance to encounter anything beyond themselves. My friend M calls me a freshy amateur in this field, and he is right. But an outside eye can sometimes notice the assumptions an inside eye has naturalized. I wonder where that kind of beginner's luck might lead.</p>
+
+      <hr>
+
+      <p>There is a quiet consensus forming in sensory AI research that goes like this: the world produces signals, and we encode those signals into representations. We align those representations with language. Then humans can ask questions and get answers. The pipeline is linear. Encode, align, interpret.</p>
+
+      <p>I think encoding itself is the problem. Not encoding as an operation — encoding as a <em>sequence</em>. When you encode first and relate second, you've already decided what matters before the encounter that would determine it. The pipeline isn't wrong in what it does. It's wrong in what order it does it.</p>
+
+      <p>Two recent pieces of work brought me here. The first is Archetype AI's research on aligning their physical world encoder, <a href="https://www.archetypeai.io/blog/language-and-physical-world-model">Newton</a>, with a frozen language model. The second is Linus Lee's essay <em><a href="https://thesephist.com/posts/synth/">Synthesizer for thought</a></em>, which imagines a new class of instruments for language built on the decomposition of meaning into mathematical features. I find both remarkably elegant. And both share an assumption that I think deserves to be challenged.</p>
+
+      <h2>The shared assumption</h2>
+
+      <p>Archetype AI trains Newton on hundreds of millions of real-world sensor measurements like vibration, motion, pressure, and current. The encoder produces embeddings where signals with similar qualitative properties cluster together: automotive signals from similarly rough road surfaces group tightly; smooth and uneven patterns separate cleanly. Then a small alignment network, roughly 3.3 million parameters on a single GPU, maps these embeddings into the representation space of a frozen LLM. You can ask "did anything unusual happen during this drive segment?" and get a natural-language answer grounded in sensor data.</p>
+
+      <p>Linus Lee makes a parallel move with language itself. In his <a href="https://thesephist.com/posts/prism/">Prism</a> project, he uses sparse autoencoders to decompose text embeddings into thousands of human-interpretable features — things like "technical discourse on formal logic," "interrogative sentence structure," "discussions about parenthood." He can steer these features: push the embedding toward "figurative language" and the text transforms accordingly. Multiple edits stack predictably. His analogy is the synthesizer — just as we understood sound as overlapping waves and built instruments that manipulate waveforms directly, we might understand meaning as positions in a vector space and build instruments that manipulate ideas the way a producer manipulates a mix.</p>
+
+      <p>Both encode first and relate second. The representation always precedes the encounter.</p>
+
+      <h2>The mirror</h2>
+
+      <p>I want to start somewhere that has nothing to do with AI.</p>
+
+      <p>I walked into <a href="https://leaflet.perrotin.com/view/1305/repeated-original-gabriel-de-la-mora">Perrotin</a> gallery in New York two days ago and stood in front of Gabriel de la Mora's <em>Repeated Original</em> — paintings without paint, planes that retain pictorial qualities but dispense with pigment entirely. The most striking works were done with mirrors. Not decorative mirrors. Structural, curvature ones. Fragmented surfaces that don't reflect a single coherent image but break the encounter into planes, each angled differently, each returning a different slice of whatever stands before it.</p>
+
+      <blockquote><p>De la Mora makes evident that images belong neither to the object nor to the viewer; they are a transient state of light, a precarious and mutable phenomenon that emerges—and dissolves—at the encounter between matter and gaze.</p></blockquote>
+
+      <p>A mirror has no content of its own. It exists only in the encounter with what stands before it. You cannot store a mirror's reflection without the thing being reflected. The reflection isn't a property of the mirror. It's a property of the meeting.</p>
+
+      <p>But de la Mora's mirrors aren't passive. The fragmented surface doesn't just receive — it restructures. It changes the form of the information by changing the geometry of the encounter. The mirror is an atomic unit, but what it produces is entirely relational.</p>
+
+      <p>This is the problem with encoding first.</p>
+
+      <p>When Archetype says a vibration signal "means" that a road surface is rough, where does that meaning live? In the embedding? In the language model's interpretation? Archetype themselves acknowledge that the same numerical pattern "can imply very different realities depending on where it occurs and why." A rise in temperature can mean boiling water, an overheating engine, or entirely normal operation. Context determines meaning. But their architecture encodes the signal before context enters. The embedding is fixed. Then language arrives. Meaning is treated as something to be retrieved, not something to be generated in the meeting.</p>
+
+      <p>The atomic unit of meaning is not positional. It's relational. It doesn't exist in the vector. It exists in what happens when the vector meets a question.</p>
+
+      <h2>The synthesizer's own counter-argument</h2>
+
+      <p>Linus's synthesizer metaphor also contains its own refutation.</p>
+
+      <p>Synthesizers did not succeed by faithfully reproducing acoustic instruments. The 'Moog' did not replace the violin. What happened was stranger: the gap between physical sound and its mathematical reconstruction opened entirely new sonic territory. Techno is not a lossy reproduction of orchestral music. Ambient is not a compressed version of chamber music. The compression artifacts — the aliasing, the quantization, the things that fall away when you rebuild sound from oscillators — became the medium itself.</p>
+
+      <p>The synthesizer's cultural power came from what it couldn't faithfully represent, but rather, the loss was generative.</p>
+
+      <p>A synthesizer has knobs. Knobs require stable parameters that exist before you touch them. You turn a dial, a waveform changes predictably. But if the most interesting properties of meaning aren't stable — if they only appear in the encounter between two texts, two minds, a signal and a question — then you can't build knobs for them. You need something else entirely.</p>
+
+      <p>Linus ends his essay with an open question: what would the instrument for thought be? I don't think it's a synthesizer. The instrument for thought might be closer to a controlled collider, something that designs the geometry of encounter rather than the parameters of representation.</p>
+
+      <h2>Reverse the order</h2>
+
+      <p>Encode first, relate second. That's the current sequence. Reverse it. Relate first. Let representation fall out.</p>
+
+      <p>Instead of encoding a signal into a fixed embedding and then asking language to interpret it, let the raw signal and the linguistic prompt enter a shared processing space simultaneously. The signal shapes how language behaves. Language shapes how the signal gets encoded. Neither goes first. The interpretation isn't retrieved from a pre-existing representation. It's generated at the boundary.</p>
+
+      <p>This means different questions about the same signal would produce genuinely different readings — not because the system retrieves different facets of a fixed vector, but because each collision is a different event. Ask "is this road dangerous?" and the signal-language interference pattern foregrounds certain features. Ask "how does this compare to yesterday's drive?" and the interference pattern is structurally different. The signal hasn't changed. The collision has.</p>
+
+      <p>This is not inefficiency. This is fidelity. Because meaning is context-dependent — Archetype says so themselves — an architecture that generates meaning in context rather than encoding it in advance is more honest about how physical signals actually work.</p>
+
+      <h2>The gradient</h2>
+
+      <p>Some architectures are already moving toward this, but none have committed.</p>
+
+      <p><a href="https://openai.com/index/clip/">CLIP</a> (Open AI) learns from copresence — it trains on 400 million image-text pairs, learning which pairings match by maximizing similarity between correct pairs and minimizing it for mismatched ones. The meaning of an image emerges through its relationship with a caption, not from the image alone. But the collision is shallow: separate encoders, a dot product at the end. Two pipelines that touch only at their tips.</p>
+
+      <p><a href="https://deepmind.google/blog/building-architectures-that-can-handle-the-worlds-data/">DeepMind's Perceiver IO</a> goes further. Inputs from different modalities attend to each other during encoding through cross-attention. The image representation is shaped by the text, and the text by the image, in the same forward pass. Closer. But still layered — modality-specific encoding happens before the shared space absorbs it.</p>
+
+      <p>Yann LeCun's Joint Embedding Predictive Architecture gets closest. JEPA rejects the sequential paradigm entirely. Instead of predicting the next token or pixel, it defines an energy-based compatibility function over the whole system and lets it settle into a low-energy state. Compatible inputs relax into alignment together. No step goes first. As LeCun puts it, prediction happens not in the space of raw sensory inputs but in an abstract representational space, through energy minimization — two things deforming each other until they find a stable mutual shape.</p>
+
+      <p>The gradient is clear: from shallow contact to mutual deformation. What's missing is an architecture where the collision between physical signals and language is the primary operation — where neither the signal's encoding nor the language's interpretation is fixed before they encounter each other.</p>
+
+      <h2>What this looks like, concretely</h2>
+
+      <p>I attended a panel at California College of the Arts a few weeks ago — "Designing for Physical AI," with Leonardo Giusti from Archetype AI, David Webster from Google Labs, Chris Stoffel from Zoox. The conversation stayed inside the pipeline: better sensors, better encoders, better alignment with language. Encode, align, interpret. Nobody questioned the order.</p>
+
+      <p>After the session, I directly asked Leonardo about this, but neither of us had the answer. Ever since then, I have been pondering about it, and here is what questioning the order would look like, applied directly to Archetype's Newton.</p>
+
+      <p>Right now: a sensor signal gets encoded into a fixed embedding. The alignment network translates that embedding into the LLM's space. The LLM generates natural language. Signal is ground. Language is figure. The encoding is decided before language touches it.</p>
+
+      <p>A collision architecture would replace the fixed encoder and alignment network with a shared cross-attention space. Raw sensor features — not a finished embedding, but something closer to the intermediate activations of Newton's encoder, the partially processed signal before it collapses into a single vector — enter this space alongside the tokenized prompt. Cross-attention layers let the signal features attend to the prompt tokens and the prompt tokens attend to the signal features, iteratively, before either side has been fully encoded. The signal's representation is shaped by what's being asked. The question's interpretation is shaped by what the signal contains.</p>
+
+      <p>This isn't a retrieval operation, more of a generative one. The representation that emerges from the shared space is specific to this collision — this signal, this question, this moment. A different question produces a different representation of the same signal, not because the system selects different facets of a pre-computed embedding, but because the encoding itself was different.</p>
+
+      <p>The cost is obvious: you lose the efficiency of encoding once and querying many times. Newton's current architecture encodes a signal once and can answer unlimited questions against that embedding. A collision model re-encodes for every encounter. But the gain is that context-dependent meaning gets treated as context-dependent from the start, not patched in after the fact through a language model's interpretive flexibility.</p>
+
+      <h2>The riverbed</h2>
+
+      <p>There is an obvious objection. If nothing gets extracted, if collision products don't become stable representations, then how does the system learn?</p>
+
+      <p>Every flood reshapes the riverbed. The riverbed never stores the flood. There is no data file for the flood of March 2024. But the next flood flows differently because of how all previous floods carved the terrain. The riverbed is the accumulated consequence of every collision that ever passed through it. It doesn't represent any single event. It behaves differently because of all of them.</p>
+
+      <p>Neural network weights already work like this — training doesn't store individual examples, it reshapes the weight landscape through accumulated gradients. But current architectures extract representations first and compute losses against targets second. The collision model would go further: the collision itself directly reshapes the processing environment. Not extraction, then update. Collision, scar, next collision.</p>
+
+      <p>The shared cross-attention space doesn't output data to be stored. It becomes a different space. Each collision between a physical signal and a linguistic context changes the medium. And the next collision that passes through that changed medium produces different consequences than it would have in an unmodified one.</p>
+
+      <p>The knowledge isn't in any retrievable record. It's in how the space behaves when the next signal meets the next question.</p>
+
+      <h2>Against alignment, for collision</h2>
+
+      <p>Archetype's parameter-efficient alignment is genuinely elegant. Linus's interpretability research opens real design possibilities. Both are efficient approaches to a real problem. But I think where a different paradigm matters most is somewhere neither paper addresses directly: the persistent uncanny feeling humans have when they encounter content produced by AI.</p>
+
+      <p>That feeling has a source, and it isn't technical imprecision. AI-generated text, images, and interpretations are often <em>plausible without being situated</em>. They sound like they could mean something, but they don't mean something to anyone in particular, in any particular moment. They are meaning without encounter — representations that existed before they met a reader, a question, a context. The uncanniness isn't a failure of quality. It's the trace of the alignment paradigm itself. When meaning is encoded before it meets the world, what comes out is fluent but homeless.</p>
+
+      <p>A collision architecture wouldn't just be more faithful to how physical signals work. It would produce interpretations that are <em>constitutively situated</em> — born in the meeting between a specific signal and a specific question, shaped by both, belonging to neither alone. The output of a collision isn't a retrieved answer. It's an event. And events don't feel uncanny, because they couldn't have existed before the moment that produced them.</p>
+
+      <p>The alignment paradigm assumes meaning has a home — in the embedding, in the feature, in the representation. The collision model says meaning is homeless. It only shows up at boundaries. It only exists in the meeting between a signal and an interpreter, between a thought and a context, between a question and the world it encounters.</p>
+
+      <p>You don't encode the world and then interpret it. You collide with it and see what appears.</p>
+
+      <hr>
+
+      <p><em>This essay emerged from attending the "Designing for Physical AI" panel at California College of the Arts (Mar 2026), reading Archetype AI's "Teaching Language Models to Read the Physical World with Newton" (Feb 2026) and Linus Lee's "Synthesizer for thought" and "Prism" (2024), alongside research on CLIP (Radford et al., 2021), Perceiver IO (Jaegle et al., 2021), and JEPA (LeCun, 2022; Assran et al., 2023). It extends arguments from my earlier essay "Lossy Synthesis."</em></p>
+    </div>
+    <footer class="site-footer">© 2026 Haein Jung</footer>
+  </div>
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+      body.classList.add("cursor-enabled");
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, [role='button']");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+      window.addEventListener("mousemove", (event) => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
+      document.addEventListener("mouseleave", () => { body.classList.remove("cursor-visible", "cursor-link"); });
+    })();
+  </script>
+</body>
+</html>

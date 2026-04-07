@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>one month in — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      cursor: none;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      cursor: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .cursor {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--ink);
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: transform 0.15s ease;
+    }
+
+    .cursor.hover {
+      transform: scale(2);
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 20px 4rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 3rem;
+      transition: color 0.2s ease;
+      cursor: none;
+    }
+
+    .back-link:hover {
+      color: var(--ink);
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+      margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem;
+      letter-spacing: -0.04em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+
+    .article-subtitle {
+      font-family: 'Instrument Sans', sans-serif;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .article-body p {
+      margin-bottom: 1.4rem;
+    }
+
+    .article-body strong {
+      font-weight: 600;
+    }
+
+    .article-body em {
+      font-style: italic;
+    }
+
+    .article-body h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .article-body h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+      cursor: none;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--soft);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem 20px 3rem;
+      }
+
+      .article-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="container">
+    <a href="/writing/" class="back-link">&larr; Writing</a>
+
+    <article>
+      <div class="article-date">April 5, 2026</div>
+      <h1 class="article-title">one month in</h1>
+      <p class="article-subtitle">what are you most afraid of?</p>
+
+      <div class="article-body">
+        <p>On February 20th, 2026, I started building ohm. By March 20th — exactly one month later — it was live on the App Store with beta users, from which were mostly my friends.</p>
+        <p>It started with LinkedIn. I am a paid user. I pay 40 dollars a month and I still think the UI sucks. Too many functions, too many tools I do not need. I believe in simplicity of design. The essence of a product comes from focusing on the core of what you want to convey. Everything else is noise.</p>
+        <p>So I started redesigning it for myself. But I quickly realized I wanted more than a better interface. My actual purpose on LinkedIn was never networking. It was discovering people, people outside my existing world doing genuinely interesting things. Through those connections, my world expanded. That was the seed. That became ohm.</p>
+        <p>Now, a month and a half in, I have 50 users. I have talked to more than 100 potential users across San Francisco and New York. And I am terrified.</p>
+
+        <hr>
+
+        <h2><strong>What are you most afraid of?</strong></h2>
+        <p>This was the question that was lingering in my head for the past weeks, and I think it is ambiguity. Not failure, but this ambiguity. The not-knowing. Fear is the disorientation itself.</p>
+        <p>For the first time in my life, there is this drive that I cannot tolerate. Not because it is painful but because it will not turn off. Most nights I could not sleep last month. I am scared that I might not be able to control myself. That sounds dramatic. But it is true.</p>
+        <p>I am not afraid that no one will show up. I am not afraid that nothing will happen to me. I am afraid of the space between. On the upside, it might work out. On the downside, it turns for the worse. And I have noticed something: when reality actually hits, it is never as hurtful or stressful as the anticipation itself. The waiting is worse than the thing. Every time. But the waiting does not get easier just because I know that.</p>
+        <p>I still reach out. I still figure out why people are not using it, and what I could do to make them stay. I still sit with the ambiguity and move anyway.</p>
+        <p>Would I eventually be tired? Would I burn out from this momentum? Maybe. Maybe not. But because all of these sentences start with <em>may</em> — that is exactly why it is worth pursuing.</p>
+
+        <hr>
+
+        <p>I booked a flight to New York four days before departure. I realized I had to step outside the San Francisco bubble and meet people from different backgrounds. I printed a hundred flyers. I handed them to a hundred strangers and started selling my idea face to face on the street.</p>
+        <p>It is not a favorable position to be in. You are pushing people to care about something they did not ask for. It is not fun. But over time, it sharpened me. I started noticing what kind of attention I could actually capture. I started reading people faster. Their reactions shaped the product more than any feature brainstorm ever did.</p>
+        <p>Building the product is the easy part now. Every product can be built through Claude Code in four hours. What is actually scarce is driving people's attention. And you cannot learn that from inside your apartment.</p>
+        <p>Marketing was hard for me, and I want to be honest about why. There is a mismatch between my natural mode of expression and the demands of sustained public output. I have an artistic soul — or at least I think I do. I believe in the purity of what I create. And I think that belief led to a kind of arrogance: caring more about my own intentions than about whether the audience actually received them.</p>
+        <p>But marketing is not self-expression. It is conveying your intentions precisely enough to change someone's behavior. That is a different skill. I am still not good at it. But selling an idea I did not yet have a solid product for, and watching people's faces as I did — that taught me more than any framework could.</p>
+
+        <hr>
+
+        <p>Back in SF, I met a friend who came from New York. A very different character from me. I asked him the same question. What are you most afraid of?</p>
+        <p>He said failure.</p>
+        <p>Then I asked him, how do you define failure?</p>
+        <p>Not living up to his maximum potential.</p>
+        <p>In order to avoid that, he would minimize risk. Credibility and social recognition mattered. Legibility mattered. He wanted to know, at every point, where he stood.</p>
+        <p>I am worried too. The uncertainty of whether I am spending my time on the right thing, it does not go away. I think it is the tax of choosing a path with genuine upside.</p>
+        <p>Stable jobs are enticing because the rewards are visible and immediate. Salary. Structure. External validation. Legibility. Building your own thing offers something less soothing. The proof is delayed. The ambiguity is constant. There is a high chance I will fail. And I cannot keep asking <em>am I doing the right thing?</em> because no one can answer that yet.</p>
+        <p>But I would like to justify myself that I am not someone passively avoiding life. I am someone who cares about making something real. And that is exactly why looking for jobs can feel both attractive and vaguely deadly at the same time. The tension is not between laziness and ambition. It is between security and aliveness.</p>
+        <p>The healthier way is not to follow passion blindly. It is to keep building, seriously, but place reality around it. What skills am I accumulating? What relationships? What outputs? Even if this venture fails, are those things still valuable? Loving the mission is beautiful. But the world only starts changing when my work reaches enough people to matter. I need both devotion and discipline.</p>
+
+        <hr>
+
+        <p>I met a french ML researcher at a random dive bar near Washington Square. I was writing some stuff at the bar, and when I closed my laptop he started looking at my side. I looked at his too. With slight intention. Yet we were both fine not to talk.</p>
+        <p>Eventually we did. I spoke up. How is your day? He said, very fine.</p>
+        <p>This weird tension between people is interesting to me. Sometimes you can sense that you both might want to talk. Kind of glancing sideways. But there needs to be courage to be the one who says, <em>how are you doing?</em> I personally love this tension — the thinking of should I say something first, the not wanting to miss the chance. For me, the odds of giving it a shot have increased over time. Now I would say something like 6 out of 10, I do.</p>
+        <p>I love watching people who cannot contain their energy talking about what they love. Whatever the topic. When thinking comes before your words, when ideas seem to be rushing in and your emotions arrive prior to the sentences you spit out. This excitement is somehow very cute and delightful for me to watch.</p>
+        <p>And I realized.. this is the same fear. The flyers on the street. The sleepless nights. The laptop closing at the bar. It is always the same question. Do I stay in the ambiguity, or do I move first?</p>
+
+        <hr>
+
+        <p>I still reach out. I still figure out why people are not using it, and what I could do to make them stay. I still sit with the ambiguity and move anyway. And I am mostly scared that I would give up too easily. But I know now that there is no clarity in human nature, and what I could only count on is my act of doing.</p>
+        <p>So.. what are you most afraid of?</p>
+      </div>
+    </article>
+
+    <footer class="footer">
+      &copy; 2026 Haein Jung
+    </footer>
+  </div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 9 + 'px';
+      cursor.style.top = e.clientY - 9 + 'px';
+    });
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  </script>
+</body>
+</html>
