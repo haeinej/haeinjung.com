@@ -22,11 +22,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
-    html {
-      cursor: none;
-    }
-
     body {
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
       color: var(--ink);
@@ -34,26 +29,29 @@
       font-size: 1rem;
       line-height: 1.8;
       min-height: 100vh;
-      cursor: none;
+      
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    .cursor {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--ink);
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.15s ease;
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
     }
 
-    .cursor.hover {
-      transform: scale(2);
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
+        pointer-events: none; z-index: 99999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
     }
 
     .container {
@@ -69,7 +67,7 @@
       font-size: 0.9rem;
       margin-bottom: 3rem;
       transition: color 0.2s ease;
-      cursor: none;
+      
     }
 
     .back-link:hover {
@@ -135,7 +133,7 @@
     .article-body a {
       color: var(--ink);
       text-decoration: underline;
-      cursor: none;
+      
     }
 
     .article-body hr {
@@ -166,7 +164,7 @@
   </style>
 </head>
 <body>
-  <div class="cursor"></div>
+  <div class="site-cursor" aria-hidden="true"></div>
   <div class="container">
     <a href="/writing/" class="back-link">&larr; Writing</a>
 
@@ -209,15 +207,29 @@
   </div>
 
   <script>
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX - 9 + 'px';
-      cursor.style.top = e.clientY - 9 + 'px';
-    });
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+    (() => {
+      const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector('.site-cursor');
+      if (!cursor) return;
+      body.classList.add('cursor-enabled');
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest('a, button');
+        body.classList.toggle('cursor-link', Boolean(interactive));
+      };
+      window.addEventListener('mousemove', (event) => {
+        cursor.style.left = event.clientX + 'px';
+        cursor.style.top = event.clientY + 'px';
+        body.classList.add('cursor-visible');
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener('mousedown', () => body.classList.add('cursor-press'), { passive: true });
+      window.addEventListener('mouseup', () => body.classList.remove('cursor-press'), { passive: true });
+      document.addEventListener('mouseleave', () => {
+        body.classList.remove('cursor-visible', 'cursor-link');
+      });
+    })();
   </script>
 </body>
 </html>

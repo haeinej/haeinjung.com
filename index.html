@@ -76,17 +76,30 @@
 
   .sidebar.revealed { opacity: 1; }
 
-  .content {
+  .hero-title,
+  .portrait-frame,
+  .hero-lead {
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 900ms cubic-bezier(0.4, 0, 0.2, 1),
-                transform 900ms cubic-bezier(0.23, 1, 0.32, 1);
-    will-change: opacity, transform;
+    transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 700ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .content.revealed {
+  .content.revealed .hero-title {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .content.revealed .portrait-frame {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 150ms;
+  }
+
+  .content.revealed .hero-lead {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 300ms;
   }
 
   .site-cursor {
@@ -797,23 +810,23 @@
           splash.classList.add("leaving");
         }, 350);
 
-        // ─── Step 3: Sidebar appears first ───
+        // ─── Step 3: Sidebar fades in first ───
         const sidebar = document.querySelector(".sidebar");
         const content = document.querySelector(".content");
         setTimeout(() => {
           sidebar.classList.add("revealed");
-        }, 1100);
+        }, 1000);
 
-        // ─── Step 4: Hero fades in after sidebar ───
+        // ─── Step 4: Hero elements stagger in (title → portrait → lead) ───
         setTimeout(() => {
           content.classList.add("revealed");
-        }, 1500);
+        }, 1600);
 
         // ─── Step 5: Cleanup ───
         setTimeout(() => {
           cancelAnimationFrame(animId);
           splash.classList.add("hidden");
-        }, 2600);
+        }, 3000);
       });
     })();
   </script>
