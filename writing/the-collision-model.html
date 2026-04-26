@@ -134,13 +134,15 @@
       border-top: 1px solid var(--line);
     }
 
+    .site-cursor { display: none; }
+
     @media (hover: hover) and (pointer: fine) {
       body.cursor-enabled, body.cursor-enabled * { cursor: none; }
       .site-cursor {
         --cursor-scale: 1;
         position: fixed; left: 0; top: 0; width: 18px; height: 18px;
         display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
-      pointer-events: none; z-index: 99999; opacity: 0;
+        pointer-events: none; z-index: 99999; opacity: 0;
         transform: translate(-50%, -50%) scale(var(--cursor-scale));
         transition: transform 180ms ease, opacity 180ms ease;
       }
@@ -148,7 +150,6 @@
       body.cursor-link .site-cursor { --cursor-scale: 1.8; }
       body.cursor-press .site-cursor { --cursor-scale: 0.88; }
     }
-    .site-cursor { display: none; }
   </style>
 </head>
 <body>

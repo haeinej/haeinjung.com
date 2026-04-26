@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asymmetry of Cognition — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 20px; }
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 3rem;
+      transition: color 220ms ease;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      letter-spacing: -0.04em;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .site-footer {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
+        pointer-events: none; z-index: 99999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">Asymmetry of Cognition</h1>
+      <p class="article-subtitle">"Do you think this is the last easy money?"</p>
+      <p class="article-date">April 21, 2026</p>
+    </header>
+    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
+    <div class="article-body">
+      <p>That was the question I asked my friend M the other night at Hanwha AI center.</p>
+
+      <p>Q1 2026 was the biggest quarter in venture history — <a href="https://news.crunchbase.com/venture/record-breaking-funding-ai-global-q1-2026/">$297 billion globally, an all-time record, with AI capturing about 81% of it</a>. The real punchline is this concentration: OpenAI, Anthropic, xAI, and Waymo absorbed <a href="https://news.crunchbase.com/venture/capital-concentrated-ai-global-q1-2026/">roughly 64% of all global venture capital</a> between them in a single quarter. It felt abnormal. Concentrated and somehow urgent.</p>
+
+      <p>Although I was grateful to be inside the scene in this very moment, underneath that urgency, I sensed something else.</p>
+
+      <p>Not FOMO.. rather more like fear of ending.</p>
+
+      <hr>
+
+      <h2>1. Learning is compression</h2>
+
+      <p>I keep returning to the same frame.</p>
+
+      <p>A 1GB model trained on 1TB of data is compressing, extracting structure, discarding noise, and encoding patterns into something smaller but more powerful. From <a href="https://en.wikipedia.org/wiki/Ray_Solomonoff">Solomonoff</a> to <a href="https://en.wikipedia.org/wiki/Kolmogorov_complexity">Kolmogorov</a> to <a href="https://en.wikipedia.org/wiki/Marcus_Hutter">Marcus Hutter</a>, the idea is not only metaphorical but also formal: <a href="https://arxiv.org/html/2503.13992v1">intelligence is the ability to find the shortest program that explains the world</a>. Hutter even runs <a href="http://prize.hutter1.net/">a standing prize for compressing human knowledge</a>, on the premise that better compression is better intelligence.</p>
+
+      <p>Compression produces abstraction. And abstraction is what lets us think.</p>
+
+      <p>I think better notation doesn't make us faster at old problems. It makes previously unthinkable problems thinkable. Calculus didn't optimize arithmetic, but it created an entirely new category of reasoning. Chemistry didn't emerge from better experiments alone, but from better naming. Kenneth Iverson made this exact argument in his 1979 Turing Award lecture, <em><a href="https://www.eecg.utoronto.ca/~jzhu/csc326/readings/iverson.pdf">Notation as a Tool of Thought</a></em>, quoting Whitehead: a good notation relieves the brain of unnecessary work and, in effect, "increases the mental power of the race."</p>
+
+      <p>We stand on abstractions the way we stand on giants.</p>
+
+      <hr>
+
+      <h2>2. Design is compression made physical</h2>
+
+      <p>I use this analogy a lot — the design of a cup.</p>
+
+      <p>A cup encodes knowledge: how humans hold objects, how liquids move, how heat transfers. The handle is not just there for no reason, also not only for the aesthetic — it is stored cognition. The handle is shaped like that because of a predicted behavior, the most convenient way to drink water. And because that cognition is embedded in the object, we don't even think when we drink. We succeeded in outsourcing the knowledge.</p>
+
+      <p>This is the pattern of progress:</p>
+
+      <p>We compress knowledge → embed it into tools → reduce cognitive load → free attention → build more complex systems.</p>
+
+      <p>And then complexity grows again. We build more complex products to solve more complex problems, and it complicates again… now might be an era where it is too complicated, and the people who are actually solving (building something that is actually meaningful on top of these systems) might be very few.</p>
+
+      <p>If intelligence is compression, then the real question is not who builds the best tools — but who controls the compression we can not see.</p>
+
+      <hr>
+
+      <h2>3. When building becomes free</h2>
+
+      <p>Now back to 2026, the cost of building software is collapsing.</p>
+
+      <p>I saw this clearly in a small moment. The other morning I sat in on a GTM talk with one of our alums, and she shared her story. Whisper (a refined speech-to-text tool) was very hyped within her firm, and she also found it very useful. But soon, when the free trial ended, they tried to charge her $10 a month.</p>
+
+      <p>So what did she do?</p>
+
+      <p>She opened her terminal and began to vibe code.</p>
+
+      <p>Within an hour she built the exact same thing — customized for her tone, better for her use, for free.</p>
+
+      <p>I think this is not really exceptional anymore. <a href="https://a16z.com/llmflation-llm-inference-cost/">a16z's "LLMflation" report</a> shows inference cost for equivalent performance is falling about 10× per year. What cost $60 per million tokens in 2021 costs about $0.06 today. When building is nearly free, ready-built software stops being attractive structurally.</p>
+
+      <p>And most software today is built on top of shared foundation models. That makes much of it inherently replicable. If replication is cheap, differentiation becomes fragile.</p>
+
+      <hr>
+
+      <h2>4. Back to the question</h2>
+
+      <p>So I asked M: Do you think these VC firms are anxious that this is the last opportunity to make easy money?</p>
+
+      <p>My argument dates back to my previous <a href="https://substack.com/home/post/p-190259030">essay</a>. Because these softwares are essentially built upon the backbones of companies who own the foundation models, everything is pretty replicable — and as I said, I humbly preassume that this industry will break down soon. It also makes sense why big firms are investing / trying to keep the market hyped; those are whom could benefit the most from deeper market influx of LPs and founders. But underneath that, I think they are very anxious that this might be the last opportunity to make money through investing in software companies. Since soon will come an era when individuals could build anything based on their own needs.</p>
+
+      <p>The market has actually started to say this out loud.</p>
+
+      <p>Claude Code launched in February 2025 and kicked off the vertical AI boom. Then on January 12, 2026, Anthropic launched Claude Cowork — basically Claude Code but for non-engineers. Within three weeks, the industry-specific plug-ins for legal, finance, and sales triggered what traders began calling the <a href="https://medium.com/activated-thinker/the-830-billion-wake-up-call-how-claude-just-murdered-the-old-software-industry-6740be8a4786">"SaaSpocalypse."</a> Roughly $830 billion in global software market cap evaporated in seven days. <a href="https://markets.financialcontent.com/stocks/article/tokenring-2026-2-5-the-saaspocalypse-anthropics-claude-cowork-triggers-massive-sell-off-in-professional-services-stocks">Thomson Reuters fell 15.8% in one session. LegalZoom cratered nearly 20%. RELX (parent of LexisNexis) fell 14%</a>. <a href="https://www.cnn.com/2026/02/04/investing/us-stocks-anthropic-software">Salesforce is down about 26% on the year</a>.</p>
+
+      <hr>
+
+      <h2>5. M's rebuttal</h2>
+
+      <p>M disagreed. He had built a B2B software company himself, and his pushback was grounded: yes, but people would want to still focus on something more important to them. Maintenance requires extra effort. Human time and energy is bounded. It is plausible that there will still be needs to outsource these efforts.</p>
+
+      <p>Half agree, half disagree.</p>
+
+      <p>For SMEs, there still might be needs — it is true they have limited energy. But for larger corporates, it is unnecessary to outsource software products. They just need to hire someone to build it for them.</p>
+
+      <p>And this is where it is fundamentally different from Luddite movement.</p>
+
+      <p>When the cost of manufacturing became extremely cheap, the price / value of goods down-surged. It used to take $100 to make a t-shirt; now it might only take $2–3. Then the value shifted to something rarer, which used to be service (software). But unlike manufacturing, which requires actual physical material and resource, software only requires electricity. It is less bounded. Therefore it is more replaceable, and cost would keep on self-cutting per se over time through self-development.</p>
+
+      <hr>
+
+      <h2>6. What actually changes</h2>
+
+      <p>Still, it is not really the end of software, but more like.. end of certain kind of software.</p>
+
+      <p>When production becomes cheap, value moves elsewhere. We saw this in manufacturing — t-shirts used to be expensive, now they are nearly free to produce, and value shifted toward branding, distribution, and identity. Software is undergoing a similar shift, but faster, because it has no material constraint.</p>
+
+      <p>What disappears is generic, replaceable workflows.</p>
+
+      <p>What remains (and becomes more valuable) is context, integration, trust, distribution, and decision-making. Not code but coordination.</p>
+
+      <hr>
+
+      <h2>7. The opaque compression</h2>
+
+      <p>There is a caveat to all of this.</p>
+
+      <p>Traditional tools externalized answers. AI systems externalize reasoning paths.</p>
+
+      <p>If learning is compression, then modern tools are compressed knowledge systems. But we increasingly cannot read the compression.</p>
+
+      <p>There are techniques that try. <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">Anthropic's interpretability team used sparse autoencoders on Claude 3 Sonnet</a> and managed to pull out high-quality, interpretable features — you can isolate a feature for "the Golden Gate Bridge" or for deceptive reasoning, and even steer it. SAEs expand a dense vector into a much larger but sparse representation, where each active dimension corresponds to a single concept. That work is genuinely impressive. But it lives inside the labs that trained the models. The ability to read what a model actually knows is not broadly distributed. It is owned. Furthermore, there is no validation process of reasoning of these models, optimized for specific outcomes. There are limitations of prompt engineering, and it passively limits individuals.</p>
+
+      <blockquote><p><em>"Preference tuning tunes models away from being accurate reflections of reality into being greedy reward-seekers happy to output a boring response if it expects the boring output to be rated highly." — <a href="https://thesephist.com/posts/epistemic-calibration/">Epistemic Calibration, Linus Lee</a></em></p></blockquote>
+
+      <p>And the mass build upon these tools.</p>
+
+      <p>This is not like the cup. The cup's logic is legible — you can look at the handle and understand why. Modern AI systems are not.</p>
+
+      <p>And when you cannot see the compression, you cannot evaluate its biases. Bias identification is important, and it becomes harder the less we can trace where the knowledge came from. System that is designed by few individuals are shaping which options are visible.</p>
+
+      <hr>
+
+      <h2>8. Agency and its asymmetry</h2>
+
+      <p>Every software product is imbued with human knowledge.</p>
+
+      <p>But we are entering an era where individuals cannot interpret this knowledge — they merely consume. It is no longer cup-level knowledge. And this, I believe, weakens individuals' agency.</p>
+
+      <p>The more we use agents as tools, the more we outsource not just labor, but agency.</p>
+
+      <p>And if the underlying models are controlled by a small number of organizations, then access to understanding — and therefore influence — becomes concentrated. Very few selective individuals have access to this knowledge, and especially when this recursive loop of training closes in on itself, I am more certain that access will belong to the companies who own the foundation models. If so, these few would have the knowledge to manipulate individuals — well, I guess like Meta figuring out the best drug to keep individuals addicted to pleasure, but one level deeper. If we could track humans more accurately, even in ways one does not notice, it is very possible to control humans.</p>
+
+      <p>A lot of people are afraid of losing jobs, but I think the real risk is not automation, but it actually is about the asymmetry of cognition.</p>
+
+      <hr>
+
+      <h2>9. What comes after</h2>
+
+      <p>So what happens next?</p>
+
+      <p>I originally framed this with Maslow's 5 steps of human desire, and I should flag up front that Maslow's specific hierarchy has weak empirical support — the 1976 Wahba and Bridwell review found little evidence for the strict ranking, so I use it as a heuristic, not as science. The empirically stronger version is <a href="https://en.wikipedia.org/wiki/Postmaterialism">Ronald Inglehart's post-materialism thesis</a>: as societies secure their material needs, value priorities shift away from economic and physical security toward self-expression, autonomy, and quality of life. The shift is measurable, and the measurements hold up from 1981 through the 2022 waves of the World Values Survey.</p>
+
+      <p>Either way, it is a parallel disposition of a bell curve — or quadrant of a sine graph. The needs of the lower step soar, then diminish when they become abundant, which spotlights the next scarce value, which also soon diminishes when it gets sufficient enough.</p>
+
+      <p>Map the previous two: goods → services → ?</p>
+
+      <p>The next layer is not productivity. It is self-actualization. More precisely — agency over thought.</p>
+
+      <p>The current AI wave optimizes for doing more of what is already possible. The next wave will be about thinking what was previously impossible.</p>
+
+      <p>This is where Iverson returns. The purpose of better tools was never efficiency. It was expanding the space of thought.</p>
+
+      <hr>
+
+      <h2>10. Intellectual augmentation</h2>
+
+      <p>So the frontier is not: <em>how do we automate work?</em></p>
+
+      <p>It is: <em>how do we help humans think differently?</em></p>
+
+      <p>The highest-value systems will not just execute tasks. They will reshape how problems are framed — enabling new abstractions, new connections, new questions. In more abstract terms, I personally believe the value comes from connectivity and creativity. And by any chance if you can think of something that was unknown or yet to be explored, you can cheaply execute it with your best friend so-called agents.</p>
+
+      <p>Because execution is becoming cheap.</p>
+
+      <p>Insight is not.</p>
+
+      <p>(Alternatively, you could copy-paste B2B SaaS companies outside SF — mostly non-English-speaking countries where these tools have yet to be adopted, third-world countries, or even mid-west America, to rich individuals who have money but don't know where to spend. The tools haven't landed there yet.)</p>
+
+      <hr>
+
+      <h2>11. A strange conclusion</h2>
+
+      <p>There is a paradox here.</p>
+
+      <p>If tools become too good at compressing and externalizing thought, we risk losing the friction that generates new ideas.</p>
+
+      <p>So maybe the answer is not more optimization.</p>
+
+      <p>Maybe it is constraint. Maybe it is boredom.</p>
+
+      <p>Because boredom is where unstructured thought emerges — before it is compressed, before it is optimized, before it is turned into a tool.</p>
+
+      <p>If compression determines what we can think, then spaces without compression are where new thought originates.</p>
+
+      <p>We should be more bored, and wonder.</p>
+
+      <p>Because in that space, before compression, is where new abstractions begin.</p>
+    </div>
+    <footer class="site-footer">© 2026 Haein Jung</footer>
+  </div>
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+      body.classList.add("cursor-enabled");
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, [role='button']");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+      window.addEventListener("mousemove", (event) => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
+      document.addEventListener("mouseleave", () => { body.classList.remove("cursor-visible", "cursor-link"); });
+    })();
+  </script>
+</body>
+</html>
