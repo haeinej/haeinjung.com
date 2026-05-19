@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Writing — Haein Jung</title>
+<title>Writing - Haein Jung</title>
 <meta name="description" content="Essays on design, AI, human connection, and becoming.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,13 +11,17 @@
 <style>
   :root {
     --bg: #050914;
-    --bg-strong: #08101f;
-    --ink: #f5f1e8;
-    --muted: rgba(245, 241, 232, 0.72);
-    --soft: rgba(245, 241, 232, 0.46);
-    --line: rgba(245, 241, 232, 0.12);
+    --paper: #fbfaf7;
+    --paper-soft: #f3f0ea;
+    --ink: #050914;
+    --ink-on-dark: #f5f1e8;
+    --muted: rgba(5, 9, 20, 0.66);
+    --soft: rgba(5, 9, 20, 0.42);
+    --line: rgba(5, 9, 20, 0.12);
+    --line-strong: rgba(5, 9, 20, 0.24);
     --accent: #000000;
-    --accent-bg: rgba(245, 241, 232, 0.96);
+    --accent-bg: #050914;
+    --accent-ink: #f5f1e8;
     --sans: "Instrument Sans", sans-serif;
     --serif: "Instrument Serif", serif;
     --transition: 220ms ease;
@@ -28,32 +32,50 @@
 
   body {
     min-height: 100vh;
-    color: var(--ink);
+    color: var(--ink-on-dark);
     font-family: var(--sans);
-    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   a { color: inherit; }
 
-  ::selection { background: #000000; color: var(--ink); }
+  ::selection { background: var(--accent-bg); color: var(--accent-ink); }
 
   @media (hover: hover) and (pointer: fine) {
-    body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+    body.cursor-visible,
+    body.cursor-visible * { cursor: none; }
   }
 
-  .page { max-width: 1520px; margin: 0 auto; padding: 24px; }
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1520px;
+    margin: 0 auto;
+    padding: 24px;
+  }
 
   .site-cursor { display: none; }
 
   @media (hover: hover) and (pointer: fine) {
     .site-cursor {
       --cursor-scale: 1;
-      position: fixed; left: 0; top: 0; width: 18px; height: 18px;
-      display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
-      pointer-events: none; z-index: 99999; opacity: 0;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      display: block;
+      border-radius: 50%;
+      background: rgba(245, 241, 232, 0.85);
+      pointer-events: none;
+      z-index: 99999;
+      opacity: 0;
       transform: translate(-50%, -50%) scale(var(--cursor-scale));
-      transition: transform 180ms ease, opacity 180ms ease;
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
     }
+
     body.cursor-visible .site-cursor { opacity: 1; }
     body.cursor-link .site-cursor { --cursor-scale: 1.8; }
     body.cursor-press .site-cursor { --cursor-scale: 0.88; }
@@ -62,7 +84,7 @@
   .layout {
     display: grid;
     grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-    gap: clamp(28px, 4vw, 64px);
+    gap: clamp(28px, 4vw, 72px);
   }
 
   .sidebar {
@@ -90,45 +112,93 @@
   .sidebar-block { margin-top: 20px; display: grid; gap: 4px; }
 
   .sidebar-location { font-size: 1rem; font-weight: 600; }
-  .sidebar-school { font-size: 0.98rem; line-height: 1.55; color: var(--muted); }
+  .sidebar-school { font-size: 0.98rem; line-height: 1.55; color: rgba(245, 241, 232, 0.72); }
 
-  .sidebar-nav, .sidebar-links { display: flex; flex-wrap: wrap; gap: 12px 18px; }
-  .sidebar-nav { margin-top: 28px; }
-
-  .sidebar-nav a, .sidebar-links a, .mail-link {
-    text-decoration: none;
-    transition: color var(--transition), background-color var(--transition), opacity var(--transition);
+  .sidebar-nav,
+  .sidebar-links,
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
   }
 
-  .sidebar-nav a, .sidebar-links a { color: var(--muted); }
+  .sidebar-nav { margin-top: 28px; }
 
-  .sidebar-nav a, .mail-link {
-    display: inline-flex; align-items: center;
-    padding: 0.18rem 0.42rem; margin: -0.18rem -0.42rem;
+  .sidebar-nav a,
+  .sidebar-links a,
+  .mail-link,
+  .category-nav a,
+  .article-link {
+    text-decoration: none;
+    transition: color var(--transition), background-color var(--transition), opacity var(--transition), border-color var(--transition);
+  }
+
+  .sidebar-nav a,
+  .sidebar-links a { color: rgba(245, 241, 232, 0.72); }
+
+  .sidebar-nav a,
+  .mail-link,
+  .category-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.18rem 0.42rem;
+    margin: -0.18rem -0.42rem;
     border-radius: 999px;
   }
 
-  .sidebar-nav a:hover, .sidebar-links a:hover, .mail-link:hover {
-    color: var(--accent); background: var(--accent-bg);
+  .sidebar-nav a:hover,
+  .sidebar-links a:hover,
+  .mail-link:hover,
+  .category-nav a:hover {
+    color: var(--ink);
+    background: var(--accent-ink);
   }
 
   .sidebar-links { gap: 12px; }
+
   .sidebar-links a {
-    width: 28px; height: 28px;
-    display: inline-flex; align-items: center; justify-content: center;
-    color: var(--muted); border-radius: 999px;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245, 241, 232, 0.72);
+    border-radius: 999px;
   }
-  .sidebar-links a:hover { color: var(--accent); }
+
+  .sidebar-links a:hover { color: var(--accent-ink); }
   .sidebar-links svg { width: 18px; height: 18px; fill: currentColor; }
 
   .mail-link {
-    display: inline-block; margin-top: 16px;
-    font-size: 0.95rem; font-weight: 600;
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
   }
 
-  .content { padding: 0 0 48px; }
+  .content { padding: 0 0 64px; }
 
-  .writing-meta, .footer-copy {
+  .writing-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 15px 0 14px;
+    margin-bottom: 18px;
+    color: var(--ink-on-dark);
+    background: rgba(5, 9, 20, 0.68);
+    border-bottom: 1px solid rgba(245, 241, 232, 0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .writing-label,
+  .article-meta,
+  .footer-copy,
+  .section-kicker {
     text-transform: uppercase;
     letter-spacing: 0.18em;
     font-size: 0.72rem;
@@ -136,57 +206,333 @@
     color: var(--soft);
   }
 
-  .section { padding: 48px 0; }
+  .writing-label { color: var(--ink-on-dark); }
 
-  .section-title {
-    font-size: clamp(1.55rem, 3vw, 2.2rem);
-    letter-spacing: -0.04em;
-    margin-bottom: 22px;
+  .writing-count {
+    font-size: 0.82rem;
+    color: rgba(245, 241, 232, 0.68);
   }
 
-  .writing-list { display: grid; }
+  .archive {
+    margin-top: 0;
+    padding: 44px clamp(22px, 5vw, 64px) 56px;
+    background: var(--paper);
+    color: var(--ink);
+  }
 
-  .writing-link {
-    text-decoration: none;
-    color: inherit;
+  .category-nav {
+    position: sticky;
+    top: 48px;
+    z-index: 35;
+    padding: 18px 0;
+    margin-bottom: 38px;
+    background: rgba(251, 250, 247, 0.92);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .category-nav a {
+    color: var(--muted);
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+  }
+
+  .category-nav a:hover { border-color: var(--accent-bg); }
+
+  .section-group {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    padding: 42px 0 22px;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 126px;
+  }
+
+  .section-group:first-of-type { border-top: 0; padding-top: 0; }
+
+  .section-heading {
+    position: sticky;
+    top: 116px;
+    align-self: start;
+  }
+
+  .section-title {
+    margin-top: 8px;
+    font-family: var(--sans);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+
+  .article-list { display: grid; }
+
+  .article-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(96px, auto);
+    gap: 24px;
+    align-items: start;
+    padding: 25px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .article-link:first-child { border-top: 0; padding-top: 0; }
+
+  .article-link:hover { opacity: 0.68; }
+
+  .article-title {
+    max-width: 640px;
+    font-family: var(--sans);
+    font-size: clamp(1.32rem, 2.4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+  }
+
+  .article-subtitle {
+    display: block;
+    max-width: 580px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    align-items: flex-end;
+    padding-top: 5px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .article-meta span:last-child {
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .elsewhere {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 20px;
-    align-items: baseline;
-    padding: 18px 0;
+    align-items: center;
+    padding: 26px 0;
     border-top: 1px solid var(--line);
-    transition: opacity var(--transition);
   }
 
-  .writing-link:hover { opacity: 0.72; }
+  .elsewhere:first-child { border-top: 0; padding-top: 0; }
 
-  .writing-title {
-    font-size: clamp(1.18rem, 2vw, 1.5rem);
-    letter-spacing: -0.03em;
+  .elsewhere-title {
+    font-size: clamp(1.28rem, 2.3vw, 1.8rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
   }
 
-  .writing-subtitle {
-    display: block;
-    margin-top: 6px;
-    font-size: 0.9rem;
+  .elsewhere-copy {
+    margin-top: 9px;
     color: var(--muted);
     line-height: 1.5;
   }
 
-  .footer { padding-top: 22px; }
+  .elsewhere-cta {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .footer {
+    padding-top: 42px;
+    border-top: 1px solid var(--line);
+  }
 
   @media (max-width: 980px) {
     .page { padding: 20px; }
-    .layout { grid-template-columns: 1fr; gap: 18px; }
+
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
     .sidebar {
-      position: static; min-height: auto;
-      padding-bottom: 28px; border-bottom: 1px solid var(--line);
+      position: static;
+      min-height: auto;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .content { max-width: none; }
+
+    .writing-topbar { margin-bottom: 34px; }
+  }
+
+  @media (max-width: 760px) {
+
+    .archive {
+      margin-inline: 0;
+      padding: 34px 18px 46px;
+    }
+
+    .category-nav {
+      top: 46px;
+      gap: 10px 14px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+    }
+
+    .category-nav::-webkit-scrollbar { display: none; }
+
+    .category-nav a {
+      flex: 0 0 auto;
+      font-size: 0.86rem;
+    }
+
+    .section-group {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding-top: 36px;
+    }
+
+    .section-heading {
+      position: static;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+      gap: 14px;
+    }
+
+    .section-title { margin-top: 0; }
+
+    .article-link,
+    .elsewhere {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .article-meta {
+      align-items: flex-start;
+      text-align: left;
+      padding-top: 0;
     }
   }
 
-  @media (max-width: 680px) {
-    .writing-link { grid-template-columns: 1fr; gap: 6px; }
+  @media (max-width: 520px) {
+    .page { padding: 18px; }
+
+    .writing-topbar {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .category-nav { top: 68px; }
+
+    .article-title { font-size: 1.65rem; }
   }
+
+  /* Final direction: homepage-style wave intro, flat navy writing page. */
+  :root {
+    --ink: #f5f1e8;
+    --muted: rgba(245, 241, 232, 0.72);
+    --soft: rgba(245, 241, 232, 0.46);
+    --line: rgba(245, 241, 232, 0.12);
+    --line-strong: rgba(245, 241, 232, 0.2);
+    --accent: #050914;
+    --accent-bg: rgba(245, 241, 232, 0.96);
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  body {
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  .sidebar-school,
+  .sidebar-nav a,
+  .sidebar-links a,
+  .writing-count,
+  .article-subtitle,
+  .article-meta span:last-child,
+  .elsewhere-copy { color: var(--muted); }
+
+  .sidebar-nav a:hover,
+  .sidebar-links a:hover,
+  .mail-link:hover,
+  .category-nav a:hover {
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+
+  .writing-topbar {
+    margin-bottom: 42px;
+    color: var(--ink);
+    background: rgba(5, 9, 20, 0.82);
+    border-bottom-color: var(--line);
+  }
+
+  .writing-label { color: var(--ink); }
+
+  .intro {
+    padding: 6px 0 44px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .intro h1 {
+    max-width: 740px;
+    font-family: var(--sans);
+    font-size: clamp(2.8rem, 7vw, 5.8rem);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+    margin-bottom: 22px;
+  }
+
+  .intro p {
+    max-width: 560px;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.25vw, 1.16rem);
+    line-height: 1.62;
+  }
+
+  .archive {
+    padding: 0 0 56px;
+    color: var(--ink);
+    background: transparent;
+  }
+
+  .category-nav {
+    background: rgba(5, 9, 20, 0.88);
+    border-bottom-color: var(--line);
+  }
+
+  .category-nav a { color: var(--muted); }
+
+  .section-group,
+  .article-link,
+  .elsewhere,
+  .footer {
+    border-color: var(--line);
+  }
+
+  .section-kicker,
+  .article-meta,
+  .footer-copy { color: var(--soft); }
+
+  .article-title,
+  .elsewhere-title {
+    color: var(--ink);
+    font-family: var(--sans);
+  }
+
+  .elsewhere-cta { color: var(--ink); }
 </style>
 </head>
 <body>
@@ -210,7 +556,7 @@
         <div>
           <div class="sidebar-links" aria-label="External links">
             <a href="https://www.instagram.com/haeinjvng/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.25-2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5a4.25 4.25 0 0 0-4.25-4.25h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.25-2.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>
             </a>
             <a href="https://www.linkedin.com/in/haein-jung-a8441a304/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002ZM7 8.48H3V21h4V8.48Zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.73-3.96 4.73 0V21H22v-7.93c0-6.17-7-5.94-8.72-2.91l.04-1.68Z"/></svg>
@@ -227,120 +573,203 @@
       </aside>
 
       <main class="content">
-        <section class="section">
-          <h1 class="section-title">Writing</h1>
+        <div class="writing-topbar">
+          <span class="writing-label">Writing</span>
+          <span class="writing-count">Essays, notes, and field signals</span>
+        </div>
 
-          <div class="writing-list">
-            <a class="writing-link" href="https://haeinej.substack.com/p/world-needs-more-autism-adhd-and" target="_blank" rel="noopener noreferrer">
+        <section class="intro" aria-labelledby="writing-title">
+          <h1 id="writing-title">Writing</h1>
+          <p>A slower index of what I am noticing: AI, design, cities, intimacy, and the small frictions that make thinking feel alive.</p>
+        </section>
+        <div class="archive">
+          <nav class="category-nav" aria-label="Writing categories">
+            <a href="#latest">Latest</a>
+            <a href="#ai-design">AI + Design</a>
+            <a href="#becoming">Becoming</a>
+            <a href="#elsewhere">Elsewhere</a>
+          </nav>
+
+        <section class="section-group" id="latest" aria-labelledby="latest-title">
+          <div class="section-heading">
+            <span class="section-kicker">01</span>
+            <h2 class="section-title" id="latest-title">Latest</h2>
+          </div>
+          <div class="article-list">
+            <a class="article-link" href="https://haeinej.substack.com/p/world-needs-more-autism-adhd-and" target="_blank" rel="noopener noreferrer">
               <div>
-                <h2 class="writing-title">World needs more autism, ADHD, and kids</h2>
-                <span class="writing-subtitle">Notes on the collapse of the credential-based system.</span>
+                <h3 class="article-title">World needs more autism, ADHD, and kids</h3>
+                <span class="article-subtitle">Notes on the collapse of the credential-based system.</span>
               </div>
-              <span class="writing-meta">May 8, 2026</span>
+              <span class="article-meta">
+                <span>May 8, 2026</span>
+                <span>Substack</span>
+              </span>
             </a>
 
-            <a class="writing-link" href="/writing/asymmetry-of-cognition.html">
+            <a class="article-link" href="/writing/asymmetry-of-cognition.html">
               <div>
-                <h2 class="writing-title">Asymmetry of Cognition</h2>
-                <span class="writing-subtitle">"Do you think this is the last easy money?"</span>
+                <h3 class="article-title">Asymmetry of Cognition</h3>
+                <span class="article-subtitle">&quot;Do you think this is the last easy money?&quot;</span>
               </div>
-              <span class="writing-meta">Apr 21, 2026</span>
+              <span class="article-meta">
+                <span>Apr 21, 2026</span>
+                <span>Essay</span>
+              </span>
             </a>
 
-            <a class="writing-link" href="/writing/one-month-in.html">
+            <a class="article-link" href="/writing/one-month-in.html">
               <div>
-                <h2 class="writing-title">one month in</h2>
-                <span class="writing-subtitle">what are you most afraid of?</span>
+                <h3 class="article-title">one month in</h3>
+                <span class="article-subtitle">what are you most afraid of?</span>
               </div>
-              <span class="writing-meta">Apr 5, 2026</span>
+              <span class="article-meta">
+                <span>Apr 5, 2026</span>
+                <span>Personal note</span>
+              </span>
             </a>
 
-            <a class="writing-link" href="/writing/the-collision-model.html">
+            <a class="article-link" href="/writing/the-collision-model.html">
               <div>
-                <h2 class="writing-title">The Collision Model: Anti-Alignment in Physical AI</h2>
-                <span class="writing-subtitle">On what happens when you stop encoding first and start colliding instead.</span>
+                <h3 class="article-title">The Collision Model: Anti-Alignment in Physical AI</h3>
+                <span class="article-subtitle">On what happens when you stop encoding first and start colliding instead.</span>
               </div>
-              <span class="writing-meta">Mar 26, 2026</span>
+              <span class="article-meta">
+                <span>Mar 26, 2026</span>
+                <span>AI systems</span>
+              </span>
             </a>
 
-            <a class="writing-link" href="/writing/lossy-synthesis.html">
+            <a class="article-link" href="/writing/lossy-synthesis.html">
               <div>
-                <h2 class="writing-title">Lossy Synthesis</h2>
-                <span class="writing-subtitle">On AI leaping past the resistance of being merely a design tool</span>
+                <h3 class="article-title">Lossy Synthesis</h3>
+                <span class="article-subtitle">On AI leaping past the resistance of being merely a design tool.</span>
               </div>
-              <span class="writing-meta">Mar 19, 2026</span>
-            </a>
-
-            <a class="writing-link" href="/writing/why-i-started-ohm.html">
-              <div>
-                <h2 class="writing-title">Why I Started ohm.</h2>
-              </div>
-              <span class="writing-meta">Mar 11, 2026</span>
-            </a>
-
-            <a class="writing-link" href="/writing/hey-siri-play-bubble-gum.html">
-              <div>
-                <h2 class="writing-title">Hey Siri, Play Bubble Gum by New Jeans</h2>
-                <span class="writing-subtitle">What happens after the steps disappear.</span>
-              </div>
-              <span class="writing-meta">Mar 8, 2026</span>
-            </a>
-
-            <a class="writing-link" href="/writing/answer-obsession-era.html">
-              <div>
-                <h2 class="writing-title">Answer Obsession Era</h2>
-                <span class="writing-subtitle">What I need—what we need—is friction, the kind that lets me be wrong without breaking.</span>
-              </div>
-              <span class="writing-meta">Feb 28, 2026</span>
-            </a>
-
-            <a class="writing-link" href="/writing/exist-and-coexist.html">
-              <div>
-                <h2 class="writing-title">exist and coexist</h2>
-              </div>
-              <span class="writing-meta">Feb 28, 2026</span>
-            </a>
-
-            <a class="writing-link" href="https://blog.naver.com/suninjunn/" target="_blank" rel="noopener noreferrer">
-              <div>
-                <h2 class="writing-title">portrait | haein</h2>
-              </div>
-              <span class="writing-meta">Naver</span>
+              <span class="article-meta">
+                <span>Mar 19, 2026</span>
+                <span>Design tools</span>
+              </span>
             </a>
           </div>
         </section>
 
-        <footer class="footer">
-          <p class="footer-copy">&copy; 2026 Haein Jung</p>
-        </footer>
+        <section class="section-group" id="ai-design" aria-labelledby="ai-design-title">
+          <div class="section-heading">
+            <span class="section-kicker">02</span>
+            <h2 class="section-title" id="ai-design-title">AI + Design</h2>
+          </div>
+          <div class="article-list">
+            <a class="article-link" href="/writing/the-collision-model.html">
+              <div>
+                <h3 class="article-title">The Collision Model: Anti-Alignment in Physical AI</h3>
+                <span class="article-subtitle">A way of thinking through contact, embodiment, and anti-alignment.</span>
+              </div>
+              <span class="article-meta">
+                <span>Mar 26, 2026</span>
+                <span>Essay</span>
+              </span>
+            </a>
+
+            <a class="article-link" href="/writing/lossy-synthesis.html">
+              <div>
+                <h3 class="article-title">Lossy Synthesis</h3>
+                <span class="article-subtitle">What changes when AI becomes a collaborator with texture instead of a frictionless shortcut.</span>
+              </div>
+              <span class="article-meta">
+                <span>Mar 19, 2026</span>
+                <span>Essay</span>
+              </span>
+            </a>
+
+            <a class="article-link" href="/writing/hey-siri-play-bubble-gum.html">
+              <div>
+                <h3 class="article-title">Hey Siri, Play Bubble Gum by New Jeans</h3>
+                <span class="article-subtitle">What happens after the steps disappear.</span>
+              </div>
+              <span class="article-meta">
+                <span>Mar 8, 2026</span>
+                <span>Interface note</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section-group" id="becoming" aria-labelledby="becoming-title">
+          <div class="section-heading">
+            <span class="section-kicker">03</span>
+            <h2 class="section-title" id="becoming-title">Becoming</h2>
+          </div>
+          <div class="article-list">
+            <a class="article-link" href="/writing/why-i-started-ohm.html">
+              <div>
+                <h3 class="article-title">Why I Started ohm.</h3>
+                <span class="article-subtitle">A founder note on resonance, connection, and building something with a pulse.</span>
+              </div>
+              <span class="article-meta">
+                <span>Mar 11, 2026</span>
+                <span>Founder note</span>
+              </span>
+            </a>
+
+            <a class="article-link" href="/writing/answer-obsession-era.html">
+              <div>
+                <h3 class="article-title">Answer Obsession Era</h3>
+                <span class="article-subtitle">What I need, what we need, is friction: the kind that lets me be wrong without breaking.</span>
+              </div>
+              <span class="article-meta">
+                <span>Feb 28, 2026</span>
+                <span>Essay</span>
+              </span>
+            </a>
+
+            <a class="article-link" href="/writing/exist-and-coexist.html">
+              <div>
+                <h3 class="article-title">exist and coexist</h3>
+                <span class="article-subtitle">A smaller meditation on being with yourself and being with others.</span>
+              </div>
+              <span class="article-meta">
+                <span>Feb 28, 2026</span>
+                <span>Reflection</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section-group" id="elsewhere" aria-labelledby="elsewhere-title">
+          <div class="section-heading">
+            <span class="section-kicker">04</span>
+            <h2 class="section-title" id="elsewhere-title">Elsewhere</h2>
+          </div>
+          <div>
+            <a class="elsewhere" href="https://haeinej.substack.com/" target="_blank" rel="noopener noreferrer">
+              <div>
+                <h3 class="elsewhere-title">Substack</h3>
+                <p class="elsewhere-copy">Longer dispatches and publication-style notes.</p>
+              </div>
+              <span class="elsewhere-cta">Open</span>
+            </a>
+
+            <a class="elsewhere" href="https://blog.naver.com/suninjunn/" target="_blank" rel="noopener noreferrer">
+              <div>
+                <h3 class="elsewhere-title">portrait | haein</h3>
+                <p class="elsewhere-copy">Korean fragments, image notes, and archive pieces.</p>
+              </div>
+              <span class="elsewhere-cta">Open</span>
+            </a>
+          </div>
+        </section>
+
+          <footer class="footer">
+            <p class="footer-copy">&copy; 2026 Haein Jung</p>
+          </footer>
+        </div>
       </main>
     </div>
   </div>
 
   <script>
     (() => {
-      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
-      if (!media.matches) return;
-      const body = document.body;
-      const cursor = document.querySelector(".site-cursor");
-      if (!cursor) return;
-      body.classList.add("cursor-enabled");
-      const updateInteractiveState = (target) => {
-        const interactive = target && target.closest("a, button, [role='button']");
-        body.classList.toggle("cursor-link", Boolean(interactive));
-      };
-      window.addEventListener("mousemove", (event) => {
-        cursor.style.left = `${event.clientX}px`;
-        cursor.style.top = `${event.clientY}px`;
-        body.classList.add("cursor-visible");
-        updateInteractiveState(event.target);
-      }, { passive: true });
-      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
-      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
-      document.addEventListener("mouseleave", () => {
-        body.classList.remove("cursor-visible");
-        body.classList.remove("cursor-link");
-      });
+      document.body.classList.remove("cursor-visible", "cursor-link", "cursor-press");
     })();
   </script>
 </body>
