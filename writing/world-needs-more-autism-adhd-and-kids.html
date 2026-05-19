@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World needs more autism, ADHD, and kids - Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 20px; }
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 3rem;
+      transition: color 220ms ease;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      letter-spacing: 0;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: 0;
+      font-weight: 400;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .site-footer {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
+        pointer-events: none; z-index: 99999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+    /* Editorial reader override */
+    :root {
+      --paper: #fbfaf7;
+      --paper-soft: #f1eee7;
+      --ink: #17130f;
+      --muted: rgba(23, 19, 15, 0.68);
+      --soft: rgba(23, 19, 15, 0.44);
+      --line: rgba(23, 19, 15, 0.14);
+      --line-strong: rgba(23, 19, 15, 0.32);
+      --accent: #050914;
+      --serif: "Instrument Serif", serif;
+      --sans: "Instrument Sans", sans-serif;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      text-rendering: optimizeLegibility;
+    }
+
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+    }
+
+    .reader-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      padding: 14px clamp(20px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .reader-topbar a { color: var(--ink); text-decoration: none; }
+    .reader-topbar span { color: var(--soft); text-align: right; }
+
+    .container,
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 92px) 24px 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 48px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 34px;
+      margin-bottom: 42px;
+    }
+
+    .article-date {
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+
+    article > .article-date:first-child { display: block; margin-bottom: 14px; }
+
+    article > .article-date:first-child + .article-title + .article-subtitle {
+      padding-bottom: 34px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 42px;
+    }
+
+    .article-title {
+      max-width: 800px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 4.1rem);
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.92;
+      margin: 0 0 18px;
+    }
+
+    .article-subtitle {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 1.25vw, 0.98rem);
+      line-height: 1.45;
+      margin: 0 0 12px;
+    }
+
+    .page > hr { display: none; }
+
+    .article-body {
+      font-family: var(--sans);
+      font-size: clamp(0.95rem, 1.1vw, 1.06rem);
+      line-height: 1.66;
+      color: var(--ink);
+    }
+
+    .article-body p { margin: 0 0 1.35em; }
+
+    .article-body p:first-child::first-letter {
+      float: none;
+      font-size: inherit;
+      line-height: inherit;
+      padding-right: 0;
+      font-style: inherit;
+    }
+
+    .article-body h2,
+    .article-body h3 {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.8vw, 1.32rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 2.4em 0 0.8em;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line-strong);
+      color: var(--muted);
+      font-style: italic;
+      margin: 1.8em 0;
+      padding-left: 1.3em;
+    }
+
+    .article-body hr {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--line-strong);
+      margin: 2.8em 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 720px) {
+      .reader-topbar { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .container, .page { padding: 44px 20px 60px; }
+      .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
+      .article-body { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="read-progress" aria-hidden="true"></div>
+  <nav class="reader-topbar" aria-label="Essay navigation">
+    <a href="/writing/">Haein Jung / Writing</a>
+    <span>Reading</span>
+  </nav>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">World needs more autism, ADHD, and kids</h1>
+      <p class="article-subtitle">Notes on the collapse of the credential-based system.</p>
+      <p class="article-date">May 8, 2026</p>
+    </header>
+    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
+    <div class="article-body">
+      <p>Why are there suddenly so many fellowships?</p>
+      <p>Because real talent does not look like what the old funnel recognized, and the people writing the checks have figured this out faster than the schools producing the graduates. Everyone around me is orbiting around this need, and I want to articulate my take on this.</p>
+      <p>I want to lay out why I think this is happening, why I think it is structural and not a fad, and what I think it actually means for who gets to build the next decade.</p>
+      <hr>
+      <h2>1. The credential was a filter for workers, not thinkers</h2>
+      <p>The credential system worked, for about a century, because it was a cheap signal.</p>
+      <p>A degree from a known school told an employer that this person sat through years of being assigned tasks, finished them mostly on time, absorbed a body of codified knowledge. They will fit your hierarchy. They will not surprise you.</p>
+      <p>That was useful when companies needed millions of humans to absorb codified knowledge and execute on it. The whole pyramid was: smart kid → top school → entry-level role → trained survivor → senior. The base of the pyramid was the labor.</p>
+      <p>The credential, in other words, was never sorting for thinking. It was sorting for predictability. It bred entire generations to second-guess themselves before asking, to wait for permission before knocking, to flatten themselves into metrics so they could be ranked. To break the horse early.</p>
+      <p>For a worker pyramid, that was efficient.</p>
+      <hr>
+      <h2>2. AI ate the base of the pyramid</h2>
+      <p>In 2026 the pyramid is missing its bottom rung.</p>
+      <p>Stanford’s <a href="https://digitaleconomy.stanford.edu/wp-content/uploads/2025/08/Canaries_BrynjolfssonChandarChen.pdf">Digital Economy Lab</a> ran a study on ADP payroll records covering millions of US workers through July 2025. In the occupations most exposed to AI, jobs for 22–25 year-olds <a href="https://fortune.com/2025/08/26/stanford-ai-entry-level-jobs-gen-z-erik-brynjolfsson/">dropped about 13%</a> after late 2022. For software developers in that age band, <a href="https://www.cnbc.com/2025/08/28/generative-ai-reshapes-us-job-market-stanford-study-shows-entry-level-young-workers.html">closer to 20%</a>. Workers over 30 in the same exposed jobs? Steady or growing.</p>
+      <p>It is not a recession, rather a selection. AI is good at the codified, textbook layer of work — exactly the layer juniors used to be hired to do.</p>
+      <p>The credential told you: this person can absorb codified knowledge and execute on it. But codified knowledge now costs $0.0001 per token. Execution is approaching free. The credential still costs $300,000 to acquire. It just does not sort for what stays scarce.</p>
+      <p>So a strange thing happens. The system keeps producing certified workers, and the system stops needing certified workers. Both at the same time. The pipeline is full and the funnel is closed.</p>
+      <hr>
+      <h2>3. Fellowships are eating the entry-level economy</h2>
+      <p>Now look at what is replacing the corporate hiring pipeline.</p>
+      <p>
+      <a href="https://baincapitalventures.com/insight/application-open-now-the-2026-bcv-labs-summer-fellowship/">BCV Labs Fellowship 2026</a> is explicitly open to “university students, post-graduate students or recent dropouts.” <a href="https://aigrant.com/">AI Grant</a> (Nat Friedman + Daniel Gross) writes $250K SAFEs plus $600K+ in compute, rolling. AI2 Incubator: $600K plus $1M in compute. Z Fellows. Thiel Fellowship. Mercor’s talent program. And a long tail of corporate-backed AI residencies from Google, OpenAI, AI2, and others.</p>
+      <p>These are not side programs anymore. They are becoming the main hatch.</p>
+      <p>The signal has flipped so completely that current YC founders out of Princeton say their group partners coached them to wear “dropout” with pride. One of them <a href="https://www.dailyprincetonian.com/article/2026/04/princeton-features-profiles-dropout-school-startups-silicon-valley-ai-boom">told the </a>
+      <em>
+      <a href="https://www.dailyprincetonian.com/article/2026/04/princeton-features-profiles-dropout-school-startups-silicon-valley-ai-boom">Daily Princetonian</a>
+      </em> that telling investors you dropped out of Princeton makes you read as smarter than if you had merely stayed and graduated.</p>
+      <p>Read that twice. The signal of leaving has become stronger than the signal of finishing.</p>
+      <p>The fellowships are not being charitable. They are pricing the next decade. They are quietly admitting: the credentialed funnel is no longer producing the people we want, and we are willing to pay seed-round prices to find them earlier — before the funnel even has a chance to file them down.</p>
+      <p>Which is also why fellowships are <em>eating</em> the small startup attempt. The same person who would have started a one-person experiment with $5K and a vibe two years ago is now picked off into a $250K program, given mentorship, aimed at a much bigger swing. Sometimes that is good. Sometimes the small experiment was the actual point and now it is wearing a name tag in a Sonoma retreat.</p>
+      <p>I am genuinely unsure which way this cuts. But the volume is real.</p>
+      <hr>
+      <h2>4. What is actually scarce now</h2>
+      <p>I have been asking the same question for a while — what comes after goods, after services? In my <a href="/writing/asymmetry-of-cognition.html">last essay</a> I sketched part of an answer. Here is the other part.</p>
+      <p>If codified knowledge is free and execution is cheap, what stays scarce?</p>
+      <p>Non-linear thinking. People who connect random dots and produce something emergent. People who ask weird questions because they don’t yet know what the standard ones are. People whose value cannot be flattened into a transcript.</p>
+      <p>The data on this is almost embarrassing, given how long the credentialed world pretended it wasn’t there.</p>
+      <p>In the <a href="https://www.timeetc.com/resources/how-to-achieve-more/why-do-neurodiversity-and-entrepreneurship-make-such-good-business-partners/">general adult population</a>, about 10% have dyslexia and 4% have ADHD. Among entrepreneurs those numbers rise to about 40% and 10%. A separate study of more than 17,000 people found roughly 29% of entrepreneurs have ADHD. Peter Thiel has argued for years that mild autism is an asset for founding companies — Musk, Gates, and a list that keeps growing.</p>
+      <p>I want to say this carefully because I am not romanticizing suffering. The same conditions correlate with much harder lives in the average case. Adult unemployment for people with autism is sometimes estimated as high as 80%. There is nothing redemptive about a system that grinds people down on the way in.</p>
+      <p>But the structure is real. The trait the credentialed system filtered <em>against</em> — can’t sit still in a pipeline, obsessed with one weird thing, doesn’t accept “no”, asks too many why’s — is exactly the trait the new system is filtering <em>for</em>.</p>
+      <p>It is not only neurodivergence either.</p>
+      <p>It is also kids who have not been told no enough times yet to flinch. It is people who have lived inside three different industries and can pattern-match across them. It is the older engineer who watched five paradigms die and is not romantic about the sixth.</p>
+      <p>What links them: high-dimensional people who cannot be flattened into a metric.</p>
+      <hr>
+      <h2>5. Knowledge left the building</h2>
+      <p>Here is the part I think most takes are missing.</p>
+      <p>Knowledge — the noun — used to live in human heads. School filled the head. Civilizations were organized around moving knowledge from head to head: apprenticeships, libraries, lectures, mentors. Two decades of life were spent compressing the canon into a single person.</p>
+      <p>We have now delegated that to machines. Most of what a human once stored, the network stores better, faster, cheaper. Knowledge has left the building.</p>
+      <p>What stays scarce, in a world where knowledge is free, is only the act of <em>asking</em>. Asking from outside the standard frame. Asking without yet knowing what you’re not supposed to ask.</p>
+      <p>This is why non-linear thinkers might win now. Not necessarily because ignorance is a virtue, but because the door we are trying to crack open is no longer behind a wall of facts. The facts are free. The door is shaped like a question nobody thought to ask, and the people most likely to ask it are the ones least disciplined into the standard ones.</p>
+      <p>Knowledge is no longer bounded. It feels like throwing a rock in the sky to crack open a heaven’s door (of knowledge). Kids, because they are not yet educated, can throw any random shit. That, increasingly, is the asset.</p>
+      <p>Zen has called this beginner’s mind for a thousand years. What is new is the economics. Beginner’s mind used to be spiritually correct and economically punished. Now it is both spiritually and economically correct.</p>
+      <hr>
+      <h2>6. Twenty things at once</h2>
+      <p>This is also why I think AI is good. Not in some abstract civilizational way. Personally.</p>
+      <p>I am the kind of person who thinks twenty things at the same time. Some are right. Some are wrong. Most never used to get tested, because there is only one of me, with two hands and one mouth and a finite week.</p>
+      <p>That has changed. AI is my arms and feet. I could run twenty experiments in parallel. Some will fail. Most will fail. But if only one of them works out — it would be huge. Like huge.</p>
+      <p>If I had enough capital and a small network, I would test everything.</p>
+      <p>This, I think, is what the new venture model actually looks like.</p>
+      <p>VC at a smaller scale. Inside one person. Not a $250K bet on a team that already has a deck and a domain — a much smaller bet on a high-dimensional human, run as their own portfolio of quirky ideas. Let them try the twenty things. Let nineteen fail. The asymmetry is strong enough that the one which works carries everything.</p>
+      <p>People don’t know what they want until something is made legible. We — the naive ones, the un-flattenable ones, the ones with twenty open tabs in our heads — are the ones who can believe in things before they are legible.</p>
+      <p>With less capital. With more attempts. With AI as the body that finally lets a single brain run a fund.</p>
+      <p>That is, structurally, the most leveraged unit of capital I can think of right now. And it is exactly the unit the old credential system was incapable of seeing.</p>
+      <hr>
+      <h2>7. The part I am afraid of</h2>
+      <p>I have to be honest about where I keep getting stuck.</p>
+      <p>When credentials worked, they were ugly and they broke spirits, but they were <em>legible</em>. Anyone could see the rules and (in theory) work toward them. The system was unfair, but its unfairness was visible.</p>
+      <p>The new system is far less legible. Fellowships pick a tiny percentage of applicants based on a thirty-minute call, a vibe, a demo. Founders are picked because they “feel right” to a partner who used to run a B2B SaaS company. The selection is happening inside individual people’s pattern-matching, not inside an external rubric.</p>
+      <p>That is good for the kid who can throw the rock at the sky and <em>look magnetic doing it</em>. It is much harder for the kid who can throw the rock just as well but cannot articulate why. SF has a particular taste, and “outlier” in SF often means a specific kind of outlier — confident, English-speaking, technical, already legible to the network.</p>
+      <p>So I am not naively cheerleading the collapse. I think it is real, I think it is happening, I think the upside is genuine. But I also think the people who get through the new hatch will skew toward those who already <em>look like</em> outliers in a way SF can recognize, which is not the same as being one.</p>
+      <p>The frontier is real. It just that the system is not there yet.</p>
+      <hr>
+      <h2>8. Knock anyway</h2>
+      <p>Still — knock.</p>
+      <p>Knock weird. Knock naive. Knock from Seoul, from SF, from a small town in the midwest, from your bedroom at 2am with twenty tabs open and AI doing the parts you don’t have arms for.</p>
+      <p>The door is more open than it has been in a generation. The credential ladder is still smoking. The fellowship hatch is still funded. And the people who built the standard hallway are not the ones getting through it first.</p>
+      <p>The new asymmetry is not between the credentialed and the un-credentialed. It is between the people who can still believe in things before they are legible, and the people who have forgotten how.</p>
+      <p>Let us be the first kind.</p>
+
+    </div>
+    <footer class="site-footer">© 2026 Haein Jung</footer>
+  </div>
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+      body.classList.add("cursor-enabled");
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, [role='button']");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+      window.addEventListener("mousemove", (event) => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
+      document.addEventListener("mouseleave", () => { body.classList.remove("cursor-visible", "cursor-link"); });
+    })();
+  </script>
+  <script>
+    (() => {
+      const progress = document.querySelector(".read-progress");
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const width = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        if (progress) progress.style.width = Math.min(width, 100) + "%";
+      };
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+    })();
+  </script>
+</body>
+</html>
