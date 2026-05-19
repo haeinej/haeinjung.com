@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A White Paper on the Coordination Layer of the Internet — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050914;
+      --bg-strong: #08101f;
+      --ink: #f5f1e8;
+      --muted: rgba(245, 241, 232, 0.72);
+      --soft: rgba(245, 241, 232, 0.46);
+      --line: rgba(245, 241, 232, 0.12);
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 20px; }
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 3rem;
+      transition: color 220ms ease;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    .article-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      letter-spacing: 0;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-subtitle {
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .article-date {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+    }
+
+    .article-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: 0;
+      font-weight: 400;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-body h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line);
+      padding-left: 1.5rem;
+      font-style: italic;
+      color: var(--muted);
+      margin: 1.5rem 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    .article-body hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .article-body em { font-style: italic; }
+    .article-body strong { font-weight: 600; }
+
+    .site-footer {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      color: var(--soft);
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
+        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
+        pointer-events: none; z-index: 99999; opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 180ms ease, opacity 180ms ease;
+      }
+      body.cursor-visible .site-cursor { opacity: 1; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+    /* Editorial reader override */
+    :root {
+      --paper: #fbfaf7;
+      --paper-soft: #f1eee7;
+      --ink: #17130f;
+      --muted: rgba(23, 19, 15, 0.68);
+      --soft: rgba(23, 19, 15, 0.44);
+      --line: rgba(23, 19, 15, 0.14);
+      --line-strong: rgba(23, 19, 15, 0.32);
+      --accent: #050914;
+      --serif: "Instrument Serif", serif;
+      --sans: "Instrument Sans", sans-serif;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      text-rendering: optimizeLegibility;
+    }
+
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+    }
+
+    .reader-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      padding: 14px clamp(20px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .reader-topbar a { color: var(--ink); text-decoration: none; }
+    .reader-topbar span { color: var(--soft); text-align: right; }
+
+    .container,
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 92px) 24px 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 48px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 34px;
+      margin-bottom: 42px;
+    }
+
+    .article-date {
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 0 0 16px;
+    }
+
+    article > .article-date:first-child { display: block; margin-bottom: 14px; }
+
+    article > .article-date:first-child + .article-title + .article-subtitle {
+      padding-bottom: 34px;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 42px;
+    }
+
+    .article-title {
+      max-width: 800px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 4.1rem);
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.92;
+      margin: 0 0 18px;
+    }
+
+    .article-subtitle {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 1.25vw, 0.98rem);
+      line-height: 1.45;
+      margin: 0 0 12px;
+    }
+
+    .page > hr { display: none; }
+
+    .article-body {
+      font-family: var(--sans);
+      font-size: clamp(0.95rem, 1.1vw, 1.06rem);
+      line-height: 1.66;
+      color: var(--ink);
+    }
+
+    .article-body p { margin: 0 0 1.35em; }
+
+    .article-body p:first-child::first-letter {
+      float: none;
+      font-size: inherit;
+      line-height: inherit;
+      padding-right: 0;
+      font-style: inherit;
+    }
+
+    .article-body h2,
+    .article-body h3 {
+      font-family: var(--sans);
+      font-size: clamp(1rem, 1.8vw, 1.32rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 2.4em 0 0.8em;
+    }
+
+    .article-body blockquote {
+      border-left: 2px solid var(--line-strong);
+      color: var(--muted);
+      font-style: italic;
+      margin: 1.8em 0;
+      padding-left: 1.3em;
+    }
+
+    .article-body hr {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--line-strong);
+      margin: 2.8em 0;
+    }
+
+    .article-body a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 720px) {
+      .reader-topbar { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .container, .page { padding: 44px 20px 60px; }
+      .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
+      .article-body { font-size: 0.95rem; }
+    }
+  
+  /* Shared healthy cursor behavior */
+  .site-cursor { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    body.cursor-enabled,
+    body.cursor-enabled * {
+      cursor: none;
+    }
+
+    .site-cursor {
+      --cursor-scale: 1;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      display: block;
+      border-radius: 50%;
+      background: #fff;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 2147483647;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(var(--cursor-scale));
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: left, top, transform;
+    }
+
+    body.cursor-visible .site-cursor { opacity: 0.92; }
+    body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+    body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+  }
+</style>
+</head>
+<body>
+  <div class="read-progress" aria-hidden="true"></div>
+  <nav class="reader-topbar" aria-label="Essay navigation">
+    <a href="/writing/">Haein Jung / Writing</a>
+    <span>Reading</span>
+  </nav>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">A White Paper on the Coordination Layer of the Internet</h1>
+      <p class="article-subtitle">Collision, agentic servers, and constrained signaling as the next coordination layer.</p>
+      <p class="article-date">May 19, 2026</p>
+    </header>
+    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
+    <div class="article-body">
+      <h2>Thesis</h2>
+
+      <p>The internet has, to this point, evolved through three coherent layers. The first organized documents. The second organized applications. The third, now emerging, will organize coordination itself: the encounter of intents, capabilities, and contexts across high-dimensional actors operating under partial information.</p>
+
+      <p>This paper sets out the case for that layer, names its central primitive (collision), describes the substrate required to host it (the agentic server), and identifies the mechanism by which coordination can occur without forced disclosure (constrained signaling under negotiated schemas). It is a statement of architecture rather than a defense of feasibility. The components exist. The integration is the work.</p>
+
+      <h2>I. The Limits of the Current Stack</h2>
+
+      <p>Every previous layer of the internet has assumed a declarative user. The web treated information as something to be requested by an identifiable subject and returned by an identifiable source. The application layer extended this contract to behavior. Actions were taken by parties who had first declared themselves, authenticated, and stated intent. The API layer, which now dominates inter-system communication, codified this further. A request is issued. A response is returned. The actor's state at the moment of the request is the entire context the system is permitted to know.</p>
+
+      <p>This architecture works for transactions. It fails for coordination.</p>
+
+      <p>Coordination is the process by which distinct entities, holding partial information about each other and about themselves, converge on interactions that produce value neither could produce alone. It is the substrate of every important institution humans have built, from markets to research to friendship to political alliance. None of it operates declaratively. The actors involved do not announce their full state. They cannot, because their state is partly unknown to themselves and partly contingent on the very encounters the system is supposed to mediate.</p>
+
+      <p>The current stack handles coordination only insofar as it can be reduced to a sequence of declarations. The reduction is lossy. Most of the value that should exist in human coordination does not exist, because the systems built to mediate it cannot represent the parts of human life that are still becoming.</p>
+
+      <h2>II. The Conditions for a Coordination Layer</h2>
+
+      <p>Three conditions must hold for a coordination layer to be possible as a system rather than as an aspiration.</p>
+
+      <p>The first is representational capacity. Coordination requires that entities be modeled at a resolution sufficient to capture latent intent, evolving context, and trajectory. Until very recently, no software system was capable of holding such a representation, let alone reasoning over it. The arrival of foundation models with general contextual competence is the precondition that converts coordination from a social phenomenon into a computational one.</p>
+
+      <p>The second is private computation. A representation of human context at the resolution required for coordination is precisely the kind of representation that cannot be entrusted to centralized intermediaries. The coordination layer must therefore be built on substrates that allow rich reasoning over sensitive state without exposing that state to the actors performing the reasoning. The relevant primitives, including confidential computing, secure enclaves, and federated inference architectures, have matured to the point where this is no longer a research aspiration.</p>
+
+      <p>The third is agentic execution. A coordination layer cannot operate by polling its users. It must act on behalf of entities continuously, negotiate with peer agents continuously, and surface only the outputs that warrant human attention. The capability of software to act as a genuine agent, with persistent state and durable representation of its principal, is the third condition. It is now satisfied.</p>
+
+      <p>These three conditions, taken together, have only recently come into alignment. The coordination layer is possible now in a way it was not possible five years ago. The next several years will determine whether it is built on principles that preserve the autonomy of its participants, or on principles that simply extend the platform economics of the previous layer into a new domain.</p>
+
+      <h2>III. The Primitive: Collision</h2>
+
+      <p>The coordination layer requires a primitive. That primitive is collision.</p>
+
+      <p>A collision is a coordination event between two or more entities whose contextual states, taken together, indicate a probability of mutual value sufficient to warrant interaction. It is not a match, which assumes both parties can specify what they want and that the specification is sufficient. It is not a recommendation, which assumes a one-way relationship between a system and a user. It is not a search result, which assumes a query against a static corpus. Collision is the recognition that two evolving trajectories have entered a region of mutual relevance, and the creation of the conditions for them to meet.</p>
+
+      <p>The formal character of collision is closer to game theory than to retrieval. The entities involved are strategic actors operating under partial information, with incentives to reveal selectively, to negotiate, to wait, and to act. A coordination system that models them as static records produces poor outcomes. A system that models them as evolving probabilistic agents produces outcomes that resemble the kinds of coordination humans recognize as valuable: introductions that lead somewhere, conversations that produce new directions, alignments that were not predictable from any single party's prior state.</p>
+
+      <p>Collision is therefore a primitive in the strict sense. It is the irreducible unit on which the coordination layer is built, in the way that the packet is the irreducible unit of the network layer and the request is the irreducible unit of the application layer. Higher-order structures, including markets, communities, organizations, and institutions, are emergent compositions of collisions over time.</p>
+
+      <h2>IV. The Substrate: Agentic Servers</h2>
+
+      <p>The coordination layer requires a substrate on which entities are represented. The substrate of the document layer was the file. The substrate of the application layer was the account. The substrate of the coordination layer is the agentic server.</p>
+
+      <p>An agentic server is a private computational environment that holds the persistent representation of an entity, including its history, capabilities, trajectory, relationships, and current state, and that participates in coordination on behalf of that entity. It is not a profile, because it is not designed for display. It is not an account, because it is not a relationship with a platform. It is a runtime. An active piece of infrastructure that performs reasoning, negotiation, and execution under the control of its principal.</p>
+
+      <p>The displacement implied by this substrate is significant. The platform era was characterized by the centralization of representation. Each platform held its own partial impression of each user, optimized for the platform's economic interest. The coordination layer inverts this. Representation lives with the represented. Platforms become services that agentic servers consult, rather than infrastructures that agentic servers depend upon for their existence.</p>
+
+      <p>This is not a return to local-first computing in the strict technical sense. The agentic server may be hosted, federated, or distributed across multiple environments. What matters is that it is governed by its principal, that its representation is portable, and that its participation in coordination is conducted on terms its principal sets.</p>
+
+      <h2>V. The Mechanism: Constrained Signaling Under Negotiated Schemas</h2>
+
+      <p>The central technical problem of the coordination layer is how to enable meaningful coordination without forced disclosure.</p>
+
+      <p>The naive approach, in which entities expose their full state to a central matcher, reproduces the platform era's failure modes and worsens them. The volume and sensitivity of information required for genuine coordination makes such exposure untenable. The coordination layer must therefore be built on a different principle: that entities reveal only the signals required to advance the coordination, that the signals are bounded by schemas the participants have negotiated in advance, and that the inference performed on those signals is itself constrained by what the schemas permit.</p>
+
+      <p>This is the discipline of constrained signaling. Two agentic servers entering a coordination chamber agree, before any signal exchange, on what categories of inference the exchange permits. The agreement is enforced by the substrate, not by the goodwill of the parties. The resulting interaction proceeds through the controlled escalation of revelation. Each step exposes only as much as the next step requires. At any point, either party can disengage without having disclosed more than the schema permitted.</p>
+
+      <p>The privacy properties of this mechanism are stronger than the privacy properties of any platform architecture currently in use, because platform architecture is structurally incapable of providing them. Platforms must see in order to mediate. The coordination layer is designed so that mediation does not require seeing.</p>
+
+      <h2>VI. The Economics: From Platforms to Peering</h2>
+
+      <p>The economic structure of the coordination layer differs from the economic structure of the platform era in a fundamental way. Platforms generate value by accumulating user data and selling access to it, directly or indirectly. The coordination layer generates value by mediating encounters whose outputs accrue to the participants.</p>
+
+      <p>This shifts the economic gravity of the system. Agentic servers do not pay rent on their representations. They pay for coordination services, including chamber operation, schema validation, capability discovery, and computation, in exchange for outcomes their principals value. Infrastructure providers compete on the quality of their mediation, not on their ability to extract and resell the context they mediate.</p>
+
+      <p>The structural analogue is not the platform marketplace but the peering arrangement. Tier-one network operators exchange traffic on settlement-free terms because the volume of mutual exchange exceeds the transactional value of any single transmission. The coordination layer suggests a similar dynamic for context. Entities engaged in continuous mutual coordination develop persistent peering relationships, with negotiated trust surfaces and ongoing schema agreements, that replace the transactional API as the dominant pattern of inter-entity communication.</p>
+
+      <p>This implies a long transition. The platform era will not end abruptly. But the locus of value creation will move, slowly and then quickly, from the platforms that hold representations to the substrates that host coordination, and from the actors who extract context to the actors whose context is being coordinated.</p>
+
+      <h2>VII. The Boundary with Deterministic Systems</h2>
+
+      <p>The coordination layer is not a replacement for deterministic infrastructure. Banking, logistics, contracts, code execution, payments, and records will continue to require systems that produce identical outputs under identical inputs, that can be audited, and that produce legally meaningful artifacts. These systems remain essential. The coordination layer operates upstream of them.</p>
+
+      <p>The boundary between deterministic and probabilistic computation is itself a design surface. A collision, once recognized, may resolve into a deterministic artifact, including a contract, a transaction, a published collaboration, an enrollment. The collision performed the work of identifying that the artifact should exist. The deterministic system performs the work of producing it under the guarantees the parties require.</p>
+
+      <p>In this division of labor, deterministic systems stabilize outcomes, probabilistic systems explore possibility, and collision mediates the handoff. The coordination layer is the negotiation between what could happen and what does happen. It is the missing layer that allows the rest of the stack to function as it was meant to.</p>
+
+      <h2>VIII. Open Problems</h2>
+
+      <p>The coordination layer is buildable but not built. Several problems remain.</p>
+
+      <p>The first is the information-theoretic problem of long-horizon coordination under constrained signaling. Even bounded signals, repeated over time, accumulate into inferences. Designing schemas and chamber dynamics that preserve their guarantees across many interactions is an open research problem with no general solution.</p>
+
+      <p>The second is the representation of evolving intent. The agentic server must update its representation of its principal in something close to real time, including representations of states the principal has not articulated. The methods for doing this without converging on false impressions or trapping the principal in stale identifications are immature.</p>
+
+      <p>The third is governance. A coordination layer used at scale must operate under rules that no single party can unilaterally rewrite. The mechanisms by which such governance is established and maintained, while preserving the autonomy of participants and the openness of the substrate, are not yet settled.</p>
+
+      <p>These are problems to be worked on, not reasons to wait. The choice is not whether the coordination layer will be built but whether it will be built deliberately.</p>
+
+      <h2>IX. Closing</h2>
+
+      <p>The internet has produced two eras of value and one era of capture. The document era produced libraries. The application era produced services. The platform era, which is a particular form of the application era, produced the accumulation of human representation by a small number of intermediaries, who used that representation in ways their subjects did not authorize and could not inspect.</p>
+
+      <p>The coordination layer is the architectural response to that capture. It returns representation to the represented. It provides the substrate on which coordination can occur without surveillance. It treats the strategic, ambiguous, and evolving character of human life as the precondition for the system, rather than as a problem the system is built to eliminate.</p>
+
+      <p>The internet of documents helped us find information. The internet of applications helped us do things. The internet of collisions would help us find each other. Less like a directory. More like people recovering our agency.</p>
+    </div>
+    <footer class="site-footer">© 2026 Haein Jung</footer>
+  </div>
+<script>
+    (() => {
+      const progress = document.querySelector(".read-progress");
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const width = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        if (progress) progress.style.width = Math.min(width, 100) + "%";
+      };
+      updateProgress();
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      window.addEventListener("resize", updateProgress);
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+
+      const clearState = () => {
+        body.classList.remove("cursor-visible", "cursor-link", "cursor-press");
+      };
+
+      const syncPointerMode = () => {
+        if (media.matches) {
+          body.classList.add("cursor-enabled");
+        } else {
+          body.classList.remove("cursor-enabled");
+          clearState();
+        }
+      };
+
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+
+      syncPointerMode();
+      if (media.addEventListener) media.addEventListener("change", syncPointerMode);
+      else if (media.addListener) media.addListener(syncPointerMode);
+
+      window.addEventListener("mousemove", (event) => {
+        if (!media.matches) return;
+        cursor.style.left = event.clientX + "px";
+        cursor.style.top = event.clientY + "px";
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+
+      window.addEventListener("mousedown", () => {
+        if (media.matches) body.classList.add("cursor-press");
+      }, { passive: true });
+
+      window.addEventListener("mouseup", () => {
+        body.classList.remove("cursor-press");
+      }, { passive: true });
+
+      document.addEventListener("mouseleave", () => {
+        clearState();
+      });
+    })();
+  </script>
+</body>
+</html>
