@@ -341,7 +341,40 @@
       .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
       .article-body { font-size: 0.95rem; }
     }
-  </style>
+  
+  /* Shared healthy cursor behavior */
+  .site-cursor { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    body.cursor-enabled,
+    body.cursor-enabled * {
+      cursor: none;
+    }
+
+    .site-cursor {
+      --cursor-scale: 1;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 18px;
+      height: 18px;
+      display: block;
+      border-radius: 50%;
+      background: #fff;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 2147483647;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(var(--cursor-scale));
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
+      will-change: left, top, transform;
+    }
+
+    body.cursor-visible .site-cursor { opacity: 0.92; }
+    body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+    body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+  }
+</style>
 </head>
 <body>
   <div class="read-progress" aria-hidden="true"></div>
@@ -441,30 +474,7 @@
     </div>
     <footer class="site-footer">© 2026 Haein Jung</footer>
   </div>
-  <script>
-    (() => {
-      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
-      if (!media.matches) return;
-      const body = document.body;
-      const cursor = document.querySelector(".site-cursor");
-      if (!cursor) return;
-      body.classList.add("cursor-enabled");
-      const updateInteractiveState = (target) => {
-        const interactive = target && target.closest("a, button, [role='button']");
-        body.classList.toggle("cursor-link", Boolean(interactive));
-      };
-      window.addEventListener("mousemove", (event) => {
-        cursor.style.left = `${event.clientX}px`;
-        cursor.style.top = `${event.clientY}px`;
-        body.classList.add("cursor-visible");
-        updateInteractiveState(event.target);
-      }, { passive: true });
-      window.addEventListener("mousedown", () => { body.classList.add("cursor-press"); }, { passive: true });
-      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
-      document.addEventListener("mouseleave", () => { body.classList.remove("cursor-visible", "cursor-link"); });
-    })();
-  </script>
-  <script>
+<script>
     (() => {
       const progress = document.querySelector(".read-progress");
       const updateProgress = () => {
@@ -475,6 +485,57 @@
       updateProgress();
       window.addEventListener("scroll", updateProgress, { passive: true });
       window.addEventListener("resize", updateProgress);
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      const body = document.body;
+      const cursor = document.querySelector(".site-cursor");
+      if (!cursor) return;
+
+      const clearState = () => {
+        body.classList.remove("cursor-visible", "cursor-link", "cursor-press");
+      };
+
+      const syncPointerMode = () => {
+        if (media.matches) {
+          body.classList.add("cursor-enabled");
+        } else {
+          body.classList.remove("cursor-enabled");
+          clearState();
+        }
+      };
+
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
+        body.classList.toggle("cursor-link", Boolean(interactive));
+      };
+
+      syncPointerMode();
+      if (media.addEventListener) media.addEventListener("change", syncPointerMode);
+      else if (media.addListener) media.addListener(syncPointerMode);
+
+      window.addEventListener("mousemove", (event) => {
+        if (!media.matches) return;
+        cursor.style.left = event.clientX + "px";
+        cursor.style.top = event.clientY + "px";
+        body.classList.add("cursor-visible");
+        updateInteractiveState(event.target);
+      }, { passive: true });
+
+      window.addEventListener("mousedown", () => {
+        if (media.matches) body.classList.add("cursor-press");
+      }, { passive: true });
+
+      window.addEventListener("mouseup", () => {
+        body.classList.remove("cursor-press");
+      }, { passive: true });
+
+      document.addEventListener("mouseleave", () => {
+        clearState();
+      });
     })();
   </script>
 </body>
