@@ -6,7 +6,7 @@
 <title>Haein Jung</title>
 <meta
   name="description"
-  content="Haein Jung designs for the thrill of opening new possibilities and builds experiments in resonance, systems, and human experience."
+  content="Haein Jung designs for the thrill of opening new possibilities and builds experiments in resonance, systems, and human connection."
 >
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,8 @@
     --sans: "Instrument Sans", sans-serif;
     --serif: "Instrument Serif", serif;
     --transition: 220ms ease;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   * {
@@ -56,8 +58,8 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    body.cursor-enabled,
-    body.cursor-enabled * {
+    body.cursor-visible,
+    body.cursor-visible * {
       cursor: none;
     }
   }
@@ -70,7 +72,7 @@
 
   .sidebar {
     opacity: 0;
-    transition: opacity 800ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 280ms var(--ease-out);
     will-change: opacity;
   }
 
@@ -80,7 +82,7 @@
   .portrait-frame,
   .hero-lead {
     opacity: 0;
-    transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 420ms var(--ease-out);
   }
 
   .content.revealed .hero-title {
@@ -89,12 +91,12 @@
 
   .content.revealed .portrait-frame {
     opacity: 1;
-    transition-delay: 400ms;
+    transition-delay: 80ms;
   }
 
   .content.revealed .hero-lead {
     opacity: 1;
-    transition-delay: 800ms;
+    transition-delay: 140ms;
   }
 
   .site-cursor {
@@ -116,7 +118,7 @@
       z-index: 99999;
       opacity: 0;
       transform: translate(-50%, -50%) scale(var(--cursor-scale));
-      transition: transform 180ms ease, opacity 180ms ease;
+      transition: transform 140ms var(--ease-out), opacity 140ms var(--ease-out);
     }
 
     body.cursor-visible .site-cursor {
@@ -261,6 +263,11 @@
     margin-top: 16px;
     font-size: 0.95rem;
     font-weight: 600;
+  }
+
+  .sidebar-contact {
+    display: grid;
+    gap: 16px;
   }
 
   .content {
@@ -436,9 +443,15 @@
 
     .sidebar {
       position: static;
-      min-height: auto;
-      padding-bottom: 28px;
+      min-height: calc(100svh - 40px);
+      justify-content: flex-start;
+      padding-bottom: max(28px, env(safe-area-inset-bottom));
       border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-contact {
+      margin-top: auto;
+      padding-top: 28px;
     }
 
     .hero-top {
@@ -480,12 +493,14 @@
 
   #splash.hidden { display: none; }
 
+  #splash.leaving { pointer-events: none; }
+
   #splash-dim {
     position: absolute;
     inset: 0;
     background: #050914;
     opacity: 0;
-    transition: opacity 1200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 420ms var(--ease-out);
     z-index: 2;
     pointer-events: none;
   }
@@ -518,13 +533,13 @@
     z-index: 3;
     transform: translate(-50%, -50%) scale(0.96);
     opacity: 0;
-    transition: transform 600ms cubic-bezier(0.23, 1, 0.32, 1),
-                opacity 600ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 280ms var(--ease-out),
+                opacity 280ms var(--ease-out);
     will-change: transform, opacity;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    #splash-name { cursor: none; }
+    body.cursor-visible #splash-name { cursor: none; }
   }
 
   #splash-name.visible {
@@ -541,39 +556,6 @@
     #splash-dim { transition-duration: 0.2s; }
   }
 
-
-  /* Shared healthy cursor behavior */
-  .site-cursor { display: none; }
-
-  @media (hover: hover) and (pointer: fine) {
-    body.cursor-enabled,
-    body.cursor-enabled * {
-      cursor: none;
-    }
-
-    .site-cursor {
-      --cursor-scale: 1;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      display: block;
-      border-radius: 50%;
-      background: #fff;
-      mix-blend-mode: difference;
-      pointer-events: none;
-      z-index: 2147483647;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(var(--cursor-scale));
-      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
-      will-change: left, top, transform;
-    }
-
-    body.cursor-visible .site-cursor { opacity: 0.92; }
-    body.cursor-link .site-cursor { --cursor-scale: 1.8; }
-    body.cursor-press .site-cursor { --cursor-scale: 0.88; }
-  }
 </style>
 </head>
 <body>
@@ -591,7 +573,7 @@
           <a class="brand" href="#top">Haein<br>Jung</a>
           <div class="sidebar-block">
             <p class="sidebar-location">San Francisco</p>
-            <p class="sidebar-school"><a href="https://www.minerva.edu" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">Minerva University</a> - Design + Computational Science</p>
+            <p class="sidebar-school">@ Minerva</p>
           </div>
 
           <nav class="sidebar-nav" aria-label="Section navigation">
@@ -600,7 +582,7 @@
           </nav>
         </div>
 
-        <div>
+        <div class="sidebar-contact">
           <div class="sidebar-links" aria-label="External links">
             <a href="https://x.com/haeinjvng_" target="_blank" rel="noopener noreferrer" aria-label="X">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H21l-6.54 7.48L22 22h-5.91l-4.63-6.06L6.15 22H3.36l7-8L3.46 2H9.2l4.18 5.48L18.9 2Zm-1.04 18.2h1.64L8.31 3.72H6.55L17.86 20.2Z"/></svg>
@@ -613,6 +595,9 @@
             </a>
             <a href="https://haeinej.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Substack">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v2.5H3V3Zm0 5h18v2.5H3V8Zm0 5h18V21l-9-5.25L3 21V13Z"/></svg>
+            </a>
+            <a href="https://blog.naver.com/suninjunn/" target="_blank" rel="noopener noreferrer" aria-label="Naver">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h6.4l3.6 5.3V3H20v18h-6.4L10 15.7V21H4V3Z"/></svg>
             </a>
           </div>
           <a class="mail-link" href="mailto:haein@pms.ne.kr">haein@pms.ne.kr</a>
@@ -651,12 +636,95 @@
       const splash = document.getElementById("splash");
       const canvas = document.getElementById("water-canvas");
       const nameBtn = document.getElementById("splash-name");
-      const page = document.querySelector(".page");
       if (!splash || !canvas || !nameBtn) return;
+
+      const sidebar = document.querySelector(".sidebar");
+      const content = document.querySelector(".content");
+      let animId = null;
+
+      const showFallbackSplash = () => {
+        splash.style.background = 'linear-gradient(rgba(5, 9, 20, 0.25), rgba(5, 9, 20, 0.65)), url("water.jpg") center / cover no-repeat';
+        canvas.style.display = "none";
+        nameBtn.classList.add("visible");
+      };
+
+      const revealSite = (cleanupDelay = 560) => {
+        splash.classList.add("leaving");
+
+        setTimeout(() => {
+          if (sidebar) sidebar.classList.add("revealed");
+        }, 0);
+
+        setTimeout(() => {
+          if (content) content.classList.add("revealed");
+        }, 40);
+
+        setTimeout(() => {
+          if (animId) cancelAnimationFrame(animId);
+          splash.classList.add("hidden");
+        }, cleanupDelay);
+      };
+
+      nameBtn.addEventListener("click", () => {
+        const brand = document.querySelector(".brand");
+        splash.style.pointerEvents = "none";
+
+        if (!brand) {
+          revealSite();
+          return;
+        }
+
+        const brandRect = brand.getBoundingClientRect();
+        const startRect = nameBtn.getBoundingClientRect();
+
+        // Blur just enough to mask the one-line -> two-line text reflow.
+        nameBtn.animate([
+          { filter: "blur(0px)", opacity: 1 },
+          { filter: "blur(4px)", opacity: 0.8, offset: 0.45 },
+          { filter: "blur(0px)", opacity: 1 }
+        ], {
+          duration: 220,
+          easing: "cubic-bezier(0.77, 0, 0.175, 1)",
+          fill: "forwards"
+        });
+
+        setTimeout(() => {
+          nameBtn.innerHTML = "Haein<br>Jung";
+          nameBtn.style.position = "fixed";
+          nameBtn.style.textAlign = "left";
+          nameBtn.style.lineHeight = "0.9";
+          nameBtn.style.whiteSpace = "normal";
+          const newRect = nameBtn.getBoundingClientRect();
+          nameBtn.style.top = (startRect.top + startRect.height / 2 - newRect.height / 2) + "px";
+          nameBtn.style.left = (startRect.left + startRect.width / 2 - newRect.width / 2) + "px";
+          nameBtn.style.transform = "none";
+        }, 80);
+
+        setTimeout(() => {
+          const currentRect = nameBtn.getBoundingClientRect();
+          const dx = brandRect.left - currentRect.left;
+          const dy = brandRect.top - currentRect.top;
+          const s = brandRect.width / currentRect.width;
+
+          nameBtn.animate([
+            { transform: "translate(0, 0) scale(1)", opacity: 1 },
+            { transform: `translate(${dx}px, ${dy}px) scale(${s})`, opacity: 1 }
+          ], {
+            duration: 340,
+            easing: "cubic-bezier(0.23, 1, 0.32, 1)",
+            fill: "forwards"
+          });
+        }, 110);
+
+        revealSite();
+      });
 
       /* ── WebGL setup ── */
       const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-      if (!gl) return; // fallback: just show static image
+      if (!gl) {
+        showFallbackSplash();
+        return;
+      }
 
       const vsSource = `
         attribute vec2 a_pos;
@@ -747,7 +815,6 @@
       // Load texture
       const tex = gl.createTexture();
       const img = new Image();
-      let animId = null;
       let startTime = performance.now();
 
       function resize() {
@@ -770,6 +837,7 @@
         render();
         setTimeout(() => nameBtn.classList.add("visible"), 500);
       };
+      img.onerror = showFallbackSplash;
       img.src = "water.jpg";
 
       function render() {
@@ -780,133 +848,46 @@
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
         animId = requestAnimationFrame(render);
       }
-
-      /* ── Click: fold → fly (no clipping, blur-masked reflow) ── */
-      nameBtn.addEventListener("click", () => {
-        const brand = document.querySelector(".brand");
-        const brandRect = brand.getBoundingClientRect();
-        const startRect = nameBtn.getBoundingClientRect();
-
-        // ─── Step 1: FOLD — blur, switch to two-line, unblur ───
-        // Blur to mask the text reflow
-        nameBtn.animate([
-          { filter: "blur(0px)", opacity: 1 },
-          { filter: "blur(6px)", opacity: 0.6, offset: 0.4 },
-          { filter: "blur(0px)", opacity: 1 }
-        ], {
-          duration: 500,
-          easing: "cubic-bezier(0.77, 0, 0.175, 1)",
-          fill: "forwards"
-        });
-
-        // At peak blur, switch to two-line layout
-        setTimeout(() => {
-          nameBtn.innerHTML = "Haein<br>Jung";
-          nameBtn.style.position = "fixed";
-          nameBtn.style.textAlign = "left";
-          nameBtn.style.lineHeight = "0.9";
-          nameBtn.style.whiteSpace = "normal";
-          // Center the two-line version where the one-line was
-          const newRect = nameBtn.getBoundingClientRect();
-          nameBtn.style.top = (startRect.top + startRect.height / 2 - newRect.height / 2) + "px";
-          nameBtn.style.left = (startRect.left + startRect.width / 2 - newRect.width / 2) + "px";
-          nameBtn.style.transform = "none";
-        }, 180);
-
-        // ─── Step 2: FLY to corner (after fold settles) ───
-        setTimeout(() => {
-          const currentRect = nameBtn.getBoundingClientRect();
-          const dx = brandRect.left - currentRect.left;
-          const dy = brandRect.top - currentRect.top;
-          const s = brandRect.width / currentRect.width;
-
-          nameBtn.animate([
-            { transform: "translate(0, 0) scale(1)", opacity: 1 },
-            { transform: `translate(${dx}px, ${dy}px) scale(${s})`, opacity: 1 }
-          ], {
-            duration: 600,
-            easing: "cubic-bezier(0.23, 1, 0.32, 1)",
-            fill: "forwards"
-          });
-
-          // Dim water as name flies
-          splash.classList.add("leaving");
-        }, 500);
-
-        // Start dimming as name flies
-        setTimeout(() => {
-          splash.classList.add("leaving");
-        }, 350);
-
-        // ─── Step 3: Sidebar fades in first ───
-        const sidebar = document.querySelector(".sidebar");
-        const content = document.querySelector(".content");
-        setTimeout(() => {
-          sidebar.classList.add("revealed");
-        }, 1000);
-
-        // ─── Step 4: Hero elements stagger in (title → portrait → lead) ───
-        setTimeout(() => {
-          content.classList.add("revealed");
-        }, 1600);
-
-        // ─── Step 5: Cleanup ───
-        setTimeout(() => {
-          cancelAnimationFrame(animId);
-          splash.classList.add("hidden");
-        }, 3000);
-      });
     })();
   </script>
 
   <script>
     (() => {
       const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+      if (!media.matches) return;
+
       const body = document.body;
       const cursor = document.querySelector(".site-cursor");
       if (!cursor) return;
 
-      const clearState = () => {
-        body.classList.remove("cursor-visible", "cursor-link", "cursor-press");
-      };
-
-      const syncPointerMode = () => {
-        if (media.matches) {
-          body.classList.add("cursor-enabled");
-        } else {
-          body.classList.remove("cursor-enabled");
-          clearState();
-        }
-      };
-
       const updateInteractiveState = (target) => {
-        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
+        const interactive = target && target.closest("a, button, [role='button']");
         body.classList.toggle("cursor-link", Boolean(interactive));
       };
 
-      syncPointerMode();
-      if (media.addEventListener) media.addEventListener("change", syncPointerMode);
-      else if (media.addListener) media.addListener(syncPointerMode);
+      const resetCursorState = () => {
+        body.classList.remove("cursor-visible");
+        body.classList.remove("cursor-link");
+        body.classList.remove("cursor-press");
+      };
 
       window.addEventListener("mousemove", (event) => {
-        if (!media.matches) return;
-        cursor.style.left = event.clientX + "px";
-        cursor.style.top = event.clientY + "px";
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
         body.classList.add("cursor-visible");
         updateInteractiveState(event.target);
       }, { passive: true });
 
       window.addEventListener("mousedown", () => {
-        if (media.matches) body.classList.add("cursor-press");
+        body.classList.add("cursor-press");
       }, { passive: true });
 
       window.addEventListener("mouseup", () => {
         body.classList.remove("cursor-press");
       }, { passive: true });
 
-      document.addEventListener("mouseleave", () => {
-        clearState();
-      });
+      document.addEventListener("mouseleave", resetCursorState);
+      window.addEventListener("blur", resetCursorState);
     })();
   </script>
 </body>

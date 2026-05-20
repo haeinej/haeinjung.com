@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Work — Haein Jung</title>
-<meta name="description" content="Projects by Haein Jung — design, systems, and human experience.">
+<meta name="description" content="Projects by Haein Jung — design, systems, and human connection.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
@@ -112,6 +112,11 @@
     color: var(--accent); background: var(--accent-bg);
   }
 
+  .sidebar-nav a[aria-current="page"] {
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+
   .sidebar-links { gap: 12px; }
   .sidebar-links a {
     width: 28px; height: 28px;
@@ -124,6 +129,11 @@
   .mail-link {
     display: inline-block; margin-top: 16px;
     font-size: 0.95rem; font-weight: 600;
+  }
+
+  .sidebar-contact {
+    display: grid;
+    gap: 16px;
   }
 
   .content { padding: 0 0 48px; }
@@ -188,46 +198,17 @@
     .page { padding: 20px; }
     .layout { grid-template-columns: 1fr; gap: 18px; }
     .sidebar {
-      position: static; min-height: auto;
-      padding-bottom: 28px; border-bottom: 1px solid var(--line);
+      position: static;
+      min-height: calc(100svh - 40px);
+      justify-content: flex-start;
+      padding-bottom: max(28px, env(safe-area-inset-bottom));
+      border-bottom: 1px solid var(--line);
     }
+    .sidebar-contact { margin-top: auto; padding-top: 28px; }
   }
 
   @media (max-width: 680px) {
     .project { grid-template-columns: 1fr; gap: 10px; }
-  }
-
-  /* Shared healthy cursor behavior */
-  .site-cursor { display: none; }
-
-  @media (hover: hover) and (pointer: fine) {
-    body.cursor-enabled,
-    body.cursor-enabled * {
-      cursor: none;
-    }
-
-    .site-cursor {
-      --cursor-scale: 1;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      display: block;
-      border-radius: 50%;
-      background: #fff;
-      mix-blend-mode: difference;
-      pointer-events: none;
-      z-index: 2147483647;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(var(--cursor-scale));
-      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
-      will-change: left, top, transform;
-    }
-
-    body.cursor-visible .site-cursor { opacity: 0.92; }
-    body.cursor-link .site-cursor { --cursor-scale: 1.8; }
-    body.cursor-press .site-cursor { --cursor-scale: 0.88; }
   }
 </style>
 </head>
@@ -240,16 +221,16 @@
           <a class="brand" href="/">Haein<br>Jung</a>
           <div class="sidebar-block">
             <p class="sidebar-location">San Francisco</p>
-            <p class="sidebar-school">Minerva University - Design + Computational Science</p>
+            <p class="sidebar-school">@ Minerva</p>
           </div>
 
           <nav class="sidebar-nav" aria-label="Section navigation">
-            <a href="/work/">Work</a>
+            <a href="/work/" aria-current="page">Work</a>
             <a href="/writing/">Writing</a>
           </nav>
         </div>
 
-        <div>
+        <div class="sidebar-contact">
           <div class="sidebar-links" aria-label="External links">
             <a href="https://x.com/haeinjvng_" target="_blank" rel="noopener noreferrer" aria-label="X">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H21l-6.54 7.48L22 22h-5.91l-4.63-6.06L6.15 22H3.36l7-8L3.46 2H9.2l4.18 5.48L18.9 2Zm-1.04 18.2h1.64L8.31 3.72H6.55L17.86 20.2Z"/></svg>
@@ -340,8 +321,8 @@
 
       window.addEventListener("mousemove", (event) => {
         if (!media.matches) return;
-        cursor.style.left = event.clientX + "px";
-        cursor.style.top = event.clientY + "px";
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
         body.classList.add("cursor-visible");
         updateInteractiveState(event.target);
       }, { passive: true });
@@ -350,13 +331,13 @@
         if (media.matches) body.classList.add("cursor-press");
       }, { passive: true });
 
-      window.addEventListener("mouseup", () => {
-        body.classList.remove("cursor-press");
-      }, { passive: true });
+      window.addEventListener("mouseup", () => { body.classList.remove("cursor-press"); }, { passive: true });
 
       document.addEventListener("mouseleave", () => {
         clearState();
       });
+
+      window.addEventListener("blur", clearState);
     })();
   </script>
 </body>
