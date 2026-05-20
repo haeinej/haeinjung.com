@@ -154,6 +154,11 @@
     background: var(--accent-ink);
   }
 
+  .sidebar-nav a[aria-current="page"] {
+    color: var(--ink);
+    background: var(--accent-ink);
+  }
+
   .sidebar-links { gap: 12px; }
 
   .sidebar-links a {
@@ -174,6 +179,11 @@
     margin-top: 16px;
     font-size: 0.95rem;
     font-weight: 600;
+  }
+
+  .sidebar-contact {
+    display: grid;
+    gap: 16px;
   }
 
   .content { padding: 0 0 64px; }
@@ -361,9 +371,15 @@
 
     .sidebar {
       position: static;
-      min-height: auto;
-      padding-bottom: 28px;
+      min-height: calc(100svh - 40px);
+      justify-content: flex-start;
+      padding-bottom: max(28px, env(safe-area-inset-bottom));
       border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-contact {
+      margin-top: auto;
+      padding-top: 28px;
     }
 
     .content { max-width: none; }
@@ -577,16 +593,16 @@
           <a class="brand" href="/">Haein<br>Jung</a>
           <div class="sidebar-block">
             <p class="sidebar-location">San Francisco</p>
-            <p class="sidebar-school">Minerva University - Design + Computational Science</p>
+            <p class="sidebar-school">@ Minerva</p>
           </div>
 
           <nav class="sidebar-nav" aria-label="Section navigation">
             <a href="/work/">Work</a>
-            <a href="/writing/">Writing</a>
+            <a href="/writing/" aria-current="page">Writing</a>
           </nav>
         </div>
 
-        <div>
+        <div class="sidebar-contact">
           <div class="sidebar-links" aria-label="External links">
             <a href="https://x.com/haeinjvng_" target="_blank" rel="noopener noreferrer" aria-label="X">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H21l-6.54 7.48L22 22h-5.91l-4.63-6.06L6.15 22H3.36l7-8L3.46 2H9.2l4.18 5.48L18.9 2Zm-1.04 18.2h1.64L8.31 3.72H6.55L17.86 20.2Z"/></svg>
@@ -804,7 +820,6 @@
       </main>
     </div>
   </div>
-
   <script>
     (() => {
       const media = window.matchMedia("(hover: hover) and (pointer: fine)");
