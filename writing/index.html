@@ -11,6 +11,7 @@
 <style>
   :root {
     --bg: #050914;
+    --bg-strong: #08101f;
     --paper: #fbfaf7;
     --paper-soft: #f3f0ea;
     --ink: #050914;
@@ -25,6 +26,7 @@
     --sans: "Instrument Sans", sans-serif;
     --serif: "Instrument Serif", serif;
     --transition: 220ms ease;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +36,7 @@
     min-height: 100vh;
     color: var(--ink-on-dark);
     font-family: var(--sans);
-    background: var(--bg);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -84,7 +86,7 @@
   .layout {
     display: grid;
     grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-    gap: clamp(28px, 4vw, 72px);
+    gap: clamp(28px, 4vw, 64px);
   }
 
   .sidebar {
@@ -104,7 +106,7 @@
     text-decoration: none;
     font-size: clamp(2.1rem, 4vw, 3.2rem);
     line-height: 0.9;
-    letter-spacing: 0;
+    letter-spacing: -0.05em;
     font-weight: 600;
     margin-bottom: 24px;
   }
@@ -199,10 +201,8 @@
     padding: 15px 0 14px;
     margin-bottom: 18px;
     color: var(--ink-on-dark);
-    background: rgba(5, 9, 20, 0.68);
+    background: rgba(5, 9, 20, 0.92);
     border-bottom: 1px solid rgba(245, 241, 232, 0.14);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
 
   .writing-label,
@@ -236,10 +236,8 @@
     z-index: 35;
     padding: 18px 0;
     margin-bottom: 38px;
-    background: rgba(251, 250, 247, 0.92);
+    background: rgba(251, 250, 247, 0.98);
     border-bottom: 1px solid var(--line);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
 
   .category-nav a {
@@ -365,26 +363,43 @@
     .page { padding: 20px; }
 
     .layout {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 18px;
+      min-height: calc(100svh - 40px);
+    }
+
+    .content {
+      order: 1;
+      flex: 1 0 auto;
     }
 
     .sidebar {
+      order: 2;
       position: static;
-      min-height: calc(100svh - 40px);
+      min-height: 0;
+      margin-top: auto;
       justify-content: flex-start;
+      gap: 28px;
+      padding-top: 32px;
       padding-bottom: max(28px, env(safe-area-inset-bottom));
-      border-bottom: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+      border-bottom: 0;
     }
 
     .sidebar-contact {
-      margin-top: auto;
-      padding-top: 28px;
+      padding-top: 0;
     }
 
     .content { max-width: none; }
 
-    .writing-topbar { margin-bottom: 34px; }
+    .writing-topbar,
+    .category-nav {
+      position: static;
+      top: auto;
+    }
+
+    .writing-topbar { margin-bottom: 28px; }
   }
 
   @media (max-width: 760px) {
@@ -399,7 +414,11 @@
       gap: 10px 14px;
       overflow-x: auto;
       flex-wrap: nowrap;
+      scroll-snap-type: x proximity;
       scrollbar-width: none;
+      padding-right: 28px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
     }
 
     .category-nav::-webkit-scrollbar { display: none; }
@@ -407,6 +426,7 @@
     .category-nav a {
       flex: 0 0 auto;
       font-size: 0.86rem;
+      scroll-snap-align: start;
     }
 
     .section-group {
@@ -466,7 +486,7 @@
 
   body {
     color: var(--ink);
-    background: var(--bg);
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
   }
 
   .sidebar-school,
@@ -485,10 +505,15 @@
     background: var(--accent-bg);
   }
 
+  .sidebar-nav a[aria-current="page"] {
+    color: var(--accent);
+    background: var(--accent-bg);
+  }
+
   .writing-topbar {
     margin-bottom: 42px;
     color: var(--ink);
-    background: rgba(5, 9, 20, 0.82);
+    background: rgba(5, 9, 20, 0.94);
     border-bottom-color: var(--line);
   }
 
@@ -525,7 +550,7 @@
   }
 
   .category-nav {
-    background: rgba(5, 9, 20, 0.88);
+    background: rgba(5, 9, 20, 0.94);
     border-bottom-color: var(--line);
   }
 
@@ -549,6 +574,18 @@
   }
 
   .elsewhere-cta { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    .sidebar-nav a,
+    .sidebar-links a,
+    .mail-link,
+    .category-nav a,
+    .article-link {
+      transition-duration: 0.01ms !important;
+    }
+  }
 
   /* Shared healthy cursor behavior */
   .site-cursor { display: none; }
@@ -632,6 +669,7 @@
         </section>
         <div class="archive">
           <nav class="category-nav" aria-label="Writing categories">
+            <a href="#writing-title">All writings</a>
             <a href="#latest">Latest</a>
             <a href="#whitepaper">Whitepaper</a>
             <a href="#ai-design">AI + Design</a>
