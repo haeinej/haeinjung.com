@@ -3,526 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collision — Haein Jung</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <title>Writing — Haein Jung</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta http-equiv="refresh" content="0; url=/writing/">
+  <link rel="canonical" href="https://haeinjung.com/writing/">
   <style>
     :root {
       --bg: #050914;
       --bg-strong: #08101f;
       --ink: #f5f1e8;
       --muted: rgba(245, 241, 232, 0.72);
-      --soft: rgba(245, 241, 232, 0.46);
       --line: rgba(245, 241, 232, 0.12);
       --sans: "Instrument Sans", sans-serif;
-      --serif: "Instrument Serif", serif;
     }
 
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
       color: var(--ink);
       font-family: var(--sans);
-      font-size: 1rem;
-      line-height: 1.8;
-      min-height: 100vh;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 24px;
+    main {
+      max-width: 540px;
+      text-align: center;
+      padding: 32px 28px;
+      border: 1px solid var(--line);
     }
 
-    @media (max-width: 600px) {
-      .page { padding: 20px; }
+    h1 {
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      line-height: 1;
+      margin-bottom: 14px;
     }
 
-    .back-link {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.9rem;
-      display: inline-block;
-      margin-bottom: 3rem;
-      transition: color 220ms ease;
-    }
-    .back-link:hover { color: var(--ink); }
-
-    .article-title {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-      letter-spacing: 0;
-      font-weight: 400;
-      margin-bottom: 0.5rem;
-    }
-
-    .article-subtitle {
-      font-family: var(--sans);
-      font-size: 1.05rem;
+    p {
       color: var(--muted);
       line-height: 1.6;
-      margin-bottom: 1rem;
+      margin-bottom: 18px;
     }
 
-    .article-date {
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      font-weight: 600;
-      color: var(--soft);
-    }
-
-    .article-body p {
-      margin-bottom: 1.5rem;
-    }
-
-    .article-body h2 {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      letter-spacing: 0;
-      font-weight: 400;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .article-body h3 {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      font-weight: 400;
-      margin-top: 2rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .article-body blockquote {
-      border-left: 2px solid var(--line);
-      padding-left: 1.5rem;
-      font-style: italic;
-      color: var(--muted);
-      margin: 1.5rem 0;
-    }
-
-    .article-body a {
+    a {
       color: var(--ink);
-      text-decoration: underline;
-    }
-
-    .article-body hr {
-      border: none;
-      border-top: 1px solid var(--line);
-      margin: 2.5rem 0;
-    }
-
-    .article-body em { font-style: italic; }
-    .article-body strong { font-weight: 600; }
-
-    .site-footer {
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      font-weight: 600;
-      color: var(--soft);
-      margin-top: 4rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
-    }
-
-    .site-cursor { display: none; }
-
-    @media (hover: hover) and (pointer: fine) {
-      body.cursor-enabled, body.cursor-enabled * { cursor: none; }
-      .site-cursor {
-        --cursor-scale: 1;
-        position: fixed; left: 0; top: 0; width: 18px; height: 18px;
-        display: block; border-radius: 50%; background: rgba(245, 241, 232, 0.85);
-        pointer-events: none; z-index: 99999; opacity: 0;
-        transform: translate(-50%, -50%) scale(var(--cursor-scale));
-        transition: transform 180ms ease, opacity 180ms ease;
-      }
-      body.cursor-visible .site-cursor { opacity: 1; }
-      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
-      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
-    }
-    /* Editorial reader override */
-    :root {
-      --paper: #fbfaf7;
-      --paper-soft: #f1eee7;
-      --ink: #17130f;
-      --muted: rgba(23, 19, 15, 0.68);
-      --soft: rgba(23, 19, 15, 0.44);
-      --line: rgba(23, 19, 15, 0.14);
-      --line-strong: rgba(23, 19, 15, 0.32);
-      --accent: #050914;
-      --serif: "Instrument Serif", serif;
-      --sans: "Instrument Sans", sans-serif;
-    }
-
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.72;
-      text-rendering: optimizeLegibility;
-    }
-
-    .read-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: var(--accent);
-      z-index: 1000;
-    }
-
-    .reader-topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: baseline;
-      padding: 14px clamp(20px, 4vw, 48px);
-      border-bottom: 1px solid var(--line);
-      background: rgba(251, 250, 247, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--soft);
-    }
-
-    .reader-topbar a { color: var(--ink); text-decoration: none; }
-    .reader-topbar span { color: var(--soft); text-align: right; }
-
-    .container,
-    .page {
-      position: relative;
-      z-index: 1;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: clamp(48px, 8vw, 92px) 24px 72px;
-    }
-
-    .back-link {
-      display: inline-flex;
-      margin-bottom: 48px;
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
       text-decoration: none;
-      border-bottom: 1px solid transparent;
+      border-bottom: 1px solid currentColor;
     }
-
-    .back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
-
-    header {
-      border-bottom: 2px solid var(--ink);
-      padding-bottom: 34px;
-      margin-bottom: 42px;
-    }
-
-    .article-date {
-      color: var(--soft);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin: 0 0 16px;
-    }
-
-    article > .article-date:first-child { display: block; margin-bottom: 14px; }
-
-    article > .article-date:first-child + .article-title + .article-subtitle {
-      padding-bottom: 34px;
-      border-bottom: 2px solid var(--ink);
-      margin-bottom: 42px;
-    }
-
-    .article-title {
-      max-width: 800px;
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: clamp(2rem, 5vw, 4.1rem);
-      font-style: normal;
-      font-weight: 600;
-      letter-spacing: 0;
-      line-height: 0.92;
-      margin: 0 0 18px;
-    }
-
-    .article-subtitle {
-      max-width: 620px;
-      color: var(--muted);
-      font-size: clamp(0.9rem, 1.25vw, 0.98rem);
-      line-height: 1.45;
-      margin: 0 0 12px;
-    }
-
-    .page > hr { display: none; }
-
-    .article-body {
-      font-family: var(--sans);
-      font-size: clamp(0.95rem, 1.1vw, 1.06rem);
-      line-height: 1.66;
-      color: var(--ink);
-    }
-
-    .article-body p { margin: 0 0 1.35em; }
-
-    .article-body p:first-child::first-letter {
-      float: none;
-      font-size: inherit;
-      line-height: inherit;
-      padding-right: 0;
-      font-style: inherit;
-    }
-
-    .article-body h2,
-    .article-body h3 {
-      font-family: var(--sans);
-      font-size: clamp(1rem, 1.8vw, 1.32rem);
-      font-weight: 600;
-      letter-spacing: 0;
-      line-height: 1.08;
-      margin: 2.4em 0 0.8em;
-    }
-
-    .article-body blockquote {
-      border-left: 2px solid var(--line-strong);
-      color: var(--muted);
-      font-style: italic;
-      margin: 1.8em 0;
-      padding-left: 1.3em;
-    }
-
-    .article-body hr {
-      width: 100%;
-      border: 0;
-      border-top: 1px solid var(--line-strong);
-      margin: 2.8em 0;
-    }
-
-    .article-body a {
-      color: var(--ink);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 0.16em;
-    }
-
-    .footer {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--line);
-      color: var(--soft);
-      font-family: var(--sans);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 720px) {
-      .reader-topbar { align-items: flex-start; flex-direction: column; gap: 4px; }
-      .container, .page { padding: 44px 20px 60px; }
-      .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
-      .article-body { font-size: 0.95rem; }
-    }
-  
-  /* Shared healthy cursor behavior */
-  .site-cursor { display: none; }
-
-  @media (hover: hover) and (pointer: fine) {
-    body.cursor-enabled,
-    body.cursor-enabled * {
-      cursor: none;
-    }
-
-    .site-cursor {
-      --cursor-scale: 1;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      display: block;
-      border-radius: 50%;
-      background: #fff;
-      mix-blend-mode: difference;
-      pointer-events: none;
-      z-index: 2147483647;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(var(--cursor-scale));
-      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
-      will-change: left, top, transform;
-    }
-
-    body.cursor-visible .site-cursor { opacity: 0.92; }
-    body.cursor-link .site-cursor { --cursor-scale: 1.8; }
-    body.cursor-press .site-cursor { --cursor-scale: 0.88; }
-  }
-</style>
+  </style>
 </head>
 <body>
-  <div class="read-progress" aria-hidden="true"></div>
-  <nav class="reader-topbar" aria-label="Essay navigation">
-    <a href="/writing/">Haein Jung / Writing</a>
-    <span>Reading</span>
-  </nav>
-  <div class="site-cursor" aria-hidden="true"></div>
-  <div class="page">
-    <a href="/writing/" class="back-link">← Writing</a>
-    <header>
-      <h1 class="article-title">Collision</h1>
-      <p class="article-subtitle">Collision, agentic servers, and constrained signaling as the next coordination layer.</p>
-      <p class="article-date">May 19, 2026</p>
-    </header>
-    <hr style="border:none;border-top:1px solid var(--line);margin:2.5rem 0;">
-    <div class="article-body">
-      <h2>1. The Internet as Organizing Principle</h2>
-
-      <p>The internet has never been one thing. It has been, at different moments in its history, a different organizing principle made infrastructure. Each transition produced not a replacement of what came before but an expansion of what was possible — a new layer of abstraction that allowed new forms of human activity to occur at scale. We are at the beginning of another such transition, and the question worth asking is not whether it will happen but what it will be organized around.</p>
-
-      <p>The first organizing principle was the document. Information that had previously required physical proximity — to a library, to a specialist, to an institution — became universally accessible through a protocol that could retrieve and display text. The genius of PageRank was to make this retrieval intelligent by observing the structure of human citation rather than the content of documents themselves. The internet became a library, and then a library with a very good index.</p>
-
-      <p>The second organizing principle was the application. The internet stopped being a place you read and became a place you acted. Platforms emerged. Commerce, communication, coordination, and creation all acquired digital surfaces. APIs became the connective tissue between these surfaces, allowing systems to compose and interoperate at a scale no single platform could sustain alone. The internet became infrastructure for doing things, not just finding things.</p>
-
-      <p>The third organizing principle is forming now. It is not a new type of content, and it is not a new type of application. It is a new type of coordination — specifically, the kind of coordination that current infrastructure cannot support: probabilistic, context-dependent, partially hidden, and temporally sensitive. The Collision Protocol is a proposal for what that infrastructure looks like.</p>
-
-      <hr>
-
-      <h2>2. The Limits of Declared Intent</h2>
-
-      <p>The limitation of current coordination infrastructure is structural, not incidental. Every dominant platform mediating human interaction today operates on the same foundational assumption: that intent must be declared before coordination can begin. You submit a profile. You state preferences. You send a request. The platform processes your declaration against a database of other declarations and returns a ranked set of possible matches. This is the architecture of LinkedIn, of recruiting platforms, of dating applications, of academic collaboration tools, of accelerator application systems. They differ in surface design. They are identical in underlying logic.</p>
-
-      <p>This architecture fails at a specific and important class of coordination: the kind where neither party has yet fully articulated what they are looking for, where the value of a potential interaction is not yet visible from either party's explicit state, and where premature declaration would impose a social cost sufficient to suppress the signal entirely. This is not a marginal case. It describes the conditions under which most consequential human coordination actually begins. The founding partnership, the transformative research collaboration, the career-defining introduction — these rarely emerge from explicit mutual declarations of compatibility. They emerge from contextual convergence: a shared intellectual trajectory, a moment of compatible ambiguity, a meeting where the value only becomes visible in the interaction itself.</p>
-
-      <p>Current infrastructure has no model for this. It can only process what has already been made explicit. Everything that exists in the space before explicit declaration — the evolving intent, the partially formed direction, the contextual readiness that has not yet crystallized into a stated preference — is invisible to the platforms nominally designed to support human coordination. The result is a systematic underproduction of the coordination events that matter most.</p>
-
-      <hr>
-
-      <h2>3. Collision, Not Matching</h2>
-
-      <p>The concept of collision addresses this gap directly. A collision is not a match. A match is a comparison between two static explicit representations. A collision is a dynamic event between two evolving contextual states — a moment when two entities, moving through a shared possibility space, reach a point of sufficient alignment that an interaction becomes warranted. The distinction is not semantic. It reflects a fundamentally different model of what coordination is and how it works.</p>
-
-      <p>Matching operates on declared states. Collision operates on trajectories. This matters because the most useful information about whether a coordination event will be valuable is often not contained in what each party has declared, but in the direction they are moving, the context in which they are currently operating, and the compatibility of their present positions rather than their historical averages. A person's LinkedIn profile is an average of their professional history, optimized for social legibility. Their current contextual state — what they are working on now, what they are uncertain about, what they are becoming — is almost entirely absent from that representation. Collision infrastructure is designed to operate on that absent information.</p>
-
-      <p>The mechanism by which collision operates on evolving contextual states without requiring their full disclosure is constrained signaling under prenegotiated exchange schemas. Two entities do not share their full internal states. Their agents agree in advance on the structure of the signals to be exchanged — the information-theoretic boundary of the interaction — and operate within those constraints. Coordination emerges not from complete mutual transparency but from the accumulation of bounded signals over time, building toward a threshold of sufficient confidence to justify explicit interaction. This preserves the productive ambiguity of early-stage coordination while still enabling the routing function that makes it possible.</p>
-
-      <hr>
-
-      <h2>4. The Three Primitives</h2>
-
-      <p>The infrastructure required to support this model rests on three primitives. The first is the agentic server. An agentic server is a persistent computational substrate representing an entity's evolving contextual state: its trajectory, memory, trust history, capability affordances, and hidden context. It is not a profile. A profile is a static, manually curated, third-party-hosted simplification of a person, optimized for the platform's engagement architecture. An agentic server is a living model, locally controlled, continuously updated from the person's own interactions and context, and capable of representing them in coordination spaces without requiring constant explicit input. The agentic server transforms personal context from a resource extracted by platforms into infrastructure owned by the person it describes.</p>
-
-      <p>The second primitive is the collision chamber. A collision chamber is a structured environment in which two or more agentic servers exchange constrained signals under a prenegotiated schema, with the purpose of determining whether a direct interaction would be mutually valuable. The chamber enforces the information boundaries agreed to in advance. It prevents either party from extracting more than the schema permits. It accumulates signals over time, updating its assessment of collision potential as the contextual states of the participants evolve. When the potential crosses a threshold, it surfaces the interaction to the relevant parties. When it does not, neither party has been exposed.</p>
-
-      <p>The third primitive is collision routing. Routing, in the current internet, is the process of directing a request to the appropriate endpoint. Collision routing is the process of identifying which entities, at which moment, in which contextual configuration, should be brought into contact. It operates over the population of agentic servers participating in a coordination space, continuously assessing the evolving distribution of collision potential and directing the formation of chambers when the conditions warrant it. Collision routing is what makes the protocol a layer of infrastructure rather than a feature of any particular application.</p>
-
-      <hr>
-
-      <h2>5. A Layer Above Applications</h2>
-
-      <p>The relationship between collision infrastructure and existing computational layers follows the same pattern as every previous infrastructure transition. Documents did not disappear when applications emerged. They became a substrate that applications were built on top of. APIs did not disappear when agents emerged. They became one of the capability surfaces that agents access. Collision does not replace APIs or applications. It adds a coordination layer above them: a layer that organizes not content or capability but the events of contact between entities with aligned contextual states.</p>
-
-      <p>This positioning has a specific implication. Collision infrastructure does not compete with any existing platform in the conventional sense. It operates at a different level of abstraction. A recruiting platform built on top of collision infrastructure would not merely be a better version of LinkedIn. It would be a qualitatively different kind of system: one that surfaces not the candidates whose declared profiles most closely match a declared job description, but the candidates whose current trajectories and contextual states suggest a match that neither party could have identified from explicit representations alone. The same reframing applies to research collaboration, to startup formation, to investment, to every domain where consequential coordination currently depends on either luck or the exhausting work of manually navigating possibility spaces.</p>
-
-      <hr>
-
-      <h2>6. Context Ownership</h2>
-
-      <p>The philosophical claim underlying the Collision Protocol is not merely that this infrastructure would be more efficient. It is that the current architecture of coordination platforms has imposed a specific and costly distortion on human coordination by forcing all of it through the narrow channel of explicit declaration. The cost is not only the friction of the declaration process itself. It is the systematic suppression of coordination that would be valuable but that neither party was willing to initiate explicitly, the premature crystallization of intent that had not yet fully formed, and the loss of the productive ambiguity that makes early-stage coordination possible.</p>
-
-      <p>Every platform that mediates human coordination today extracts personal context as a resource, processes it through an architecture optimized for engagement rather than coordination quality, and returns a ranked set of explicit suggestions that the user must then act on through further explicit declarations. The context that generates value in this system belongs to the platform. The person who produced it has no persistent representation in the system that survives their engagement with the platform's surface. When they leave, their context leaves with the platform's model of them, not with them.</p>
-
-      <p>Agentic servers invert this. Personal context becomes infrastructure that belongs to the person it describes, persists across platforms and coordination spaces, and is controlled by the person rather than by the systems that process it. This is not a privacy feature. It is an architectural shift in who owns the substrate of coordination. The Collision Protocol is built on the premise that coordination infrastructure designed to return context ownership to individuals will produce qualitatively better coordination outcomes than infrastructure designed to extract context as a platform asset — and that the difference will become increasingly legible as the capability of agentic systems to represent and reason over contextual states continues to develop.</p>
-
-      <hr>
-
-      <h2>7. Why Now</h2>
-
-      <p>The current moment is the right moment for this infrastructure for a specific reason. The model capability required to represent an entity's evolving contextual state with sufficient richness to support collision routing has only recently become available. Trusted execution environments capable of protecting hidden state during computation are now deployed at scale. Agent protocols enabling standardized communication between autonomous agents are reaching maturity. The economic primitives for machine-native coordination are being established. Each of these developments is individually significant. Together, they constitute the technical precondition for building a coordination layer that was not previously buildable.</p>
-
-      <p>The choices made now about the architecture of that layer will be durable. Infrastructure layers are not easily replaced once established. The protocols, economic models, privacy architectures, and coordination primitives that are built into the first generation of collision infrastructure will shape the experience of coordination for a generation. The Collision Protocol is a proposal that those choices be made with the full recognition of what is at stake: not a better matching algorithm, not a smarter recommendation system, but the foundational infrastructure through which consequential human coordination will increasingly occur. That infrastructure should be designed to restore to people the agency over their own context that the current generation of platforms has systematically removed — not as a regulatory concession, but as a first principle of its architecture.</p>
-    </div>
-    <footer class="site-footer">© 2026 Haein Jung</footer>
-  </div>
-<script>
-    (() => {
-      const progress = document.querySelector(".read-progress");
-      const updateProgress = () => {
-        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        const width = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-        if (progress) progress.style.width = Math.min(width, 100) + "%";
-      };
-      updateProgress();
-      window.addEventListener("scroll", updateProgress, { passive: true });
-      window.addEventListener("resize", updateProgress);
-    })();
-  </script>
-
+  <main>
+    <h1>This writing is private.</h1>
+    <p>You are being redirected back to the writing index.</p>
+    <p><a href="/writing/">Return to writing</a></p>
+  </main>
   <script>
-    (() => {
-      const media = window.matchMedia("(hover: hover) and (pointer: fine)");
-      const body = document.body;
-      const cursor = document.querySelector(".site-cursor");
-      if (!cursor) return;
-
-      const clearState = () => {
-        body.classList.remove("cursor-visible", "cursor-link", "cursor-press");
-      };
-
-      const syncPointerMode = () => {
-        if (media.matches) {
-          body.classList.add("cursor-enabled");
-        } else {
-          body.classList.remove("cursor-enabled");
-          clearState();
-        }
-      };
-
-      const updateInteractiveState = (target) => {
-        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
-        body.classList.toggle("cursor-link", Boolean(interactive));
-      };
-
-      syncPointerMode();
-      if (media.addEventListener) media.addEventListener("change", syncPointerMode);
-      else if (media.addListener) media.addListener(syncPointerMode);
-
-      window.addEventListener("mousemove", (event) => {
-        if (!media.matches) return;
-        cursor.style.left = event.clientX + "px";
-        cursor.style.top = event.clientY + "px";
-        body.classList.add("cursor-visible");
-        updateInteractiveState(event.target);
-      }, { passive: true });
-
-      window.addEventListener("mousedown", () => {
-        if (media.matches) body.classList.add("cursor-press");
-      }, { passive: true });
-
-      window.addEventListener("mouseup", () => {
-        body.classList.remove("cursor-press");
-      }, { passive: true });
-
-      document.addEventListener("mouseleave", () => {
-        clearState();
-      });
-    })();
+    window.location.replace("/writing/");
   </script>
 </body>
 </html>

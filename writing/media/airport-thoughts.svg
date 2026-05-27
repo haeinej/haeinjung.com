@@ -1,0 +1,19 @@
+<svg width="900" height="1200" viewBox="0 0 900 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="1200" fill="#07111F"/>
+  <rect x="40" y="40" width="820" height="1120" rx="24" fill="url(#bg)"/>
+  <path d="M118 976C187 870 267 817 357 817C465 817 527 939 624 939C686 939 740 912 782 872V1092H118V976Z" fill="#F5F1E8" fill-opacity="0.08"/>
+  <text x="120" y="190" fill="#F5F1E8" font-family="Instrument Sans, sans-serif" font-size="36" font-weight="700" letter-spacing="8">JABNYEOMDEUL</text>
+  <text x="120" y="600" fill="#F5F1E8" font-family="Instrument Sans, sans-serif" font-size="112" font-weight="600">
+    <tspan x="120" dy="0">공항만</tspan>
+    <tspan x="120" dy="120">가면 내가</tspan>
+  </text>
+  <text x="120" y="980" fill="#C9C0B3" font-family="Instrument Sans, sans-serif" font-size="34" font-weight="500">
+    Text-only note from April 13, 2026
+  </text>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="72" x2="840" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1729"/>
+      <stop offset="1" stop-color="#09101B"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나는 얼마나 많은 인연들을 무심히 지나쳐 왔을까? — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fbfaf7;
+      --ink: #17130f;
+      --muted: rgba(23, 19, 15, 0.68);
+      --soft: rgba(23, 19, 15, 0.44);
+      --line: rgba(23, 19, 15, 0.14);
+      --line-strong: rgba(23, 19, 15, 0.32);
+      --accent: #050914;
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+    }
+
+    .reader-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      padding: 14px clamp(20px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .reader-topbar a { color: var(--ink); text-decoration: none; }
+    .reader-topbar span { color: var(--soft); text-align: right; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 92px) 24px 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 48px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 34px;
+      margin-bottom: 42px;
+    }
+
+    .article-title {
+      max-width: 800px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 4.1rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.96;
+      margin: 0 0 18px;
+      word-break: keep-all;
+    }
+
+    .article-subtitle {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(0.94rem, 1.25vw, 1rem);
+      line-height: 1.52;
+      margin: 0 0 16px;
+      word-break: keep-all;
+    }
+
+    .article-date {
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+
+    .article-hero {
+      margin: 0 0 2.4rem;
+      border: 1px solid var(--line);
+      background: #f1eee7;
+      overflow: hidden;
+    }
+
+    .article-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+
+    .article-hero--wide img {
+      aspect-ratio: auto;
+      object-fit: contain;
+      background: #f1eee7;
+    }
+
+    .article-body {
+      font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+      line-height: 1.78;
+      word-break: keep-all;
+    }
+
+    .article-body p { margin: 0 0 1.35em; }
+
+    .article-body hr {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--line-strong);
+      margin: 2.8em 0;
+    }
+
+    .source-note {
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .source-note a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled,
+      body.cursor-enabled * { cursor: none; }
+
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        display: block;
+        border-radius: 50%;
+        background: #fff;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        z-index: 2147483647;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      body.cursor-visible .site-cursor { opacity: 0.92; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+
+    @media (max-width: 720px) {
+      .reader-topbar { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .page { padding: 44px 20px 60px; }
+      .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
+      .article-body { font-size: 0.96rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="read-progress" aria-hidden="true"></div>
+  <nav class="reader-topbar" aria-label="Essay navigation">
+    <a href="/writing/#korean">Haein Jung / 잡념들</a>
+    <span>Reading</span>
+  </nav>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/#korean" class="back-link">← 잡념들</a>
+    <header>
+      <h1 class="article-title">나는 얼마나 많은 인연들을 무심히 지나쳐 왔을까?</h1>
+      <p class="article-subtitle">여덟시까지는 오후 같은데 왜 아홉시부터는 밤 같을까? Broken Korean.. 점점 한국어로 글 쓰는 것도 뭔가 부자연스럽다…</p>
+      <p class="article-date">December 2, 2025</p>
+    </header>
+
+    <figure class="article-hero">
+      <img src="/writing/media/missed-connections.jpg" alt="나는 얼마나 많은 인연들을 무심히 지나쳐 왔을까?">
+    </figure>
+
+    <div class="article-body">
+      <p>여덟시까지는 오후 같은데 왜 아홉시부터는 밤 같을까?</p>
+      <p>Broken Korean.. 점점 한국어로 글 쓰는 것도 뭔가 부자연스럽다…</p>
+      <p>비행기만 타면 괜히 글을 쓰고 싶어진다</p>
+      <p>몇자 두드리는게 뭐 대단하다고 평소에는 쓰지도 않다가</p>
+      <p>책 몇장 넘기고 컴퓨터를 열고 글을 쓴다.</p>
+      <p>나는 비행기 창가석을 선호하는데, 특별한 이유는 없지만 구석에서 머리를 기대고 쉴 수 있어서, 나만의 작은 코너가 만들어지는게 좋다.</p>
+      <p>사람은 누구나 다양한 페르소나가 있지만</p>
+      <p>가족들과 있을 때 나의 페르소나는 정말 조용한 편이다.</p>
+      <p>몇 사촌과 고모가 기가 너무 쎄서 에너지가 눌리는 것도 있지만</p>
+      <p>꼭 그런게 아니라도 집에 오면 말수가 없어진다.</p>
+      <p>밖에서는 나름 활발한 편인데 집이라는 공간, 혹은 집이라고 인식하는 사람들과 함께 있으면 사색적으로 변하는 것 같다.</p>
+      <p>공백을 채우기 위해 애써 하는 말들이 참 싫었다.</p>
+      <p>누가 질문하는 것도 딱히 달갑진 않다.</p>
+      <p>조용히 가고 싶은데…</p>
+      <p>혼란스러운 고모</p>
+      <p>저 사람은 정신 구조가 어떨까..</p>
+      <p>저 사람은 왜 저런 생각을 할까.. 곰곰이 생각해본다.</p>
+      <p>내가 평화와 조용함, 고요함을 추구하는 것이 고고한 삶이라 믿었는데 만약 나의 믿음이 사실이 아니였다면?</p>
+      <p>어떤 이는 이런 저런 말들을, 특별히 이유없이 하는게 관성이고 즐거움이라면</p>
+      <p>그런 두 사람이 만나면 어떻게 차 안에서 2시간을 보내야 하지?</p>
+      <hr>
+      <p>굳이 이야기하자면 고모부도 나 같은 성향을 지닌 듯 하다.</p>
+      <p>우리 고모부는 신부님 같은 사람이다.</p>
+      <p>퇴직 후에는 매일 5시에 일어나 성당을 가고, 강아지 산책을 하고, 요리하고, 청소하고</p>
+      <p>조용하고 잔잔한 사람이다.</p>
+      <p>어렸을 때는 그런 사람이 왜 고모를 만나 결혼을 해서 30년 넘게 가정을 이루어 살고 있을까.. 의문이 진심으로 들기도 했었는데..</p>
+      <p>여튼 소셜라이저 고모와 달리 조지아에 딱히 친구도 없던 차에 나와 고모부는 그렇게 많은 시간을 함께 보내게 되었다.</p>
+      <p>특별히 할 얘기도 없어서 나는 고모에 대해 이것저것 물어보았다.</p>
+      <p>첫 질문은 왜 고모였는지 여쭤보니</p>
+      <p>우문현답이었는지,</p>
+      <p>그래도 너희 고모는 술, 마약도 안하고 돈을 헤프게 쓰지 않잖아. 문신도 없고.</p>
+      <p>한국에서 첫눈에 반했다고, 물론 당시에 화장이 짙었고, 나중에 지운 얼굴을 보고 제법 달라서 깜짝 놀라긴 했지만..</p>
+      <p>한국에서부터 나는 고모 아파트를 치우곤 했어. 지금도 그렇지만.</p>
+      <p>다른 남편들은 보면 짜증나겠지만 나는 치우고 정리하는 걸 좋아하는 성격이고, 고모는 정반대였지</p>
+      <p>젊을 때는 나도 가끔 답답하기도 했지만 지금은 맞추고 살아.</p>
+      <p>결혼은 완벽할 수 없고 나도 완벽하지 않으니 나 또한 완벽함을 바라는 것은 사치지.</p>
+      <p>나는 말했다.</p>
+      <p>아 그럼 둘이 보완하면서 살아가는 거네요.</p>
+      <p>고모부는 한참 웃으면서</p>
+      <p>그렇게 볼 수도 있겠지라고 말씀하셨다.</p>
+      <p>그러고서는 이혼하는 사람들도 참 많고, 허니문 기간이 지나면 식은 뜨거움에 실망하는 사람들도 많은데 여태껏 너희 고모는 내 곁에 있었고</p>
+      <p>그런 믿음에 함께 맞춰가는거지..</p>
+      <p>나는 어쩌면 완벽함을 바라보고 살았던 것 같다.</p>
+      <p>문득 머릿속에 꽂힌게, 어렸을 적 별명이 까칠이였다.</p>
+      <p>왜 그랬을까 다시 돌아보면,</p>
+      <p>혼자만의 기준이 너무 높았던 것이었다.</p>
+      <p>마음에 안 들면 하지 말아야지, 내 성에 안차면 기분이 나빴고 우울했다.</p>
+      <p>괜히 애매한거, 흐릿한 경계 이런걸 참 싫어했던 것 같다.</p>
+      <p>누구나 그렇지만 명료함을 쫓았고, 중간을 견디기를 답답해했다.</p>
+      <p>근데 관계라는게 그러기가 쉽지가 않다.</p>
+      <p>이런 성향 탓인지 맞지 않은 환경 속에서 견디기 힘들어했고,</p>
+      <p>나 자신의 인간에 대한 허들을 조금 낮추기를 시도해보지도 않았다.</p>
+      <p>맞다. 나도 완벽하지 않다.</p>
+      <p>여태 고치지 못한 다리 꼬는 습관과 밥 먹을 때 영상보지 않는 것 부터 시작하여 나조차도 사소하지만 마음에 들지 않는 점들도 참 많은데</p>
+      <p>나는 나한테도, 타인에게도 너무 높은 기준을 적용하고 있었다.</p>
+      <p>그렇다고 실제 내 삶이 이상과 부합하는 것도 아니고 노력을 더 하는 것도 아닌데,</p>
+      <p>그저 까칠이로 계속 살아가고 있었다.</p>
+      <p>조금 너그러워져도 될 것 같다.</p>
+      <p>환영하는 사람이 되고 싶었다. 최소한 내가 지금 사랑하는 사람들부터라도, 만났을 때 환영받는 느낌이 들게 해주고 싶다. 세상은 이토록 혼란스러운데 누구 하나라도 헷갈리지 않게 환대해준다면, 불완전함을 껴안아준다면 위로가 되지 않을까.</p>
+      <p>작년에는 수동적인 삶을 살다보니, 자유로움을 갈망했었고,</p>
+      <p>자유로워지니 처음으로 놓여진 자유를 어떻게 조각해야하지 몰라 혼란스러워 했었다.</p>
+      <p>젊음을 믿고 겁 없이 돌아다닌지 1년 가까이 되어 간다.</p>
+      <p>처음과 달리 이제는 혼자 좋아하는 것을 해도 외롭지 않다.</p>
+      <p>고모가 이번에 유독 많이 하시던 말처럼.. 만남의 축복.. 이 찾아올거라는 믿음과</p>
+      <p>온전히 나로 존재하는 법을 배워가고 있기에,</p>
+      <p>또한 이미 사랑하는 사람들과 그들과의 기억들이 가슴속에 남아 있기에.</p>
+      <p>113035</p>
+      <p>산타 크루즈에서 샌프란으로 돌아오는 어느날 저녁 칼트레인에서</p>
+      <p>기업은 인간의 욕망을 자극하는 기술을 상품화시켜 사람들에게 판매한다.</p>
+      <p>쾌락 (지루함을 이기는 것), 연결에 대한 욕구, 신속함, 효율성 등 기존의 인간이 의식적으로 노력해야하는 과정들을 단순화시키는 기술을 개발하여 제공한다.</p>
+      <p>사람들은 소비자로서 그것을 돈으로 구매하고 그로써 시간과 물리적, 정신적 에너지 소모를 극복한다.</p>
+      <p>세상은 기술의 발전으로서 급격하게 변하고 우리는 그 어느 때보다 신속한 세상에서 살아가고 있다.</p>
+      <p>컴퓨터가 상용화되지 않았던 지난 30년 전을 떠올려 보자.. 우리는 수기로 모든 장부를 정리해야 했었고, 적는데 들이는 시간 뿐만 아니라, 물리적 장소의 제약, 또한 이미 기록된 내용을 다시 찾아보기 위해서도 많은 시간과 노력이 필요했었다. 오늘날은 컴퓨터로 1분이면 끝마칠 일을 과거의 우리는 며칠씩 시간과 공을 들여 일을 하곤 했다.</p>
+      <p>기술은 우리가 지난날 들인 노력들을 무가치해보이게 만드는 효과가 있다.</p>
+      <p>나는 가끔 이런 부분에서 니힐리즘, 혹은 회의감을 느끼는데</p>
+      <p>아, 지금 내가 정성을 쏟아 하고 있는 일이 미래에는 고민조차 할 필요가 없는 간단한 업무라면?…</p>
+      <p>그렇다면 일은 어떤 의미를 지니는가.</p>
+      <p>나아가, 기술은 문제를 해결할 수 있지만, 그로써 파생되는 새로운 문제가 존재한다. 양상은 달라졌지만 만약 그로써 우리가 경험하는 정신적 피로의 수준이 훨씬 높다면, 그렇다면 과연 우리는 진전했다고 볼 수 있는가?</p>
+      <p>예를 들어, 소셜미디어는 연결성에 대한 인간의 욕구를 충족시키고, 소통의 부재의 문제를 해결 위해 개발되었다.</p>
+      <p>그로써 우리는 세계 어디에서 친구 혹은 지인들의 소식을 접할 수 있게 되었다.</p>
+      <p>하지만 그로부터 파생되는 문제들을 우리는 오늘날 누구보다 뼈저리게 느끼고 있다.</p>
+      <p>지나친 온라인 의존, 건강 문제, 정신적 피로도..</p>
+      <p>오늘날의 과연 소셜미디어가 존재하지 않던 몇십년 전보다 행복하다고 할 수 있는가?</p>
+      <p>최근 들어 관념으로서의 ‘일‘ 에 대해 자주 고민을 한다.</p>
+      <p>본질적으로 인간의 직업과 일은 문제를 해결하는 과정이라고 생각을 하는데,</p>
+      <p>일을 통해 상품이나 서비스로서 개발한 인간의 기술이 피상적으로 해결해주는 것처럼 보여도 장기적으로 인류의 문제를 악화시키는 것일수도 있다는 생각을 자주 한다. 세상은 결국 늘어나는 엔트로피 때문에 증가하는 무질서도와 감소하는 유용성의 경향에 따라 디스토피아적으로 변하게 되는 걸까?</p>
+      <p>그렇다면 우리는 어디에서 ‘일’에 대한 의미를 찾아야 할까.</p>
+      <p>과거의 일들이 현재 너무나 쉽게 해결될 수 있는 것이라 부질없다고 생각하기 쉽지만, 그럼에도 우리는 과정에서 답을 찾아야 한다고 생각한다.</p>
+      <p>최근의 나는 오늘날을 살면서 과거에 살아도 괜찮다는 생각이 든다.</p>
+      <p>AI와 인스타그램을 사용하지 않고도, 천천히 늦게 과거의 방식대로, 물론 더 쉽게 해결할 수 있는 방법이 있겠지만 행위의 의미를 찾는다면 그 또한 충분히 행복한 삶이 아니겠는가?</p>
+      <p>따라서 나는 어떤 과정에서 가장 만족감과 행복감을 느끼는가?</p>
+      <p>그것이 본질적으로 중요한 질문이라 생각한다.</p>
+      <p>오늘날의 우리는 현재와 과거의 방식 중에서 무엇이든 선택할 수 있는 여건이 된다.</p>
+      <p>그렇기 때문에 무엇보다 중요한 것은, 의식적으로 본인이 생각하는 행복이라는 가치에 부합하는 방법과 기술을 찾아서 자신만의 일을 하는 것이다.</p>
+      <p>기술과 효율성이 우세한 가치라고 믿어지는 세상에서 휘둘리지 않고 의식적으로 본인을 위한 선택을 하는 것, 그리고 그것을 고수하는 것.</p>
+      <p>과거의 나는 기술을 빠르게 받아들이면서 무언가 문제가 있다고 무의식적으로 느꼈고, 그것을 통제해야 하는 대상으로 다루었던 것 같다.</p>
+      <p>하지만 지금은 조금 다른 선택과 결정의 관점에서 바라보는 것 같다.</p>
+      <p>건강하고 만족스러운 삶을 위해서 기술을 나를 위한 최선의 방식으로 사용하길 선택하는 것이 필요하다.</p>
+      <p>사르트르의 말처럼, 앙가제, 앙가제하는 삶이 필요하다.</p>
+      <p>결정하고 선택하는 나의 삶을 살고 싶다.</p>
+      <p>예를 들어, 나는 인스타그램이 내게 제공하는 여러가지 가치들에 굉장한 만족과 쾌락을 느끼곤 했었다.</p>
+      <p>첫째, 나는 내가 좋아하는 사진들, 의미 있는 순간들을 포착해 나만의 프로필과 공간을 만드는 것을 참 좋아한다.</p>
+      <p>무언가를 아름답게 만드는 것에서 만족감을 느끼는 내 성향 탓에 더욱이 인스타그램에 애착이 갔던 것 같다.</p>
+      <p>또한 내가 좋아하는 것을 공유하고 그로써 나뿐만 아니라 타인에게 검증을 받는다.</p>
+      <p>올리는 행위로서 내 생각안에 머무르는 것이 아니라 그것이 내 정체성을 형성하고 입증하는 하나의 의식처럼 작용한다고 생각한다.</p>
+      <p>하지만 이것이 때론 족쇄가 되기도 하는 것 같다. 목적전치.. 외부에서 구하는 인정에 익숙해져 의존적으로 변하는 경우도 있는 듯 하다.</p>
+      <p>둘째, 인스타그램 메신저를 통해 넓고 얕은 인간관계를 쉽게 유지할 수 있다. 별로 친하지 않은 지인들이 어떻게 살아가고 있는지 쉽게 확인이 가능하다. 인스타그램이 존재하기 이전에는 이렇게까지 넓은 폭의 관계를 유지하기 어려웠던 것 같다.</p>
+      <p>그로써 파생되는 문제는, 알고 싶지 않은 사람들과의 관계를, 혹은 지나치는 인연들과의 관계를 애써 기술로써 붙여 연결하면서 정신적 공간을 차지한다는 것. 나라는 사람은 깊은 인간관계에서 의미를 찾는 편인데, 과다한 연결로 되려 내게 더 큰 기쁨과 의미를 가져다주는 진짜 관계, 현실에 놓인 관계들에 집중할 에너지마저 소비해버린다는 점이다. 나아가 인간을 대체 가능한 것으로 만들어버린다는 것. 너무나 쉽게 연결되고 너무나 쉽게 차단해버릴 수 있으니 관계가 소모적이라는 생각까지 든다. 가장 순수하고 아름다운 관계들은 오히려 초등 학창시절 만난 친구들, 싫어도 무조건 같은 반과 공간에서 살아남아야 하고, 그렇게 지지고 볶으면서 어떻게 사람들과 공존하는지, 함께 살아가는 법을 배웠던 것 같다.</p>
+      <p>무엇보다 항시로 연결된다는 것에 대한 피로감. 연결되지 않을 자유가 있는 것 같다.</p>
+      <p>그리고 그를 위한 선택을 해야 한다.</p>
+      <p>샤잠에 대한 생각을 한다.</p>
+      <p>산타 크루즈의 한 빈티지 샵에서 정말 좋은 노래를 들었다.</p>
+      <p>무의식적으로 나는 샤잠을 눌렀고, 너무나 편하게 나는 궁금했던 음악이</p>
+      <p>Phantogram 이라는 밴드의 Fall in Love 라는 노래라는 사실을 알아낼 수 있었다.</p>
+      <p>하지만 문득, 만약 이런 기술이 존재하지 않았다면 나는 직원에게 노래 제목이 무엇인지 물어보지 않았을까 하는 생각이 든다.</p>
+      <p>그 과정에서 직원을 통해 그와 비슷한 다른 좋은 음악들을 알아낼 수도 있었을테고, 그의 음악 취향을 칭찬하며 새로운 친구가 될 수도 있었겠지. 편리함은 인간의 타인에 대한 의존도를 낮추고,  더욱 개별적인 존재로 만든다. 그로써 인간은 소외되고 외로움을 느낀다.</p>
+      <p>세상은 결코 혼자 살아갈 수 있는 곳이 아닌데 기술은 그럴 듯하게 혼자서도 괜찮을 거라고 사람들을 유혹한다.</p>
+      <p>문득 상상해본다.</p>
+      <p>나는 지금까지 얼마나 많은 인연들과 특별한 순간들을 지나쳐 왔을까?</p>
+    </div>
+
+    <div class="source-note">
+      <p>Originally published on Naver.</p>
+      <p>Source: <a href="https://blog.naver.com/suninjunn/224095392918" target="_blank" rel="noopener noreferrer">https://blog.naver.com/suninjunn/224095392918</a></p>
+    </div>
+
+    <footer class="footer">© 2026 Haein Jung</footer>
+  </div>
+
+  <script>
+    (() => {
+      const progress = document.querySelector('.read-progress');
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const width = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        if (progress) progress.style.width = Math.min(width, 100) + '%';
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const body = document.body;
+      const cursor = document.querySelector('.site-cursor');
+      if (!cursor) return;
+
+      const clearState = () => {
+        body.classList.remove('cursor-visible', 'cursor-link', 'cursor-press');
+      };
+
+      const syncPointerMode = () => {
+        if (media.matches) {
+          body.classList.add('cursor-enabled');
+        } else {
+          body.classList.remove('cursor-enabled');
+          clearState();
+        }
+      };
+
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
+        body.classList.toggle('cursor-link', Boolean(interactive));
+      };
+
+      syncPointerMode();
+      if (media.addEventListener) media.addEventListener('change', syncPointerMode);
+      else if (media.addListener) media.addListener(syncPointerMode);
+
+      window.addEventListener('mousemove', (event) => {
+        if (!media.matches) return;
+        cursor.style.left = event.clientX + 'px';
+        cursor.style.top = event.clientY + 'px';
+        body.classList.add('cursor-visible');
+        updateInteractiveState(event.target);
+      }, { passive: true });
+
+      window.addEventListener('mousedown', () => {
+        if (media.matches) body.classList.add('cursor-press');
+      }, { passive: true });
+
+      window.addEventListener('mouseup', () => {
+        body.classList.remove('cursor-press');
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        clearState();
+      });
+    })();
+  </script>
+</body>
+</html>

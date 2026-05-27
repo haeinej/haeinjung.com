@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끈에 대해서 — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fbfaf7;
+      --ink: #17130f;
+      --muted: rgba(23, 19, 15, 0.68);
+      --soft: rgba(23, 19, 15, 0.44);
+      --line: rgba(23, 19, 15, 0.14);
+      --line-strong: rgba(23, 19, 15, 0.32);
+      --accent: #050914;
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+    }
+
+    .reader-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      padding: 14px clamp(20px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .reader-topbar a { color: var(--ink); text-decoration: none; }
+    .reader-topbar span { color: var(--soft); text-align: right; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 92px) 24px 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 48px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 34px;
+      margin-bottom: 42px;
+    }
+
+    .article-title {
+      max-width: 800px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 4.1rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.96;
+      margin: 0 0 18px;
+      word-break: keep-all;
+    }
+
+    .article-subtitle {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(0.94rem, 1.25vw, 1rem);
+      line-height: 1.52;
+      margin: 0 0 16px;
+      word-break: keep-all;
+    }
+
+    .article-date {
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+
+    .article-hero {
+      margin: 0 0 2.4rem;
+      border: 1px solid var(--line);
+      background: #f1eee7;
+      overflow: hidden;
+    }
+
+    .article-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+
+    .article-hero--wide img {
+      aspect-ratio: auto;
+      object-fit: contain;
+      background: #f1eee7;
+    }
+
+    .article-body {
+      font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+      line-height: 1.78;
+      word-break: keep-all;
+    }
+
+    .article-body p { margin: 0 0 1.35em; }
+
+    .article-body hr {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--line-strong);
+      margin: 2.8em 0;
+    }
+
+    .source-note {
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .source-note a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled,
+      body.cursor-enabled * { cursor: none; }
+
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        display: block;
+        border-radius: 50%;
+        background: #fff;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        z-index: 2147483647;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      body.cursor-visible .site-cursor { opacity: 0.92; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+
+    @media (max-width: 720px) {
+      .reader-topbar { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .page { padding: 44px 20px 60px; }
+      .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
+      .article-body { font-size: 0.96rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="read-progress" aria-hidden="true"></div>
+  <nav class="reader-topbar" aria-label="Essay navigation">
+    <a href="/writing/#korean">Haein Jung / 잡념들</a>
+    <span>Reading</span>
+  </nav>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/#korean" class="back-link">← 잡념들</a>
+    <header>
+      <h1 class="article-title">끈에 대해서</h1>
+      <p class="article-subtitle">사람과 사람 사이에는 끈이 있다고 생각한다. 길이도 다르고, 굵기도 다르고, 꼬이는 정도도 모두 다르다.</p>
+      <p class="article-date">January 27, 2022</p>
+    </header>
+
+    <figure class="article-hero article-hero--wide">
+      <img src="/writing/media/on-strings.png" alt="끈에 대해서">
+    </figure>
+
+    <div class="article-body">
+      <p>사람과 사람 사이에는 끈이 있다고 생각한다.</p>
+      <p>길이도 다르고, 굵기도 다르고, 꼬이는 정도도 모두 다르다.</p>
+      <p>그리고 우리는 자신의 끈을 어영부영 부여잡고 상대의 끈을 향해 조금씩 걸어간다.</p>
+      <p>걷다가 걷다가</p>
+      <p>꼬임을 겪기도 하고, 약간의 끊어지는 순간들도 있을 것이다.</p>
+      <p>몇 번의 만남을 가지고 몇 번의 헤어짐을 거치면</p>
+      <p>상대와의 보이지 않는 끈의</p>
+      <p>실체가 드러난다.</p>
+      <p>많은 사람들은 끈의 끊어짐을 두려워한다.</p>
+      <p>그와 맞지 않는 것을 알면서도</p>
+      <p>혼자됨이 두려워, 무엇과 연결되지 않음이 두려워</p>
+      <p>억지로 묶으려고 아등바등 산다.</p>
+      <p>joan miro, hope of a condemned man</p>
+      <p>정말 어렸을 때에는 난 그랬다.</p>
+      <p>정저지와</p>
+      <p>학교라는 협소한 사회 속에서 이상을 좇았고,</p>
+      <p>실망의 여유도 없이</p>
+      <p>맞지 않는 관계라는 걸 알면서도 좋은 척을 해야 했었다.</p>
+      <p>나의 이런 생각들을</p>
+      <p>나를 향해 누군가도 하고 있지 않을까 싶어</p>
+      <p>두려웠다.</p>
+      <p>누군가를 향한 사회의 잣대를 멀리 넘어 볼 때에면</p>
+      <p>스스로 수긍하는 나의 모습이 부끄러웠다.</p>
+      <p>그것이 마냥 허상이라는 것을 알면서도</p>
+      <p>사회적 압박에 설득돼 가는 줏대 없는 내가 한심스러웠다.</p>
+      <p>혼자있는 공간 속에서는</p>
+      <p>내 언어에, 나의 행동에 누군가 고통받고 있진 않았을까 자책했다.</p>
+      <p>변화는 없었다.</p>
+      <p>항상 생각에서 끝났고, 항상 부끄러웠다.</p>
+      <p>그러다 한 선생님의 이야기를 들었다.</p>
+      <p>그 분은 시인 윤동주에 관해 꽤나 비판적인 분이셨다.</p>
+      <p>대학 시절 선배에게 이런 이야기를 했다고 하셨다.</p>
+      <p>‘윤동주가 이육사와 같이 적극적 독립운동 행보를 보인 것도 아니고, 그렇다고 저항적 시를 강렬하게 쓴 것도 아닌데 왜 사람들은 이렇게 좋아할까요?’</p>
+      <p>그러자 이런 선배의 답변을 들으셨다 한다.</p>
+      <p>‘세상의 모든 사람들이 자신의 행동에 부끄러움을 느끼진 않아요.’</p>
+      <p>그리하여 나는</p>
+      <p>혼자 고통받고, 수치스러우며, 부끄러웠던 껍질을 벗어낼 수 있었다.</p>
+      <p>부끄러움이라는 것이 나의 트리거가 되어 줄 것이라는 확신을 가졌고,</p>
+      <p>되려 인위적이었던 내 관계의 무게를 덜어내고 싶었다.</p>
+      <p>인간 관계를 끈으로 형상화시켜 이해하려고 노력했지만</p>
+      <p>스스로의 관계에 미숙한 내가 이를 완전히 알아가긴 어려웠다.</p>
+      <p>앞으로도 새로운 문턱들이 많이 기다리고 있을 것이다.</p>
+      <p>이 끈이 어떤 방향을 나아갈지는 아무도 모른다.</p>
+      <p>그저 키를 쥐고 있는 나를 믿을 뿐이다.</p>
+    </div>
+
+    <div class="source-note">
+      <p>Originally published on Naver.</p>
+      <p>Source: <a href="https://blog.naver.com/suninjunn/222633108028" target="_blank" rel="noopener noreferrer">https://blog.naver.com/suninjunn/222633108028</a></p>
+    </div>
+
+    <footer class="footer">© 2026 Haein Jung</footer>
+  </div>
+
+  <script>
+    (() => {
+      const progress = document.querySelector('.read-progress');
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const width = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        if (progress) progress.style.width = Math.min(width, 100) + '%';
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const body = document.body;
+      const cursor = document.querySelector('.site-cursor');
+      if (!cursor) return;
+
+      const clearState = () => {
+        body.classList.remove('cursor-visible', 'cursor-link', 'cursor-press');
+      };
+
+      const syncPointerMode = () => {
+        if (media.matches) {
+          body.classList.add('cursor-enabled');
+        } else {
+          body.classList.remove('cursor-enabled');
+          clearState();
+        }
+      };
+
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
+        body.classList.toggle('cursor-link', Boolean(interactive));
+      };
+
+      syncPointerMode();
+      if (media.addEventListener) media.addEventListener('change', syncPointerMode);
+      else if (media.addListener) media.addListener(syncPointerMode);
+
+      window.addEventListener('mousemove', (event) => {
+        if (!media.matches) return;
+        cursor.style.left = event.clientX + 'px';
+        cursor.style.top = event.clientY + 'px';
+        body.classList.add('cursor-visible');
+        updateInteractiveState(event.target);
+      }, { passive: true });
+
+      window.addEventListener('mousedown', () => {
+        if (media.matches) body.classList.add('cursor-press');
+      }, { passive: true });
+
+      window.addEventListener('mouseup', () => {
+        body.classList.remove('cursor-press');
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        clearState();
+      });
+    })();
+  </script>
+</body>
+</html>
