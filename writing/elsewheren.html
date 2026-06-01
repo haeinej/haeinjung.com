@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>elsewheren — Haein Jung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fbfaf7;
+      --paper-soft: #f1eee7;
+      --ink: #17130f;
+      --muted: rgba(23, 19, 15, 0.68);
+      --soft: rgba(23, 19, 15, 0.44);
+      --line: rgba(23, 19, 15, 0.14);
+      --line-strong: rgba(23, 19, 15, 0.32);
+      --accent: #050914;
+      --sans: "Instrument Sans", sans-serif;
+      --serif: "Instrument Serif", serif;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .read-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+      z-index: 1000;
+    }
+
+    .reader-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      padding: 14px clamp(20px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(251, 250, 247, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .reader-topbar a { color: var(--ink); text-decoration: none; }
+    .reader-topbar span { color: var(--soft); text-align: right; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 92px) 24px 72px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 48px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .back-link:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 34px;
+      margin-bottom: 42px;
+    }
+
+    .article-title {
+      max-width: 800px;
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 4.1rem);
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 0.96;
+      margin: 0 0 18px;
+    }
+
+    .article-subtitle {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(0.94rem, 1.25vw, 1rem);
+      line-height: 1.52;
+      margin: 0 0 14px;
+      font-style: italic;
+    }
+
+    .article-byline {
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    .article-date {
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .article-body {
+      font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+      line-height: 1.78;
+    }
+
+    .article-body p { margin: 0 0 1.35em; }
+
+    .article-body hr {
+      width: 100%;
+      border: 0;
+      border-top: 1px solid var(--line-strong);
+      margin: 2.8em 0;
+    }
+
+    .article-body em { font-style: italic; }
+
+    .article-figure {
+      margin: 2rem 0 2.4rem;
+      border: 1px solid var(--line);
+      background: var(--paper-soft);
+      overflow: hidden;
+    }
+
+    .article-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .source-note {
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .source-note a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.16em;
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      color: var(--soft);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .site-cursor { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      body.cursor-enabled,
+      body.cursor-enabled * { cursor: none; }
+
+      .site-cursor {
+        --cursor-scale: 1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        display: block;
+        border-radius: 50%;
+        background: #fff;
+        mix-blend-mode: difference;
+        pointer-events: none;
+        z-index: 2147483647;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(var(--cursor-scale));
+        transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1), opacity 140ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      body.cursor-visible .site-cursor { opacity: 0.92; }
+      body.cursor-link .site-cursor { --cursor-scale: 1.8; }
+      body.cursor-press .site-cursor { --cursor-scale: 0.88; }
+    }
+
+    @media (max-width: 720px) {
+      .reader-topbar { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .page { padding: 44px 20px 60px; }
+      .article-title { font-size: clamp(2.15rem, 12vw, 3.35rem); }
+      .article-body { font-size: 0.96rem; }
+      .article-figure { margin: 1.7rem 0 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="read-progress" aria-hidden="true"></div>
+  <nav class="reader-topbar" aria-label="Essay navigation">
+    <a href="/writing/#becoming">Haein Jung / Writing</a>
+    <span>Reading</span>
+  </nav>
+  <div class="site-cursor" aria-hidden="true"></div>
+  <div class="page">
+    <a href="/writing/#becoming" class="back-link">← Writing</a>
+    <header>
+      <h1 class="article-title">elsewheren</h1>
+      <p class="article-subtitle">einmal ist keinmal</p>
+      <p class="article-byline">Haein</p>
+      <p class="article-date">June 1, 2026</p>
+    </header>
+
+    <div class="article-body">
+      <p>I started walking to Lands End from Alamo Square one afternoon. After meeting some startup-industry-tech people I felt as if I was trapped in my headspace again. A headspace that keeps me in and out, making myself internally and externally static at the current position. I could not step out of my thinking bubble and actually do anything.</p>
+      <p>When I feel heavy, I go to Lands End. The massive energy of the wave and uncontrollable force makes me feel small; makes me feel as if I am nothing. They take the weight of life and shrink it down to the size of a particle. Most of the time, it is way too cold. Too cold that you cannot even think well or walk well. With drowsy nose and stiffened limbs, I would sit there hours gazing the horizon and pelicans. Well today, I walked 2 hours straight to Ocean Beach, not all the way towards Lands End, but still, sat down in the sand like a homeless person, lay back, ate what was left from lunch. Isolated and part of the larger world at the same time.</p>
+
+      <figure class="article-figure">
+        <img src="/writing/media/elsewheren-ocean.jpg" alt="Ocean Beach under a pale sky">
+      </figure>
+
+      <p>It gives a massive amount of freedom when you start considering planet earth as home. Back in Seoul, people refrain from sitting on the ground, it is dirty, out of norm or manner, a violation of where you are supposed to sit. It is a controlled system with higher expectations people are imposing to the system. Everything too impeccable to be true. But when you allow yourself to sit or lie down wherever you want, you start to feel comfortable with yourself and the world. And so I was there, myself, allowing myself to be vulnerable with the earth, and ironically this exposure of vulnerability and the ability to tolerate this exposure of self was something that actually steadied me simultaneously.</p>
+      <p>When the sky darkened and waves got more fierce, I decided to take an Uber back home, and got a message to help out for a rave happening tonight.</p>
+      <p>I felt strangely pulled to that message, but there was also an acute perception of fearness for some reason. Although I already knew the host and there was no real danger, my neurons were keenly alert. I hadn’t been drinking for a while, focused on something I was trying to do; disciplined in that sense, even though that discipline still hadn’t moved me to actually do anything. I was afraid that, if I put myself in an uncontrolled environment that is expected to be harmful for the long-term vision of my purpose, it would rather distract me.</p>
+      <p>In retrospect, now I think that thinking was total bullshit. There is this pre-discernment judgement layer that distorts the relationship between means and ends. Say, I have this goal that would eventually make me happy. And so I strive and figure out the best way out of making this goal happen, and somewhere along the way, I notice that I am not happy with the process. Of course nothing comes with no effort, but I think the things that mattered significantly in life were about alignment.</p>
+      <p>Alignment of belief, act of doing, and the feelings that you sense through the process — as a whole positive feedback loop. I kept saying I wanted to redesign the system, I spent whole days thinking strategically about the system, but none of them mattered because I was only thinking. My main source of output for some time was explaining thesis to people, which gave me instant reward and changed nothing. I wanted out of the projection of being a high-potential self. I wanted something concrete. Having a fun night out seemed not aligned with the purpose, even though things that I were doing already hit the button of not enjoyable for a while, which I tried to dismiss.</p>
+
+      <hr>
+
+      <figure class="article-figure">
+        <img src="/writing/media/elsewheren-rave.jpg" alt="Blurred red and blue lights inside the rave">
+      </figure>
+
+      <p>I followed the fear fire alert, decided to go to that rave sober minded. It was a weird building, floors were inverted, floor 1 ~ 4 actually meant -4 ~ -1, and the elevator button was also inverted. Weird. I awkwardly stood there, amid colorful people calling me babe, them excreting all sorts of possible sensations. Eventually I could not stand the contrast of energy I had within self and started drinking out of self charity.</p>
+      <p>Switching onwards different persona of myself I’d kept latent and ignored.</p>
+      <p>Before I entered underground, my body was rehearsing the awkwardness, I’ll be exposed, I won’t fit, I mean objectively, meta-data wise, I knew I didn’t belong there, and I did not pretend to.</p>
+      <p>With the help of some seltzer I pushed myself in, I could co-exist with this version of the world. Like the earth and me. We coexisted, and I felt awkwardly free and comfortable.</p>
+      <p>And for some time, I became a charming bartender, and it was very enjoyable. Made me even think that I may have found a runway job. People approached me. I handed out drinks, talked, held the attention, with the juice of flirtation in the air I wasn’t responsible for and didn’t have to manage. I enjoyed this interaction with random people, and after a certain point I felt as if we all had this consensus of being. They left tips. Said unexpected things to me. And it didn’t feel like selling anything — nothing to do with my body or my sexuality going across the bar. It was that I was present in this time-space, and being present had visible worth. Had recurring customers visiting me. Someone complimented me because I was actually there to be seen, most were high or drunk visibly and one lady calling me adorable, and it felt ticklish, in an empowering way. Everyone was captured in being themselves from wheren-ever they came from, but we were present sharing this time-space.</p>
+      <p>After hours of being a particle in front of the ocean — nothing and unwitnessed — I was suddenly a person registering on other people in real time, and being valued for it. Not for my potential. For what I was doing, right then, with my hands and my attention.</p>
+      <p>That is when I realized that confidence is not built by justifying myself, but built when the body finds out it survived a room and changed it.</p>
+      <p>Finding my way back home at 4am, I realized that I succeeded in escaping another shell. I was not sitting alone in bed thinking whether I lost my confidence, but I was acting a role as a socially useful person, someone people approach, bartender.. roles that gave me immediate feedback. And I think I needed that.</p>
+      <p>I have been living too much in the abstract — analyzing and optimizing systems, trying to catch up with frontier research, whether I am too much, asking whether I and this society are real and could be trusted. I was buried damp under overthinking with languages, no way out.</p>
+      <p>Despite my longing for actualization, the environment was the one that forced my identity to update. When happening started to embody into real sensations, I was being witnessed in real time. I learned this once a while ago in London, trying acting: performing and relocating yourself is how you actually embody yourself, elsewheren you are. I was back in motion and am back online.</p>
+      <p>Because the self is not waiting inside me to be found by thinking. It is spatial and performative. You do not solely discover who you are by introspection, rather discover discovered by moving through rooms, roles, gazes, and risks. Some versions of me are inaccessible in my bedroom. Some never existed in Seoul, or in SF. Some only emerge when the Pacific makes me small, or when strangers at a rave make me socially real again. And not just somewhere — sometime at a certain hour, under a certain light, after a certain walk. The me that dissolved at Ocean Beach with dusk is not available at Alamo Square at noon. Where and when were not the backdrop to who I am. They were how I become anyone at all. I am an elsewheren creature.</p>
+      <p><em>einmal ist keinmal</em></p>
+      <p>If a self appears only once, it might as well never have appeared at all. The bartender, the particle, the one who strived in London, they are not mine to keep. They are only mine to return to. So I need more arenas. More rooms with a door I am a little scared to walk through. I have selves that wait in particular where-whens, and some of them I will never meet unless I put my body exactly there, exactly then — usually somewhere it is afraid to go.</p>
+    </div>
+
+    <div class="source-note">
+      <p>Originally published on Substack.</p>
+      <p>Source: <a href="https://haeinej.substack.com/p/elsewheren" target="_blank" rel="noopener noreferrer">https://haeinej.substack.com/p/elsewheren</a></p>
+    </div>
+
+    <footer class="footer">© 2026 Haein Jung</footer>
+  </div>
+
+  <script>
+    (() => {
+      const progress = document.querySelector('.read-progress');
+      const updateProgress = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const width = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+        if (progress) progress.style.width = Math.min(width, 100) + '%';
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const body = document.body;
+      const cursor = document.querySelector('.site-cursor');
+      if (!cursor) return;
+
+      const clearState = () => {
+        body.classList.remove('cursor-visible', 'cursor-link', 'cursor-press');
+      };
+
+      const syncPointerMode = () => {
+        if (media.matches) {
+          body.classList.add('cursor-enabled');
+        } else {
+          body.classList.remove('cursor-enabled');
+          clearState();
+        }
+      };
+
+      const updateInteractiveState = (target) => {
+        const interactive = target && target.closest("a, button, input, textarea, select, label, summary, [role='button'], [tabindex]:not([tabindex='-1'])");
+        body.classList.toggle('cursor-link', Boolean(interactive));
+      };
+
+      syncPointerMode();
+      if (media.addEventListener) media.addEventListener('change', syncPointerMode);
+      else if (media.addListener) media.addListener(syncPointerMode);
+
+      window.addEventListener('mousemove', (event) => {
+        if (!media.matches) return;
+        cursor.style.left = event.clientX + 'px';
+        cursor.style.top = event.clientY + 'px';
+        body.classList.add('cursor-visible');
+        updateInteractiveState(event.target);
+      }, { passive: true });
+
+      window.addEventListener('mousedown', () => {
+        if (media.matches) body.classList.add('cursor-press');
+      }, { passive: true });
+
+      window.addEventListener('mouseup', () => {
+        body.classList.remove('cursor-press');
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', () => {
+        clearState();
+      });
+    })();
+  </script>
+</body>
+</html>
