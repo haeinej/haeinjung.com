@@ -64,8 +64,12 @@
 
   .item figcaption {
     display: block;
-    padding: 7px 10px 0;
-    height: 24px;
+    position: relative;
+    z-index: 1; /* stays above any blur bleeding out of the frame */
+    background: var(--paper);
+    padding: 8px 10px 0;
+    height: 26px;
+    line-height: 1;
     font-size: 9.5px;
     letter-spacing: 0.1em;
     color: var(--ink);
@@ -105,8 +109,6 @@
       filter: blur(6px) saturate(0.72) contrast(0.97);
       transform: scale(1.05); /* covers the blur's soft edge inside the frame */
     }
-    .item figcaption { transition: filter 220ms var(--ease-out); }
-    .masonry:has(.item:hover) .item:not(:hover) figcaption { filter: blur(2.5px); }
   }
 
   /* ---------- lightbox ---------- */
