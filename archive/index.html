@@ -27,6 +27,62 @@
 
   ::selection { background: var(--ink); color: var(--paper); }
 
+  /* ---------- header ---------- */
+
+  .top {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    background: var(--paper);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .top .mid {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+
+  .top button {
+    all: unset;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+  }
+
+  .top .lbl { color: var(--ink); margin-right: 12px; }
+  .top .lbl + .lbl-gap { margin-left: 26px; }
+
+  .top .f {
+    color: var(--ink-soft);
+    margin-right: 12px;
+    transition: color 200ms var(--ease-out);
+  }
+
+  .top .f:hover { color: var(--ink); }
+
+  .top .f.on {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .top .hbtn {
+    color: var(--ink);
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .top .hbtn:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .top .hbtn:active { transform: scale(0.95); }
+
   /* ---------- canvas + grid ---------- */
 
   .canvas {
@@ -35,6 +91,7 @@
 
   .masonry {
     width: 100vw;
+    padding-top: 40px;
     columns: 4;
     column-gap: 0;
     transform-origin: 0 0;
@@ -232,12 +289,6 @@
     text-align: center;
   }
 
-  .zoom--left {
-    right: auto;
-    left: 16px;
-    padding: 12px;
-  }
-
   /* ---------- mobile ---------- */
 
   @media (max-width: 900px) {
@@ -273,53 +324,50 @@
 </head>
 <body>
 
+<header class="top">
+  <nav aria-label="Filters">
+    <span class="lbl">Year</span><button class="f on" data-fy="all">All</button><button class="f" data-fy="2025">2025</button><span class="lbl" style="margin-left:14px">Location</span><button class="f on" data-fl="all">All</button><button class="f" data-fl="London">London</button>
+  </nav>
+  <span class="mid">Haein Jung</span>
+  <button class="hbtn" id="shuffle" aria-label="Shuffle order">Shuffle</button>
+</header>
+
 <div class="canvas" id="canvas">
 <main class="masonry" id="grid">
-  <figure class="item sp-c"><span class="frame"><img src="img/DSC02569.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>001</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/6DFB4FA7.jpg" width="1200" height="1600" alt="" loading="eager"></span><figcaption>002</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_1584.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>003</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/10519665.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>004</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/IMG_1597.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>005</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/DSC02616.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>006</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_1638.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>007</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/2C07E1B5.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>008</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/DSC02860.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>009</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/IMG_0944.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>010</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_7172.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>011</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/EB695DA1.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>012</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/DSC02706.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>013</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/BCF2DEDC.jpg" width="1199" height="1600" alt="" loading="lazy"></span><figcaption>014</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_1750.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>015</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/DSC02751.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>016</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/IMG_8356.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>017</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/7303247F.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>018</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_4122.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>019</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/DSC02838.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>020</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/IMG_9555.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>021</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/DSC02895.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>022</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_4978.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>023</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/IMG_0318.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>024</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/DSC02802.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>025</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/IMG_6916.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>026</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_9567.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>027</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/DSC02671.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>028</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/IMG_9514.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>029</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/DSC02773.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>030</figcaption></figure>
-  <figure class="item sp-b"><span class="frame"><img src="img/IMG_1457.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>031</figcaption></figure>
-  <figure class="item sp-a"><span class="frame"><img src="img/IMG_7999.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>032</figcaption></figure>
-  <figure class="item sp-c"><span class="frame"><img src="img/DSC02806.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>033</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/DSC02569.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>001</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/6DFB4FA7.jpg" width="1200" height="1600" alt="" loading="eager"></span><figcaption>002</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_1584.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>003</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/10519665.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>004</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_1597.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>005</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02616.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>006</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_1638.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>007</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/2C07E1B5.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>008</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/DSC02860.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>009</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_0944.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>010</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_7172.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>011</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/EB695DA1.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>012</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/DSC02706.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>013</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/BCF2DEDC.jpg" width="1199" height="1600" alt="" loading="lazy"></span><figcaption>014</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_1750.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>015</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02751.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>016</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_8356.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>017</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/7303247F.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>018</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_4122.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>019</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02838.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>020</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_9555.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>021</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02895.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>022</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_4978.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>023</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_0318.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>024</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/DSC02802.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>025</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_6916.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>026</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_9567.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>027</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02671.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>028</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_9514.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>029</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02773.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>030</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_1457.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>031</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_7999.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>032</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/DSC02806.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>033</figcaption></figure>
 </main>
-</div>
-
-<div class="zoom zoom--left" aria-label="Shuffle">
-  <button id="shuffle" aria-label="Shuffle order">
-    <svg width="16" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M1 2.5h3l8 7h3.5"/>
-      <path d="M1 9.5h3l8-7h3.5"/>
-      <path d="M13.3 0.3L15.7 2.5L13.3 4.7"/>
-      <path d="M13.3 7.3L15.7 9.5L13.3 11.7"/>
-    </svg>
-  </button>
 </div>
 
 <div class="zoom" aria-label="Zoom">
@@ -341,6 +389,7 @@
 <script>
   const grid = document.getElementById('grid');
   let items = Array.from(grid.querySelectorAll('.item'));
+  let visible = items.slice();
   const total = String(items.length).padStart(3, '0');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -391,7 +440,7 @@
     items.forEach((el) => {
       const a = first.get(el);
       const b = second.get(el);
-      if (!a || !b) return;
+      if (!a || !b || !a.width || !b.width) return;
       const dx = a.left - b.left;
       const dy = a.top - b.top;
       const sx = a.width / b.width;
@@ -488,6 +537,38 @@
       }
       order.forEach((el) => grid.appendChild(el));
       items = order;
+      visible = items.filter((el) => el.style.display !== 'none');
+    });
+  });
+
+  /* ---- year / location filters ---- */
+  const fstate = { year: 'all', loc: 'all' };
+
+  function applyFilter() {
+    flip(() => {
+      items.forEach((el) => {
+        const ok =
+          (fstate.year === 'all' || el.dataset.year === fstate.year) &&
+          (fstate.loc === 'all' || el.dataset.loc === fstate.loc);
+        el.style.display = ok ? '' : 'none';
+      });
+      visible = items.filter((el) => el.style.display !== 'none');
+    });
+  }
+
+  document.querySelectorAll('[data-fy]').forEach((b) => {
+    b.addEventListener('click', () => {
+      fstate.year = b.dataset.fy;
+      document.querySelectorAll('[data-fy]').forEach((x) => x.classList.toggle('on', x === b));
+      applyFilter();
+    });
+  });
+
+  document.querySelectorAll('[data-fl]').forEach((b) => {
+    b.addEventListener('click', () => {
+      fstate.loc = b.dataset.fl;
+      document.querySelectorAll('[data-fl]').forEach((x) => x.classList.toggle('on', x === b));
+      applyFilter();
     });
   });
 
@@ -498,10 +579,10 @@
   let current = -1;
 
   function show(i) {
-    current = (i + items.length) % items.length;
-    const src = items[current].querySelector('img').src;
+    current = (i + visible.length) % visible.length;
+    const src = visible[current].querySelector('img').src;
     lbImg.classList.remove('ready');
-    lbCounter.textContent = items[current].querySelector('figcaption').textContent + ' / ' + total;
+    lbCounter.textContent = visible[current].querySelector('figcaption').textContent + ' / ' + total;
     const pre = new Image();
     pre.onload = () => {
       lbImg.src = src;
@@ -526,7 +607,7 @@
   grid.addEventListener('click', (e) => {
     const fig = e.target.closest('.item');
     if (!fig) return;
-    open(items.indexOf(fig));
+    open(visible.indexOf(fig));
   });
   document.getElementById('lb-close').addEventListener('click', close);
   document.getElementById('lb-prev').addEventListener('click', () => show(current - 1));
