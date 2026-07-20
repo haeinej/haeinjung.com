@@ -215,10 +215,12 @@
     transform: scale(1);
   }
 
+  .item.instant,
+  .item.instant .frame { transition: none; }
+
   @media (hover: hover) and (pointer: fine) {
     .item img,
     .item video {
-      will-change: filter, transform;
       transition: filter 220ms var(--ease-out), transform 220ms var(--ease-out);
     }
     .item:hover img,
@@ -393,192 +395,192 @@
 
 <div class="canvas" id="canvas">
 <main class="masonry" id="grid">
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-c"><span class="frame"><img src="img/9F8150ED.jpg" width="1600" height="1201" alt="" loading="eager"></span><figcaption>001</figcaption></figure>
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-a"><span class="frame"><img src="img/IMG_5719.jpg" width="941" height="1600" alt="" loading="eager"></span><figcaption>002</figcaption></figure>
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-b"><span class="frame"><img src="img/IMG_5888.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>003</figcaption></figure>
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-a"><span class="frame"><img src="img/IMG_5974.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>004</figcaption></figure>
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-c"><span class="frame"><img src="img/IMG_5701.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>005</figcaption></figure>
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-a"><span class="frame"><img src="img/73DFD50B.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>006</figcaption></figure>
-  <figure data-year="2026" data-loc="Helsinki" class="item sp-b"><span class="frame"><img src="img/IMG_5803.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>007</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/10519665.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>008</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_6262.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>009</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_1584.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>010</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_7999.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>011</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/6DFB4FA7.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>012</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_2323.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>013</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02706.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>014</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_0344.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>015</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02671.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>016</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_9555.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>017</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_7060.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>018</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_5985.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>019</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02806.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>020</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_1597.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>021</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02569.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>022</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/DSC02616.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>023</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_0339.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>024</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/DSC02895.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>025</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_5901.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>026</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_2276.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>027</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_1984.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>028</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_9567.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>029</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_4978.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>030</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/DSC02773.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>031</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_4122.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>032</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_3316.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>033</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02751.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>034</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_6745.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>035</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02838.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>036</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_0498.jpg" width="1600" height="1202" alt="" loading="lazy"></span><figcaption>037</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DSC02802.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>038</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_7172.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>039</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_2003.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>040</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/213D7621.jpg" width="1600" height="1201" alt="" loading="lazy"></span><figcaption>041</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_3443.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>042</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_1750.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>043</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_1638.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>044</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_6880.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>045</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_9514.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>046</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_2823.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>047</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/DE5B0187.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>048</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/EB695DA1.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>049</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_0944.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>050</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_5648.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>051</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/7303247F.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>052</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_2470.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>053</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_7115.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>054</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_6916.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>055</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/BCF2DEDC.jpg" width="1199" height="1600" alt="" loading="lazy"></span><figcaption>056</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/2C07E1B5.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>057</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/87BA6968.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>058</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img src="img/IMG_8356.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>059</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img src="img/IMG_5393.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>060</figcaption></figure>
-  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img src="img/IMG_4032.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>061</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4220.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>062</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4692.jpg" width="739" height="1600" alt="" loading="lazy"></span><figcaption>063</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/DSC03524.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>064</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_5091.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>065</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/DSC03552.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>066</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/DSC03538.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>067</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4404.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>068</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/editVideo2.mp4" width="1080" height="1440" muted loop playsinline preload="metadata"></video></span><figcaption>069</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4029.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>070</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4015.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>071</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_3849.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>072</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4037.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>073</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4048.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>074</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4565.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>075</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/DSC03570.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>076</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5040.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>077</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/IMG_4821.mp4" width="1080" height="1440" muted loop playsinline preload="metadata"></video></span><figcaption>078</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5158.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>079</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4980.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>080</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5038.mp4" width="1080" height="1440" muted loop playsinline preload="metadata"></video></span><figcaption>081</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/DSC03556.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>082</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4463.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>083</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_5005.jpg" width="1289" height="1600" alt="" loading="lazy"></span><figcaption>084</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4620.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>085</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_5030.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>086</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_3905.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>087</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4195.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>088</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5243.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>089</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/DSC03545.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>090</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5333.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>091</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4201.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>092</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_3889.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>093</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/DSC03546.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>094</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4213.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>095</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4643.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>096</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4534.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>097</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/IMG_5305.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>098</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5148.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>099</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4528.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>100</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4624.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>101</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/editVideo2__2_.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>102</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4671.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>103</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4449.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>104</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4780.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>105</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4842.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>106</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4489.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>107</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4034.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>108</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4047.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>109</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4517.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>110</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5428.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>111</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4764.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>112</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_4645.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>113</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_5086.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>114</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><video src="vid/IMG_5285.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>115</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4270.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>116</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_3973.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>117</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_5105.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>118</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5118.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>119</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4677.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>120</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5266.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>121</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4236.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>122</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4527.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>123</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4554.jpg" width="1600" height="1204" alt="" loading="lazy"></span><figcaption>124</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_5034.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>125</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4051.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>126</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5094.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>127</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_3857.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>128</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_5299.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>129</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4383.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>130</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5020.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>131</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_3960.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>132</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/DSC03551.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>133</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4949.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>134</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_4787.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>135</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_5456.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>136</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_5113.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>137</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4529.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>138</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img src="img/IMG_5394.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>139</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img src="img/IMG_4660.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>140</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img src="img/IMG_3850.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>141</figcaption></figure>
-  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/IMG_5248.mp4" width="1080" height="810" muted loop playsinline preload="metadata"></video></span><figcaption>142</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/8E9497F7.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>143</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><video src="vid/IMG_5548.mp4" width="720" height="1280" muted loop playsinline preload="metadata"></video></span><figcaption>144</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/06829060.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>145</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/DA7AE9A4.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>146</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><video src="vid/IMG_4975.mp4" width="720" height="1280" muted loop playsinline preload="metadata"></video></span><figcaption>147</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/86B85A24.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>148</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/C5401638.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>149</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/5E8EEF9A.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>150</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/435BD562.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>151</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/43F15523.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>152</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/FC53880B.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>153</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/76EFA037.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>154</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/48BCFE48.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>155</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/B787D89F.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>156</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/B7A40CA1.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>157</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/F1D8E4E1.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>158</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/6A9B2EB1.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>159</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/B57BE64B.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>160</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/2B2986CD.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>161</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/C9A2268F.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>162</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/4B83AECC.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>163</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/66A609D7.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>164</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/2A8E653A.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>165</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/457BA2E2.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>166</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/4DFDCCE2.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>167</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/FA8A8235.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>168</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/BA0FCC63.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>169</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/470C541A.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>170</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/369AA2D9.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>171</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/73FE0C59.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>172</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/4BF3A108.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>173</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/B4BC4A9D.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>174</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/27988E3C.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>175</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/25D6E29B.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>176</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/13F3E797.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>177</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/B4421B9D.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>178</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img src="img/96E5B031.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>179</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><video src="vid/IMG_2254.mp4" width="1080" height="1080" muted loop playsinline preload="metadata"></video></span><figcaption>180</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/C0CE0616.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>181</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/671B0C8C.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>182</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><video src="vid/IMG_1974.mp4" width="1080" height="1080" muted loop playsinline preload="metadata"></video></span><figcaption>183</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/7CB5C8E4.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>184</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img src="img/2A1D42BD.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>185</figcaption></figure>
-  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img src="img/D32303AB.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>186</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/9F8150ED.jpg" width="1600" height="1201" alt="" loading="eager"></span><figcaption>001</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5719.jpg" width="941" height="1600" alt="" loading="eager"></span><figcaption>002</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5888.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>003</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5974.jpg" width="1600" height="1200" alt="" loading="eager"></span><figcaption>004</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_5701.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>005</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/73DFD50B.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>006</figcaption></figure>
+  <figure data-year="2026" data-loc="Helsinki" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5803.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>007</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/10519665.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>008</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_6262.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>009</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_1584.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>010</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_7999.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>011</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/6DFB4FA7.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>012</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_2323.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>013</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02706.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>014</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_0344.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>015</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02671.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>016</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_9555.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>017</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_7060.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>018</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5985.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>019</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02806.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>020</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_1597.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>021</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02569.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>022</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/DSC02616.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>023</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_0339.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>024</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/DSC02895.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>025</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5901.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>026</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_2276.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>027</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_1984.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>028</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_9567.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>029</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4978.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>030</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/DSC02773.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>031</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4122.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>032</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_3316.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>033</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02751.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>034</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_6745.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>035</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02838.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>036</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_0498.jpg" width="1600" height="1202" alt="" loading="lazy"></span><figcaption>037</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC02802.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>038</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_7172.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>039</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_2003.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>040</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/213D7621.jpg" width="1600" height="1201" alt="" loading="lazy"></span><figcaption>041</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_3443.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>042</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_1750.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>043</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_1638.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>044</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_6880.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>045</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_9514.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>046</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_2823.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>047</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DE5B0187.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>048</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/EB695DA1.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>049</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_0944.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>050</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5648.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>051</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/7303247F.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>052</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_2470.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>053</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_7115.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>054</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_6916.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>055</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/BCF2DEDC.jpg" width="1199" height="1600" alt="" loading="lazy"></span><figcaption>056</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/2C07E1B5.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>057</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/87BA6968.jpg" width="900" height="1600" alt="" loading="lazy"></span><figcaption>058</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_8356.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>059</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5393.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>060</figcaption></figure>
+  <figure data-year="2025" data-loc="London" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4032.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>061</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4220.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>062</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4692.jpg" width="739" height="1600" alt="" loading="lazy"></span><figcaption>063</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC03524.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>064</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_5091.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>065</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC03552.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>066</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/DSC03538.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>067</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4404.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>068</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/editVideo2.mp4" width="1080" height="1440" muted loop playsinline preload="none"></video></span><figcaption>069</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4029.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>070</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4015.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>071</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_3849.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>072</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4037.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>073</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4048.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>074</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4565.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>075</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC03570.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>076</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5040.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>077</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/IMG_4821.mp4" width="1080" height="1440" muted loop playsinline preload="none"></video></span><figcaption>078</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5158.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>079</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4980.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>080</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5038.mp4" width="1080" height="1440" muted loop playsinline preload="none"></video></span><figcaption>081</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC03556.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>082</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4463.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>083</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5005.jpg" width="1289" height="1600" alt="" loading="lazy"></span><figcaption>084</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4620.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>085</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5030.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>086</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_3905.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>087</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4195.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>088</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5243.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>089</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC03545.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>090</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5333.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>091</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4201.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>092</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_3889.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>093</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DSC03546.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>094</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4213.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>095</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4643.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>096</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4534.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>097</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/IMG_5305.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>098</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5148.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>099</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4528.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>100</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4624.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>101</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/editVideo2__2_.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>102</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4671.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>103</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4449.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>104</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4780.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>105</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4842.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>106</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4489.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>107</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4034.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>108</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4047.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>109</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4517.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>110</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5428.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>111</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4764.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>112</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_4645.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>113</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5086.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>114</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><video src="vid/IMG_5285.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>115</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4270.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>116</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_3973.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>117</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5105.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>118</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5118.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>119</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4677.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>120</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><video src="vid/IMG_5266.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>121</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4236.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>122</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4527.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>123</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4554.jpg" width="1600" height="1204" alt="" loading="lazy"></span><figcaption>124</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_5034.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>125</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4051.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>126</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5094.jpg" width="1600" height="1199" alt="" loading="lazy"></span><figcaption>127</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_3857.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>128</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_5299.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>129</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4383.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>130</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5020.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>131</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_3960.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>132</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/DSC03551.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>133</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4949.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>134</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_4787.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>135</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_5456.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>136</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_5113.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>137</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4529.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>138</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/IMG_5394.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>139</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/IMG_4660.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>140</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/IMG_3850.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>141</figcaption></figure>
+  <figure data-year="2025" data-loc="Lisbon" class="item sp-a"><span class="frame"><video src="vid/IMG_5248.mp4" width="1080" height="810" muted loop playsinline preload="none"></video></span><figcaption>142</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/8E9497F7.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>143</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><video src="vid/IMG_5548.mp4" width="720" height="1280" muted loop playsinline preload="none"></video></span><figcaption>144</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/06829060.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>145</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/DA7AE9A4.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>146</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><video src="vid/IMG_4975.mp4" width="720" height="1280" muted loop playsinline preload="none"></video></span><figcaption>147</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/86B85A24.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>148</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/C5401638.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>149</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/5E8EEF9A.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>150</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/435BD562.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>151</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/43F15523.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>152</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/FC53880B.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>153</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/76EFA037.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>154</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/48BCFE48.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>155</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/B787D89F.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>156</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/B7A40CA1.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>157</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/F1D8E4E1.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>158</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/6A9B2EB1.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>159</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/B57BE64B.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>160</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/2B2986CD.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>161</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/C9A2268F.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>162</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/4B83AECC.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>163</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/66A609D7.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>164</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/2A8E653A.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>165</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/457BA2E2.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>166</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/4DFDCCE2.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>167</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/FA8A8235.jpg" width="1200" height="1600" alt="" loading="lazy"></span><figcaption>168</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/BA0FCC63.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>169</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/470C541A.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>170</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/369AA2D9.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>171</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/73FE0C59.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>172</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/4BF3A108.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>173</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/B4BC4A9D.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>174</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/27988E3C.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>175</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/25D6E29B.jpg" width="1600" height="1066" alt="" loading="lazy"></span><figcaption>176</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/13F3E797.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>177</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/B4421B9D.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>178</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><img decoding="async" src="thumb/96E5B031.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>179</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><video src="vid/IMG_2254.mp4" width="1080" height="1080" muted loop playsinline preload="none"></video></span><figcaption>180</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/C0CE0616.jpg" width="1600" height="1200" alt="" loading="lazy"></span><figcaption>181</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/671B0C8C.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>182</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-b"><span class="frame"><video src="vid/IMG_1974.mp4" width="1080" height="1080" muted loop playsinline preload="none"></video></span><figcaption>183</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/7CB5C8E4.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>184</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-c"><span class="frame"><img decoding="async" src="thumb/2A1D42BD.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>185</figcaption></figure>
+  <figure data-year="2025" data-loc="LA" class="item sp-a"><span class="frame"><img decoding="async" src="thumb/D32303AB.jpg" width="1600" height="1600" alt="" loading="lazy"></span><figcaption>186</figcaption></figure>
 </main>
 </div>
 
@@ -603,6 +605,7 @@
 
   /* ---- all photos reveal on load and remain open ---- */
   items.forEach((el, i) => {
+    if (i >= 24) el.classList.add('instant');
     el.style.setProperty('--d', Math.min(i, 16) * 55 + 'ms');
   });
   requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -809,7 +812,7 @@
     lbVid.pause();
     lbVid.style.display = 'none';
     lbImg.style.display = 'block';
-    const src = item.querySelector('img').src;
+    const src = item.querySelector('img').src.replace('/thumb/', '/img/');
     const pre = new Image();
     pre.onload = () => {
       lbImg.src = src;
