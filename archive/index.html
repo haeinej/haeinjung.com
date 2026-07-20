@@ -313,53 +313,6 @@
 
   body.locked { overflow: hidden; }
 
-  /* ---------- zoom control ---------- */
-
-  .zoom {
-    position: fixed;
-    right: 16px;
-    bottom: 16px;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 16px;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    background: #fafafa;
-    border-radius: 14px;
-    box-shadow:
-      6px 6px 14px rgba(10, 10, 10, 0.09),
-      -6px -6px 14px rgba(255, 255, 255, 1),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-    transition: box-shadow 200ms var(--ease-out);
-  }
-
-  .zoom:has(button:active) {
-    box-shadow:
-      inset 3px 3px 8px rgba(10, 10, 10, 0.07),
-      inset -3px -3px 8px rgba(255, 255, 255, 1);
-  }
-
-  .zoom button {
-    all: unset;
-    font: inherit;
-    letter-spacing: inherit;
-    cursor: pointer;
-    color: var(--ink);
-    transition: transform 160ms var(--ease-out);
-  }
-
-  .zoom button:active { transform: scale(0.94); }
-
-  .zoom button svg { display: block; }
-
-  .zoom .pct {
-    color: var(--ink-soft);
-    min-width: 44px;
-    text-align: center;
-  }
-
   /* ---------- mobile ---------- */
 
   @media (max-width: 900px) {
@@ -372,7 +325,6 @@
   @media (max-width: 600px) {
     .masonry { columns: 2 !important; } /* fixed — no manual control on mobile */
     .item figcaption { font-size: 8.5px; }
-    .zoom { display: none; }
     .top { padding: 0 12px; }
     .top .mid { display: none; }
     .top .right { gap: 18px; }
@@ -630,11 +582,6 @@
 </main>
 </div>
 
-<div class="zoom" aria-label="Zoom">
-  <button id="zoom-out" aria-label="Zoom out">&minus;</button>
-  <button class="pct" id="zoom-pct" aria-label="Reset zoom">4 col</button>
-  <button id="zoom-in" aria-label="Zoom in">+</button>
-</div>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
   <div class="lb-bar">
@@ -654,28 +601,18 @@
   const total = String(items.length).padStart(3, '0');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- scroll reveal with per-batch stagger ---- */
-  let batch = 0;
-  let batchTime = 0;
-  const reveal = new IntersectionObserver((entries) => {
-    const now = performance.now();
-    if (now - batchTime > 150) batch = 0;
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.style.setProperty('--d', (batch * 60) + 'ms');
-      batch += 1;
-      batchTime = now;
-      entry.target.classList.add('in');
-      reveal.unobserve(entry.target);
-    });
-  }, { rootMargin: '0px 0px -5% 0px', threshold: 0.05 });
-  items.forEach((el) => reveal.observe(el));
+  /* ---- all photos reveal on load and remain open ---- */
+  items.forEach((el, i) => {
+    el.style.setProperty('--d', Math.min(i, 16) * 55 + 'ms');
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    items.forEach((el) => el.classList.add('in'));
+  }));
 
   function revealAll() {
     items.forEach((el) => {
       el.style.setProperty('--d', '0ms');
       el.classList.add('in');
-      reveal.unobserve(el);
     });
   }
 
@@ -735,7 +672,6 @@
 
   /* ---- density zoom: the grid re-fits the screen at each state ---- */
   const LEVELS = [1, 2, 3, 4, 5, 6, 8];
-  const zoomPct = document.getElementById('zoom-pct');
   const defaultIdx = LEVELS.indexOf(innerWidth < 600 ? 2 : innerWidth < 900 ? 3 : 4);
   let idx = defaultIdx;
 
@@ -744,7 +680,6 @@
     if (n === idx) return;
     idx = n;
     flip(() => { grid.style.columns = LEVELS[idx]; });
-    zoomPct.textContent = LEVELS[idx] + ' col';
   }
 
   let acc = 0;
@@ -767,9 +702,6 @@
     if (e.key === '0') setLevel(defaultIdx);
   });
 
-  document.getElementById('zoom-in').addEventListener('click', () => setLevel(idx - 1));
-  document.getElementById('zoom-out').addEventListener('click', () => setLevel(idx + 1));
-  zoomPct.addEventListener('click', () => setLevel(defaultIdx));
 
 
   /* ---- shuffle ---- */
