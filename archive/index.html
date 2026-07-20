@@ -87,30 +87,31 @@
     transition: max-height 420ms var(--ease-out);
   }
 
-  .fpanel.open { max-height: 320px; }
+  .fpanel.open { max-height: 380px; }
 
   .fpanel .finner {
-    position: relative;
     border-top: 1px solid var(--hair);
     border-bottom: 1px solid var(--hair);
   }
 
   .fcols {
     display: grid;
-    grid-template-columns: minmax(180px, 28%) minmax(180px, 28%) 1fr;
+    grid-template-columns: minmax(190px, 27%) minmax(190px, 27%) 1fr;
   }
 
-  .fcol {
-    border-right: 1px solid var(--hair);
-    padding: 0 16px 26px;
-  }
+  .fcol { border-right: 1px solid var(--hair); }
+  .fcol:last-child { border-right: 0; }
 
   .fhead {
-    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 16px;
     border-bottom: 1px solid var(--hair);
-    margin-bottom: 16px;
     color: var(--ink);
   }
+
+  .fopts { padding: 30px 16px 44px; }
 
   .fcol .f {
     all: unset;
@@ -120,23 +121,16 @@
     text-transform: inherit;
     cursor: pointer;
     color: var(--ink-soft);
-    padding: 5px 0;
+    line-height: 2.15;
     transition: color 200ms var(--ease-out);
   }
 
-  .fcol .f:hover { color: var(--ink); }
-
-  .fcol .f.on {
-    color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  .fcol .f:hover,
+  .fcol .f.on { color: var(--ink); }
 
   .fclose {
     all: unset;
-    position: absolute;
-    top: 10px;
-    right: 16px;
+    margin-left: auto;
     font: inherit;
     letter-spacing: inherit;
     text-transform: inherit;
@@ -232,6 +226,13 @@
     .masonry:has(.item:hover) .item:not(:hover) video {
       filter: blur(6px) saturate(0.72) contrast(0.97);
       transform: scale(1.05); /* covers the blur's soft edge inside the frame */
+    }
+    /* videos are composited layers — scaling them breaks clipping and
+       opens a gap at their edges; blur only, never scale */
+    .item video,
+    .item:hover video,
+    .masonry:has(.item:hover) .item:not(:hover) video {
+      transform: none;
     }
   }
 
@@ -407,20 +408,25 @@
     <div class="fcols">
       <div class="fcol">
         <div class="fhead">Year</div>
-        <button class="f on" data-fy="all">All</button>
-        <button class="f" data-fy="2026">2026</button>
-        <button class="f" data-fy="2025">2025</button>
+        <div class="fopts">
+          <button class="f on" data-fy="all">All</button>
+          <button class="f" data-fy="2026">2026</button>
+          <button class="f" data-fy="2025">2025</button>
+        </div>
       </div>
       <div class="fcol">
         <div class="fhead">Location</div>
-        <button class="f on" data-fl="all">All</button>
-        <button class="f" data-fl="Helsinki">Helsinki</button>
-        <button class="f" data-fl="LA">LA</button>
-        <button class="f" data-fl="London">London</button>
+        <div class="fopts">
+          <button class="f on" data-fl="all">All</button>
+          <button class="f" data-fl="Helsinki">Helsinki</button>
+          <button class="f" data-fl="LA">LA</button>
+          <button class="f" data-fl="London">London</button>
+        </div>
       </div>
-      <div class="fcol"></div>
+      <div class="fcol">
+        <div class="fhead"><button class="fclose" id="filter-close">Close</button></div>
+      </div>
     </div>
-    <button class="fclose" id="filter-close">Close</button>
   </div>
 </div>
 
