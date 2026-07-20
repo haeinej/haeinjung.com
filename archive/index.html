@@ -765,6 +765,22 @@
     });
   });
 
+  /* ---- prefetch: media loads ~2.5 viewports ahead of the scroll ---- */
+  const prefetch = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const m = e.target;
+      if (m.tagName === 'IMG') {
+        m.loading = 'eager';
+      } else if (m.paused && m.readyState < 2) {
+        m.preload = 'auto';
+        m.load();
+      }
+      prefetch.unobserve(m);
+    });
+  }, { rootMargin: '250% 0px 250% 0px' });
+  document.querySelectorAll('.item img, .item video').forEach((m) => prefetch.observe(m));
+
   /* ---- video: play on hover (desktop), play in view (touch) ---- */
   const vids = Array.from(grid.querySelectorAll('video'));
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
